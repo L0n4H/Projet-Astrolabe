@@ -16,7 +16,8 @@ Projet universitaire réalisé dans le cadre de la SAE de BUT3. L'objectif princ
 ## 📌 Gestion de projet & Design
 
 * **Tableau Trello :** [Consulter le Trello](https://trello.com/invite/b/6aa968e7e7a1bf4bd1fa0be2/ATTI7d76e6076bbc949e2028c51416776adf9EB046C2/projet-astrolabe) (Suivi des tâches)
-* **Présentation Canva :** [Voir le support Canva](https://canva.link/t0kssw1wx60y9c2) (Gantt)
+* **Canva Gantt (prévisionnel):** [Voir le support Canva](https://canva.link/t0kssw1wx60y9c2) (Gantt)
+* **Canva cahier des charges :** [Voir cahier des charges](https://canva.link/x93nxmp9d6h73k1)
 
 ---
 
