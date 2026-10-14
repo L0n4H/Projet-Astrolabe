@@ -1,0 +1,38 @@
+<div class="nested-slide" id="Slide3">
+    <h2 class="slide-title slide-component mx-auto" style="width:fit-content;">Ajout de Médias</h2>
+    <div id="Slide3-slide">
+        <div id="Slide3-slide-child-1">
+            <h2 class="nested-slide-child-title">Création de ressources</h2>
+            <div id="eventRessource">
+                {# {{form_row(eventForm.ressources)}} #}
+                <div class="ressources"
+                data-index="{{ eventForm.ressources|length > 0 ? eventForm.ressources|last.vars.name + 1 : 0 }}"
+                data-prototype="{{ form_rest(eventForm.ressources.vars.prototype)|e('html_attr') }}"
+                >
+                    <div class="accordion"></div>
+                </div>
+                <button type="button" class="add_item_link btn" data-collection-holder-class="ressources"><i class="fas fa-plus color-green"></i> Ajouter une ressource</button>
+            </div>
+            <div class="d-flex justify-content-center m-3">
+                <button type="button" class="slick-btn btn btn-outline-primary m-3 goBack">Précédent</button>
+                <button id="verifMedia" type="button" class="slick-btn btn btn-outline-success m-3">Continuer</button>
+            </div>
+        </div>
+        <div id="Slide3-slide-child-2">
+            <h2 class="nested-slide-child-title">Ajout d'étiquettes</h2>
+            <div>
+                {{ form_start(etiquetteForm4,{ 'attr' : { 'id': 'etiquetteForm4' }}) }}
+                    <div class="mx-auto col-lg-6 inputCol">
+                        {{ form_row(etiquetteForm4.motsCles) }}
+                        <span class="invalid-feedback"></span> 
+                        </div>
+                {{ form_end(etiquetteForm4) }}
+                
+            </div>
+            <div class="d-flex justify-content-center m-3">
+                <button type="button" class="lienMedia vertical-prev slick-btn btn btn-outline-secondary m-3">Retour</button>
+                <button id="addEtiquette4" type="button" class="vertical-prev slick-btn btn btn-outline-success m-3">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>

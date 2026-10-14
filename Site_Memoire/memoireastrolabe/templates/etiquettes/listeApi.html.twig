@@ -1,0 +1,94 @@
+{% apply spaceless %}
+{% set etiquettesArr =  {} %}
+{% for etiquette in listeEtiquettes %}
+	{% set ressources =  { } %}
+	{% for ressource in etiquette.getVisibleRessources %}
+		{%  set ressourceArray =
+        { 
+            (ressource.getId) : {
+                'id':ressource.getId, 
+                'lien':ressource.getLien , 
+                'titre': (ressource.getTitre),
+                'nomFile': (ressource.getNom),
+                'type': ressource.getType.getLabel,
+                'url':  (absolute_url(path('detail_ressource', {'id' : ressource.getId}))) 
+            } 
+        }%}
+		{% set ressources = ressources|merge(ressourceArray) %}
+	{% endfor %}
+	{% set musiciens = { } %}
+	{% for musicien in etiquette.getVisibleMusiciens %}
+
+		{%  set 
+            musicienArr = {
+                (musicien.getId) :{
+                'id':musicien.getId, 
+                'nom':musicien.getNom,
+                'prenom':musicien.getPrenom,
+                'lienImage':musicien.getLienImage,
+                'image':musicien.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(musicien, 'imageFile')) ): '', 
+                'nomScene':musicien.getNomScene,
+                'dateNaissance':musicien.getDateNaissance,
+                'url':  (absolute_url(path('detail_musicien', {'id' : musicien.getId}))) 
+                }
+            } 
+        %}
+		{% set musiciens = musiciens|merge(musicienArr) %}
+	{% endfor %}
+	{% set groupes = { } %}
+	{% for groupe in etiquette.getVisibleGroupes %}
+		{% set 
+            groupe =  
+            {
+                (groupe.getId) :{
+                'id' : (groupe.getId),
+                "nom": (groupe.getNom),
+                'dateCreation' : groupe.dateCreation,
+                'lienImage':groupe.getLienImage,
+                'image':groupe.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(groupe, 'imageFile')) ): '', 
+                'biographie':groupe.getBiographie,
+                'image':groupe.getImage,
+                'nationalite': groupe.getVisibleNationalite is not null ? groupe.getVisibleNationalite.getNom : null,
+                'url':  (absolute_url(path('detail_groupe', {'id' : groupe.getId}))) 
+                } 
+            }
+        %}
+		{% set groupes = groupes|merge(groupe) %}
+	{% endfor %}
+
+    {% set evenements =  { } %}
+	{% for evenement in etiquette.getVisibleEvenements %}
+		{% set evenementArray = 
+            {
+                (evenement.getId):
+                {
+                    'id' : evenement.getId,
+                    'titre':evenement.getTitre,
+                    'dateDebut':evenement.getDateDebut,
+                    'dateFin':evenement.getDateFin,
+		            'image':evenement.getImage is not null ? (absolute_url(url('home')))~(vich_uploader_asset(evenement, 'imageFile')): '', 
+		            'lienImage':evenement.getLienImage,
+                    'description': evenement.getDescription,
+                    'type': (evenement.getVisibleTypeEvenements != null) ? evenement.getVisibleTypeEvenements.getLabel : null, 
+                    'url':  (absolute_url(path('detail_api_evenement', {'id' : evenement.getId}))) 
+                }
+            }%}
+		{% set evenements = evenements|merge(evenementArray) %}
+	{% endfor %}
+
+	{% set 
+        etiquetteArr =  {
+            (etiquette.getId) :{
+            'id' : (etiquette.getId),
+            "motsCles": (etiquette.getMotsCles),
+            'groupes' : groupes,
+            'ressources' : ressources,
+            'evenements' : evenements,
+            'musiciens':musiciens,
+            'url':  (absolute_url(path('detail_etiquette', {'id' : etiquette.getId}))) 
+        }
+    }%}
+	{% set etiquettesArr = etiquettesArr|merge(etiquetteArr) %}
+{% endfor %}
+{{ etiquettesArr|unescape|raw }}
+{% endapply %}

@@ -1,0 +1,53 @@
+{% apply spaceless %}
+{% set passages =  { } %}
+{% for passage in listePassages %}
+	{% if passage.getVisibleEvenement != null and passage.getVisibleGroupe is not null  %}
+		{% if passage.getVisibleEvenement.getVisibleLieu is not null %}
+			{% set lieu = {'ville':(passage.getVisibleEvenement.getVisibleLieu.getVille),'CP':(passage.getVisibleEvenement.getVisibleLieu.getCP),'adresse':(passage.getVisibleEvenement.getVisibleLieu.getAdresse),'nomBatiment':(passage.getVisibleEvenement.getVisibleLieu.getNomBatiment),'url':  (absolute_url(path('detail_lieu', {'id' : passage.getVisibleEvenement.getVisibleLieu.getId}))) }%}
+		{% else %}
+			{% set lieu =  null %}
+		{% endif %}
+	
+		{% set evenement = {  'id' : passage.getVisibleEvenement.getId,'type':passage.getVisibleEvenement.getTypeEvenement is not null ? passage.getVisibleEvenement.getTypeEvenement.getLabel : null,"dateDebut": (passage.getVisibleEvenement.getDateDebut.format("d-m-Y H:i")),"dateFin": (passage.getVisibleEvenement.getDateFin.format("d-m-Y H:i")),"description": (passage.getVisibleEvenement.getDescription),
+		'image':passage.getVisibleEvenement.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(passage.getVisibleEvenement, 'imageFile')) ): '', 
+		'lienImage':passage.getVisibleEvenement.getLienImage,"titre": (passage.getVisibleEvenement.getTitre),'lieu':lieu,}%}
+	
+		{% set genres = { } %}
+
+		{% for genre in passage.getVisibleGroupe.getVisibleGenresMusicaux %}
+			{% set evenement = {  'id' : passage.getVisibleEvenement.getId,'type': (passage.getVisibleEvenement.getVisibleTypeEvenements != null) ? passage.getVisibleEvenement.getVisibleTypeEvenements.getLabel : "","dateDebut": (passage.getVisibleEvenement.getDateDebut.format("d-m-Y H:i")),"dateFin": (passage.getVisibleEvenement.getDateFin.format("d-m-Y H:i")),"description": (passage.getVisibleEvenement.getDescription),
+			'image':passage.getVisibleEvenement.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(passage.getVisibleEvenement, 'imageFile')) ): '', 
+			'lienImage':passage.getVisibleEvenement.getLienImage,"titre": (passage.getVisibleEvenement.getTitre),'lieu':lieu,}%}
+			{% set genres = { } %}
+			{% for genre in passage.getVisibleGroupe.getVisibleGenresMusicaux %}
+				{% set categories = { } %}
+				{% for categorie in genre.categorieMusicales %}
+					{%  set categoriesArray ={(categorie.getId) : {'id':categorie.getId, 'nom':categorie.getNom,'url':  (absolute_url(path('detail_categorieMusicale', {'id' : categorie.getId}))) }} %}
+					{% set categories = categories|merge(categoriesArray) %}
+				{% endfor %}
+				{%  set genreArray ={(genre.getId) : {'id':genre.getId, 'nom':genre.getNom,'categories': categories,'url':  (absolute_url(path('detail_genreMusical', {'id' : genre.getId}))) }} %}
+				{% set genres = genres|merge(genreArray) %}
+			{% endfor %}
+		{% endfor %}
+		{% if  passage.getDateDebut is defined and  passage.getDateDebut is not null %}
+			{% set dateDebPass =  passage.getDateDebut.format("d-m-Y H:i") %}
+		{% else %}
+			{% set dateDebPass =  null %}
+		{% endif %}
+
+		{% if  passage.getDateFin is defined and  passage.getDateFin is not null %}
+			{% set dateFinPass =  passage.getDateFin.format("d-m-Y H:i") %}
+		{% else %}
+			{% set dateFinPass =  null %}
+		{% endif %}
+		{% set groupe =  {'id' : (passage.getVisibleGroupe.getId),"nom": (passage.getVisibleGroupe.getNom),'dateCreation' : passage.getVisibleGroupe.dateCreation,'biographie':passage.getVisibleGroupe.getBiographie,'lienImage':passage.getVisibleGroupe.getLienImage,
+		'image':passage.getVisibleGroupe.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(passage.getVisibleGroupe, 'imageFile')) ): '', 
+		'genreMusicaux':genres,'nationalite': passage.getVisibleGroupe.getVisibleNationalite is not null ? passage.getVisibleGroupe.getVisibleNationalite.getNom : null,'url':  (absolute_url(path('detail_groupe', {'id' : passage.getVisibleGroupe.getId}))) } %}
+		{% set passageArr = {(passage.getId) : {  'id' : passage.getId,"dateDebut": dateDebPass,"dateFin": dateFinPass,"evenement" : evenement,'groupe' : groupe}}%}
+	{% else %}
+			{% set passageArr =  null %}
+	{% endif %}
+	{% set passages = passages|merge(passageArr) %}
+{% endfor %}
+{{ passages|unescape|raw }}
+{% endapply %}

@@ -1,0 +1,180 @@
+{% extends '@!EasyAdmin/layout.html.twig' %}
+
+{% set nbEnAttente = nbEtatEnAttente() %}
+
+{% block header_custom_menu %}
+    <div class="d-flex align-items-center">
+        <div class="px-2 position-relative">
+            {% if nbEnAttente != 0 %}
+            <div id="validation" data-bs-toggle="dropdown" aria-expanded="false">
+            {% endif %}
+
+                <i class="fas fa-bell text-dark"></i>
+
+                {% if nbEnAttente != 0 %}
+                <span id="notif">{{ nbEnAttente }}</span>
+                {% endif %}
+
+            {% if nbEnAttente != 0 %}
+            </div>
+
+            <div class="dropdown-menu" aria-labelledby="validation">
+                <h5 class="dropdown-title">Notifications</h5>
+                {% set entities_attente = getEntitiesByEtat(3) %}
+                {% if entities_attente|length > 0 %}
+                <div class="etat-notif pb-2">
+                    <h6 class="text-primary fw-normal dropdown-subtitle"><i class="far fa-clock"></i> En attente de validation</h6>
+                    <ul class="list-group">
+                        {% for nomEntite, entites in entities_attente %}
+                            <li class="list-group-item">
+                                <span class="notif">{{entites["entities"]|length}}</span>
+                                <a href="{{entites["lien"]}}">{{nomEntite}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% set entities_import = getEntitiesByEtat(4) %}
+                {% if entities_import|length > 0 %}
+                <div class="etat-notif pt-2 border-top">
+                    <h6 class="text-primary fw-normal dropdown-subtitle"><i class="far fa-times-circle"></i> Importé et à valider</h6>
+                    <ul class="list-group">
+                        {% for nomEntite, entites in entities_import %}
+                            <li class="list-group-item">
+                                <span class="notif">{{entites["entities"]|length}}</span>
+                                <a href="{{entites["lien"]}}">{{nomEntite}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% set entities_invalide = getEntitiesByEtat(5) %}
+                {% if entities_invalide|length > 0 %}
+                <div class="etat-notif pt-2 border-top">
+                    <h6 class="text-primary fw-normal dropdown-subtitle"><i class="far fa-times-circle"></i> Ressources/Fichiers invalides</h6>
+                    <ul class="list-group">
+                        {% for nomEntite, entites in entities_invalide %}
+                            <li class="list-group-item">
+                                <span class="notif">{{entites["entities"]|length}}</span>
+                                <a href="{{entites["lien"]}}">{{nomEntite}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {{parent()}}
+    </div>
+{% endblock header_custom_menu %}
+
+{% block responsive_header %}
+    <button id="navigation-toggler" type="button" aria-label="Toggle navigation">
+        <i class="fa fa-fw fa-bars"></i>
+    </button>
+
+    <div id="responsive-header-logo" class="text-truncate">
+        <a class="responsive-logo" title="" href="/admin">
+            <img src="/build/images/logo-header.svg">
+        </a>
+    </div>
+
+    <div class="d-flex align-items-center">
+        <div class="px-2 position-relative">
+            {% if nbEnAttente != 0 %}
+            <div id="validation" data-bs-toggle="dropdown" aria-expanded="false">
+            {% endif %}
+
+                <i class="fas fa-bell text-dark"></i>
+
+                {% if nbEnAttente != 0 %}
+                <span id="notif">{{ nbEnAttente }}</span>
+                {% endif %}
+
+            {% if nbEnAttente != 0 %}
+            </div>
+            
+            <div class="dropdown-menu" aria-labelledby="validation">
+                <h5 class="dropdown-title">Notifications</h5>
+                {% set entities_attente = getEntitiesByEtat(3) %}
+                {% if entities_attente|length > 0 %}
+                <div class="etat-notif pb-2">
+                    <h6 class="text-primary fw-normal dropdown-subtitle"><i class="far fa-clock"></i> En attente de validation</h6>
+                    <ul class="list-group">
+                        {% for nomEntite, entites in entities_attente %}
+                            <li class="list-group-item">
+                                <span class="notif">{{entites["entities"]|length}}</span>
+                                <a href="{{entites["lien"]}}">{{nomEntite}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% set entities_import = getEntitiesByEtat(4) %}
+                {% if entities_import|length > 0 %}
+                <div class="etat-notif pt-2 border-top">
+                    <h6 class="text-primary fw-normal dropdown-subtitle"><i class="far fa-times-circle"></i> Importé et à valider</h6>
+                    <ul class="list-group">
+                        {% for nomEntite, entites in entities_import %}
+                            <li class="list-group-item">
+                                <span class="notif">{{entites["entities"]|length}}</span>
+                                <a href="{{entites["lien"]}}">{{nomEntite}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% set entities_invalide = getEntitiesByEtat(5) %}
+                {% if entities_invalide|length > 0 %}
+                <div class="etat-notif pt-2 border-top">
+                    <h6 class="text-primary fw-normal dropdown-subtitle"><i class="far fa-times-circle"></i> Ressources/Fichiers invalides</h6>
+                    <ul class="list-group">
+                        {% for nomEntite, entites in entities_invalide %}
+                            <li class="list-group-item">
+                                <span class="notif">{{entites["entities"]|length}}</span>
+                                <a href="{{entites["lien"]}}">{{nomEntite}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="dropdown user-menu-wrapper ">
+            <a class="user-details" type="button" data-bs-toggle="dropdown" data-bs-offset="0,5" aria-expanded="false">
+                <span class="user-avatar">
+                    <span class="fa-stack">
+                        <i class="user-avatar-icon-background fas fa-square fa-stack-2x"></i>
+                        <i class="user-avatar-icon-foreground fa fa-user fa-stack-1x fa-inverse"></i>
+                    </span>
+                </span>
+            </a>    
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li class="dropdown-user-details">
+                    <div>                            
+                        <span class="user-avatar">
+                            <span class="fa-stack">
+                                <i class="user-avatar-icon-background fas fa-square fa-stack-2x"></i>
+                                <i class="user-avatar-icon-foreground fa fa-user fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="user-label">Connecté en tant que</span>
+                        <span class="user-name">admin</span>
+                    </div>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li></li>
+                <li>
+                    <a href="/logout" class="dropdown-item user-action " target="_self" rel="" referrerpolicy="origin-when-cross-origin">
+                        <i class="fa fa-fw fa-sign-out"></i>
+                        <span>Déconnexion</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock responsive_header %}

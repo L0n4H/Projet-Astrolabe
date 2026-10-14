@@ -1,0 +1,82 @@
+<?php //567d01feb357acdd0bd86b0b204d61af
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\ParserResult' => [
+            '_sqlExecutor' => [
+                $o[1],
+            ],
+            '_resultSetMapping' => [
+                $o[2],
+            ],
+            '_parameterMappings' => [
+                [
+                    'etat_id' => [
+                        0,
+                        1,
+                    ],
+                ],
+            ],
+        ],
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT p0_.id AS id_0, p0_.date_debut AS date_debut_1, p0_.date_fin AS date_fin_2, p0_.groupe_id AS groupe_id_3, p0_.evenement_id AS evenement_id_4 FROM passage p0_ INNER JOIN evenement e1_ ON p0_.evenement_id = e1_.id INNER JOIN groupe g2_ ON p0_.groupe_id = g2_.id WHERE e1_.etat_id = ? AND g2_.etat_id = ?',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'p' => 'App\\Entity\\Passage',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'date_debut_1' => 'dateDebut',
+                    'date_fin_2' => 'dateFin',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'groupe_id_3' => 'integer',
+                    'evenement_id_4' => 'integer',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'p' => null,
+                ],
+            ],
+            'metaMappings' => [
+                2 => [
+                    'groupe_id_3' => 'groupe_id',
+                    'evenement_id_4' => 'evenement_id',
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'p',
+                    'date_debut_1' => 'p',
+                    'date_fin_2' => 'p',
+                    'groupe_id_3' => 'p',
+                    'evenement_id_4' => 'p',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\Passage',
+                    'date_debut_1' => 'App\\Entity\\Passage',
+                    'date_fin_2' => 'App\\Entity\\Passage',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

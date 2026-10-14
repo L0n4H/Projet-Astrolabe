@@ -1,0 +1,178 @@
+@import '_variables';
+
+.invalid-feedback-up {
+    margin:auto!important; 
+    width: auto !important; 
+    display: block; 
+    color: red;
+}
+
+.valid-feedback-up {
+    margin:auto!important; 
+    width: auto !important; 
+    display: block; 
+    color: green;
+}
+
+.feedbacks {
+    text-align: center;
+    height: 20px;
+}
+
+/** SLICK */
+.btn {
+    &:focus, &:active {
+        box-shadow: none!important;
+    }
+}
+
+#mainSlide {
+    visibility: hidden;
+    &.slick-initialized {
+        visibility: visible;
+    }
+    .slick-slide {
+        padding: 10px 15px;
+    }
+    .nested-slide {
+        .nested-slide-child-title {
+            display: none;
+        }
+    }
+    .slide-title {
+        margin-top: 15px;
+        text-decoration: underline;
+        text-decoration-color: $vert;
+        position: relative;
+        font-size: 25px;
+        padding-left: 30px;
+        margin-left: 15px;
+        &::after {
+            content: "\f073";
+            font-family: 'FontAwesomeSolid';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            font-size: 20px;
+            transform: translateY(-50%);
+        }
+    }
+}
+
+#progress-next, #progress-prev {
+    display: none!important;
+}
+
+/** WORKFLOW */
+.accordion-header {
+   border-bottom: solid 1px rgb(0 0 0 / 13%);
+    .accordion-button:not(.collapsed) {
+        color: $vert;
+        background-color: transparent;
+        box-shadow: none;
+    }
+    .accordion-button:focus {
+        border-color: none;
+        box-shadow: none;
+    }
+    i {
+        font-size: 20px;
+        width: 40px;
+        text-align: center;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.recap {
+    .title {
+        margin-top: 20px;
+    }
+    .subtitle {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1rem;
+        display: inline-block;
+        text-decoration: underline;
+        margin-right: 20px;
+        margin: 10px 20px 10px 0;
+    }
+    hr {
+        background-color: darken($vert, 10%);
+        border: 3px solid darken($vert, 10%);
+        width: 75px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        opacity: 1;
+    }
+    .event-image {
+        img {
+            width: 200px;
+            height: auto;
+        }
+    }
+}
+
+/** SELECT2 */
+.select2-container--default {
+    display: block!important;
+    // width: 100%!important;
+    height: 38px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    .select2-selection--single, .select2-selection--multiple {
+        border: none!important;
+        .select2-selection__arrow {
+            top: 50%!important;
+            transform: translateY(-50%);
+        }
+    }
+}
+.select2-container--open .select2-dropdown {
+    text-align: left;
+    border: 0;
+    -webkit-box-shadow: 2px 2px 6px #e6e6e6;
+    -o-box-shadow: 2px 2px 6px #e6e6e6;
+    box-shadow: 2px 2px 6px #e6e6e6;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    ul.select2-results__options {
+        margin: 0;
+        padding: 0;
+        color: #595959;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        .select2-results__option {
+            margin: 0;
+            padding: 5px 6px;
+            list-style: none;
+            word-wrap: break-word;
+            min-height: 34px;
+        }
+        .select2-results__option--selected {
+            background-color: transparent;
+            position: relative;
+            padding-left: 15px;
+            &::before {
+                content: "- "
+            }
+        }
+        .select2-results__option--highlighted {
+            background: $vert!important;
+            color: #fff!important;
+        }
+    }
+}

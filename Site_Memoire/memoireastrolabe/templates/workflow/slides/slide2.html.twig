@@ -1,0 +1,332 @@
+<div class="nested-slide" id="Slide2">
+    <h2 class="slide-title slide-component">Passage du/des groupe(s)</h2>
+    <div id="Slide2-slide">
+        <div id="Slide2-slide-child-1">
+            <h2 class="nested-slide-child-title">Création des Passages</h2>
+            <div id="eventPassage">
+                <div class="passages"
+                data-index="{{ eventForm.passages|length > 0 ? eventForm.passages|last.vars.name + 1 : 0 }}"
+                data-prototype="{{ form_rest(eventForm.passages.vars.prototype)|e('html_attr') }}"
+                >
+                    <div class="accordion"></div>
+                </div>
+                <button type="button" class="add_item_link btn" data-collection-holder-class="passages"><i class="fas fa-plus color-green"></i> Ajouter un Passage</button>
+            </div>
+            <div class="d-flex justify-content-center m-3">
+                <button type="button" class="slick-btn btn btn-outline-primary m-3 goBack">Précédent</button>
+                <button id="verifPassage" type="button" class="slick-btn btn btn-outline-success m-3">Continuer</button>
+            </div>
+            <div class="feedbacks slide-component">
+                <span class="valid-feedback-up"></span>
+                <span class="invalid-feedback-up"></span>
+            </div>
+        </div>
+        <div id="Slide2-slide-child-2">
+            <h2 class="nested-slide-child-title">Création de Groupe</h2>
+            <div>
+                {{ form_start(groupForm,{ 'attr' : { 'id': 'groupForm' }})}} 
+                    <div class="row">
+                        <div class="col-lg-6 inputCol">
+                            {{ form_row(groupForm.nom)}}
+                            <span class="invalid-feedback"></span> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 inputCol">
+                            {{ form_row(groupForm.imageFile)}}
+                            <span class="invalid-feedback"></span> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 inputCol">
+                            {{ form_row(groupForm.lienImage)}}
+                            <span class="invalid-feedback"></span> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 inputCol">
+                            {{ form_row(groupForm.nationalite)}}
+                            <span class="invalid-feedback"></span> 
+                            <button type="button" class="lienParamSuppGroup vertical-next btn"><i class="fas fa-plus color-green"></i>Ajouter une Nationalité</button>
+                        </div>
+                        <div class="col-lg-6 inputCol">
+                            {{ form_row(groupForm.genresMusicaux)}}
+                            <span class="invalid-feedback"></span> 
+                            <button type="button" class="lienParamSuppGroup vertical-next btn"><i class="fas fa-plus color-green"></i>Ajouter un Genre Musical</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 inputCol">
+                            {{ form_row(groupForm.dateCreation)}}
+                            <span class="invalid-feedback"></span> 
+                        </div>
+                        <div class="col-lg-6 inputCol">
+                            {{ form_row(groupForm.labels)}}
+                            <span class="invalid-feedback"></span> 
+                            <button type="button" class="lienLabel vertical-next btn"><i class="fas fa-plus color-green"></i>Ajouter un label</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 inputCol">
+                            {{ form_row(groupForm.etiquettes)}}
+                            <span class="invalid-feedback"></span> 
+                            <button type="button" class="lienParamSuppGroup vertical-next btn"><i class="fas fa-plus color-green"></i>Ajouter une étiquette</button>
+                        </div>
+                    </div>
+                    <div id="groupeMembres">
+                        <div class="membres"
+                        data-index="{{ groupForm.membres|length > 0 ? groupForm.membres|last.vars.name + 1 : 0 }}"
+                        data-prototype="{{ form_rest(groupForm.membres.vars.prototype)|e('html_attr') }}"
+                        >                              
+                            <div class="accordion"></div>
+                        </div>
+                        <button type="button" class="add_item_link btn" data-collection-holder-class="membres"><i class="fas fa-plus color-green"></i> Ajouter un Membre</button>
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                    <div class="row">
+                        <div class="inputCol">
+                                {{ form_row(groupForm.biographie)}}
+                                <span class="invalid-feedback"></span> 
+                        </div>
+                    </div>
+                    {{ form_row(groupForm._token)}}
+                {{ form_end(groupForm,{'render_rest' : false})}}
+                <span class="invalid-feedback"></span> 
+
+            </div>
+            <div class="d-flex justify-content-center m-3">
+                <button  type="button" class="lienRetourPassage vertical-prev slick-btn btn btn-outline-secondary m-3">Retour</button>
+                <button  id="addGroup" type="button" class="vertical-prev slick-btn btn btn-outline-success m-3">Valider</button>
+            </div>
+            <div class="feedbacks slide-component">
+                <span class="valid-feedback-up"></span>
+                <span class="invalid-feedback-up"></span>
+            </div>
+        </div>
+        <div id="Slide2-slide-child-3">
+            <h2 class="nested-slide-child-title">Création de Label</h2>
+            <div>
+                {{ form_start(labelForm,{ 'attr' : { 'id': 'labelForm' }}) }}
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(labelForm.nom) }}
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(labelForm.dateCreation) }}
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(labelForm.description) }}
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(labelForm.logoFile) }}
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(labelForm.lienLogo) }}
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                </div>
+                {{ form_row(labelForm._token)}}
+                {{ form_end(labelForm, {'render_rest' : false}) }}
+            </div>
+            <div class="d-flex justify-content-center m-3">
+                <button type="button" class="lienGroup vertical-prev slick-btn btn btn-outline-secondary m-3">Retour</button>
+                <button id="addLabel" type="button" class="vertical-prev slick-btn btn btn-outline-success m-3">Ajouter ce label</button>
+            </div>
+            <div class="feedbacks slide-component">
+                <span class="valid-feedback-up"></span>
+                <span class="invalid-feedback-up"></span>
+            </div>
+        </div>
+        <div id="Slide2-slide-child-4">
+            <h2 class="nested-slide-child-title">Création de Musicien</h2>
+            <div>
+                {{ form_start(musicienForm,{ 'attr' : { 'id': 'musicienForm' }}) }}
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(musicienForm.nomScene) }}
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(musicienForm.nom) }}
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(musicienForm.prenom) }}
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(musicienForm.dateNaissance) }}
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(musicienForm.imageFile) }}
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(musicienForm.lienImage) }}
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(musicienForm.etiquettes) }}
+                        <span class="invalid-feedback"></span> 
+                        <button type="button" class="lienParamSuppMusicien vertical-next btn"><i class="fas fa-plus color-green"></i>Ajouter une étiquette</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(musicienForm.nationalite) }}
+                        <span class="invalid-feedback"></span> 
+                        <button type="button" class="lienParamSuppMusicien vertical-next btn"><i class="fas fa-plus color-green"></i>Ajouter une nationalité</button>
+                    </div>
+                </div>
+                {{ form_end(musicienForm) }}
+                <span class="invalid-feedback"></span>
+            </div>
+            <div class="d-flex justify-content-start m-3">
+                <button type="button" class="lienGroup vertical-prev slick-btn btn btn-outline-secondary m-3">Retour</button>
+                <button id="addMusicien" type="button" class="vertical-prev slick-btn btn btn-outline-success m-3">Ajouter ce musicien</button>
+            </div>
+            <div class="feedbacks slide-component">
+                <span class="valid-feedback-up"></span>
+                <span class="invalid-feedback-up"></span>
+            </div>
+        </div>
+        <div id="Slide2-slide-child-5">
+            <h2 class="nested-slide-child-title">Informations complémentaires Groupe</h2>
+            <div class="col-lg-6">
+                <h4 class="h5 mb-1 mt-3">Création de Nationalité</h4>
+                {{ form_start(nationaliteForm,{ 'attr' : { 'id': 'nationaliteForm' }}) }}
+                <div class="row">
+                    <div class="inputCol">
+                        {{ form_row(nationaliteForm.nom) }}
+                        <span class="invalid-feedback"></span>
+                    </div>
+                    <div class="col-lg-6 inputCol">              
+                        {{ form_label(nationaliteForm.codeISO) }}
+                        <div class="input-group">
+                            {{ form_widget(nationaliteForm.codeISO) }}
+                            <button id="addNationalite" type="button" class="slick-btn vertical-next btn btn-outline-success input-group-text">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                </div>
+                <div class="feedbacks slide-component">
+                    <span class="valid-feedback-up"></span>
+                    <span class="invalid-feedback-up"></span>
+                </div>
+                {{ form_row(nationaliteForm ._token) }}
+                {{ form_end(nationaliteForm , {'render_rest': false}) }} 
+            </div>
+            <div class="col-lg-6 inputCol">
+                <h4 class="h5 mb-1 mt-3">Création d'Instrument</h4>
+                {{ form_start(instrForm,{ 'attr' : { 'id': 'instrForm' }}) }}
+                {{ form_label(instrForm.nom) }}
+                <div class="input-group">
+                    {{ form_widget(instrForm.nom) }}
+                    <button id="addInstr" type="button" class="slick-btn vertical-next btn btn-outline-success input-group-text">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <span class="invalid-feedback"></span> 
+                {{ form_row(instrForm ._token) }}
+                {{ form_end(instrForm , {'render_rest': false}) }} 
+            </div>
+            <div class="col-lg-6 inputCol">
+                <h4 class="h5 mb-0 mt-3">Création de genre musical</h4>
+                {{ form_start(typeMusicForm2,{ 'attr' : { 'id': 'typeMusicForm2' }}) }}
+                    {{ form_label(typeMusicForm2.nom) }}
+                    <div class="input-group">
+                        {{ form_widget(typeMusicForm2.nom) }}
+                        <button id="addGenreMusic2" type="button" class="slick-btn vertical-next btn btn-outline-success input-group-text">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <span class="invalid-feedback"></span> 
+                {{ form_end(typeMusicForm2) }}
+            </div>
+            <div class="col-lg-6 inputCol">
+                <h4 class="h5 mb-1 mt-3">Ajout d'étiquettes</h4>
+                {{ form_start(etiquetteForm2,{ 'attr' : { 'id': 'etiquetteForm2' }}) }}
+                    {{ form_label(etiquetteForm2.motsCles) }}
+                    <div class="input-group">
+                        {{ form_widget(etiquetteForm2.motsCles) }}
+                        <button id="addEtiquette2" type="button" class="slick-btn vertical-next btn btn-outline-success input-group-text">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <span class="invalid-feedback"></span> 
+                {{ form_end(etiquetteForm2) }}
+            </div>
+            <div class="m-3">
+                <button type="button" class="lienGroup vertical-prev slick-btn btn btn-outline-secondary m-3">Retour</button>
+            </div>
+        </div>
+        <div id="Slide2-slide-child-6">
+            <h2 class="nested-slide-child-title">Informations complémentaires Musicien</h2>
+            <div class="col-lg-6 inputCol">
+                <h4 class="h5 mb-1 mt-3">Ajout d'étiquettes</h4>
+                {{ form_start(etiquetteForm3,{ 'attr' : { 'id': 'etiquetteForm3' }}) }}
+                    {{ form_label(etiquetteForm3.motsCles) }}
+                    <div class="input-group">
+                        {{ form_widget(etiquetteForm3.motsCles) }}
+                        <button id="addEtiquette3" type="button" class="slick-btn vertical-next btn btn-outline-success input-group-text">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <span class="invalid-feedback"></span> 
+                {{ form_end(etiquetteForm3) }}
+            </div>
+            <div class="col-lg-6 ">
+                <h4 class="h5 mb-1 mt-3">Création de Nationalité</h4>
+                {{ form_start(nationaliteForm2,{ 'attr' : { 'id': 'nationaliteForm2' }}) }}
+                <div class="row">
+                    <div class="col-lg-6 inputCol">
+                        {{ form_row(nationaliteForm2.nom) }}
+                        <span class="invalid-feedback"></span>
+                    </div>
+                    <div class="col-lg-6 inputCol">              
+                        {{ form_label(nationaliteForm2.codeISO) }}
+                        <div class="input-group">
+                            {{ form_widget(nationaliteForm2.codeISO) }}
+                            <button id="addNationalite2" type="button" class="slick-btn vertical-next btn btn-outline-success input-group-text">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <span class="invalid-feedback"></span> 
+                    </div>
+                </div>
+                {{ form_row(nationaliteForm2 ._token) }}
+                {{ form_end(nationaliteForm2 , {'render_rest': false}) }} 
+            </div>
+            <div class="m-3">
+                <button type="button" class="lienMusicien vertical-prev slick-btn btn btn-outline-secondary m-3">Retour</button>
+            </div>
+        </div>
+    </div>
+</div>

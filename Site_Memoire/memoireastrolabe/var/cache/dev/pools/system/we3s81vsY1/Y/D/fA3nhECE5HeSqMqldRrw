@@ -1,0 +1,3 @@
+<?php //App%255CEntity%255CCategorieMusicale%2523getGenresMusicaux
+
+return [PHP_INT_MAX, []];

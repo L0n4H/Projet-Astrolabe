@@ -1,0 +1,17 @@
+{% block _evenement_ressources_entry_row %}
+
+{% for key, value in _context  %}
+    <li>{{ key }}</li>
+{% endfor %}
+
+ {% for ressources in form %}
+        <div class="col-xs-4 js-genus-scientist-item">
+            <a href="#" class="js-remove-scientist pull-right">
+                <span class="fa fa-close"></span>
+            </a>
+            {{ form_errors(ressources) }}
+            {{ form_row(ressources.titre) }}
+            {{ form_row(ressources.lien) }}
+        </div>
+    {% endfor %}
+{% endblock %}

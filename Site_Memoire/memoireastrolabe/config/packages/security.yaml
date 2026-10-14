@@ -1,0 +1,113 @@
+security:
+    enable_authenticator_manager: true
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        App\Entity\User:
+            algorithm: auto
+
+
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+        # used to reload user from session & other features (e.g. switch_user)
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: app_user_provider
+            custom_authenticator: App\Security\LoginFormAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
+            # guard:
+            #     authenticators:
+            #         - App\Security\LoginFormAuthenticator
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#the-firewall
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+            remember_me:
+                secret:   '%kernel.secret%' # required
+                lifetime: 604800 # 1 week in seconds
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login, allow_if: "not is_granted('ROLE_USER')" }
+        - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_EASYADMIN] }
+
+    role_hierarchy:
+        ROLE_EVENEMENT_WRITE : ROLE_EVENEMENT_READ
+        ROLE_EVENEMENT_EDIT : ROLE_EVENEMENT_READ
+        ROLE_EVENEMENT_DELETE : ROLE_EVENEMENT_READ
+
+        ROLE_LIEU_WRITE : ROLE_LIEU_READ
+        ROLE_LIEU_EDIT : ROLE_LIEU_READ
+        ROLE_LIEU_DELETE : ROLE_LIEU_READ
+
+        ROLE_GROUPE_WRITE : ROLE_GROUPE_READ
+        ROLE_GROUPE_EDIT : ROLE_GROUPE_READ
+        ROLE_GROUPE_DELETE : ROLE_GROUPE_READ
+
+        ROLE_LABEL_WRITE : ROLE_LABEL_READ
+        ROLE_LABEL_EDIT : ROLE_LABEL_READ
+        ROLE_LABEL_DELETE : ROLE_LABEL_READ
+
+        ROLE_MUSICIEN_WRITE : ROLE_MUSICIEN_READ
+        ROLE_MUSICIEN_EDIT : ROLE_MUSICIEN_READ
+        ROLE_MUSICIEN_DELETE : ROLE_MUSICIEN_READ
+
+        ROLE_INSTRUMENT_WRITE : ROLE_INSTRUMENT_READ
+        ROLE_INSTRUMENT_EDIT : ROLE_INSTRUMENT_READ
+        ROLE_INSTRUMENT_DELETE : ROLE_INSTRUMENT_READ
+
+        ROLE_NATIONALITE_WRITE : ROLE_NATIONALITE_READ
+        ROLE_NATIONALITE_EDIT : ROLE_NATIONALITE_READ
+        ROLE_NATIONALITE_DELETE : ROLE_NATIONALITE_READ
+
+        ROLE_GENRE_WRITE : ROLE_GENRE_READ
+        ROLE_GENRE_EDIT : ROLE_GENRE_READ
+        ROLE_GENRE_DELETE : ROLE_GENRE_READ
+
+        ROLE_CATEGORIE_WRITE : ROLE_CATEGORIE_READ
+        ROLE_CATEGORIE_EDIT : ROLE_CATEGORIE_READ
+        ROLE_CATEGORIE_DELETE : ROLE_CATEGORIE_READ
+
+        ROLE_RESSOURCES_WRITE : ROLE_RESSOURCES_READ
+        ROLE_RESSOURCES_EDIT : ROLE_RESSOURCES_READ
+        ROLE_RESSOURCES_DELETE : ROLE_RESSOURCES_READ
+
+        ROLE_ETIQUETTE_WRITE : ROLE_ETIQUETTE_READ
+        ROLE_ETIQUETTE_EDIT : ROLE_ETIQUETTE_READ
+        ROLE_ETIQUETTE_DELETE : ROLE_ETIQUETTE_READ
+
+        ROLE_TYPEEVENT_WRITE : ROLE_TYPEEVENT_READ
+        ROLE_TYPEEVENT_EDIT : ROLE_TYPEEVENT_READ
+        ROLE_TYPEEVENT_DELETE : ROLE_TYPEEVENT_READ
+        
+        ROLE_EASYADMIN:   ROLE_USER
+        ROLE_REDACTEUR:   ["ROLE_EASYADMIN","ROLE_EVENEMENT_READ","ROLE_EVENEMENT_WRITE","ROLE_EVENEMENT_EDIT","ROLE_EVENEMENT_DELETE","ROLE_LIEU_READ","ROLE_LIEU_WRITE","ROLE_LIEU_EDIT","ROLE_LIEU_DELETE","ROLE_GROUPE_READ","ROLE_GROUPE_WRITE","ROLE_GROUPE_EDIT","ROLE_GROUPE_DELETE","ROLE_LABEL_READ","ROLE_LABEL_WRITE","ROLE_LABEL_EDIT","ROLE_LABEL_DELETE","ROLE_MUSICIEN_READ","ROLE_MUSICIEN_WRITE","ROLE_MUSICIEN_EDIT","ROLE_MUSICIEN_DELETE","ROLE_INSTRUMENT_READ","ROLE_INSTRUMENT_WRITE","ROLE_INSTRUMENT_EDIT","ROLE_INSTRUMENT_DELETE","ROLE_NATIONALITE_READ","ROLE_NATIONALITE_WRITE","ROLE_NATIONALITE_EDIT","ROLE_NATIONALITE_DELETE","ROLE_GENRE_READ","ROLE_GENRE_WRITE","ROLE_GENRE_EDIT","ROLE_GENRE_DELETE","ROLE_CATEGORIE_READ","ROLE_CATEGORIE_WRITE","ROLE_CATEGORIE_EDIT","ROLE_CATEGORIE_DELETE","ROLE_RESSOURCES_READ","ROLE_RESSOURCES_WRITE","ROLE_RESSOURCES_EDIT","ROLE_RESSOURCES_DELETE","ROLE_ETIQUETTE_READ","ROLE_ETIQUETTE_WRITE","ROLE_ETIQUETTE_EDIT","ROLE_ETIQUETTE_DELETE","ROLE_TYPEEVENT_READ","ROLE_TYPEEVENT_WRITE","ROLE_TYPEEVENT_EDIT","ROLE_TYPEEVENT_DELETE"]
+        ROLE_ADMIN : ROLE_REDACTEUR
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+when@test:
+    security:
+        password_hashers:
+            # By default, password hashers are resource intensive and take time. This is
+            # important to generate secure password hashes. In tests however, secure hashes
+            # are not important, waste resources and increase test times. The following
+            # reduces the work factor to the lowest possible values.
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4 # Lowest possible value for bcrypt
+                time_cost: 3 # Lowest possible value for argon
+                memory_cost: 10 # Lowest possible value for argon

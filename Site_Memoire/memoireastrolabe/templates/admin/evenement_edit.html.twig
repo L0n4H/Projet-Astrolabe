@@ -1,0 +1,29 @@
+{% extends '@EasyAdmin/crud/edit.html.twig' %}
+{% block configured_stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block main %}
+    {% block page_content %}
+        {{ form_start(edit_form) }}
+            {{ form_row(edit_form.titre) }}
+            {{ form_row(edit_form.lieu) }}
+            {{ form_row(edit_form.dateDebut) }}
+            {{ form_row(edit_form.dateFin) }}
+            {{ form_row(edit_form.typeEvenement) }}
+            {{ form_row(edit_form.imageFile) }}
+            {{ form_row(edit_form.lienImage) }}
+            {{ form_row(edit_form.passages) }}
+            {{ form_row(edit_form.genresMusicaux) }}
+            <span class="invalid-feedback" id="error_file"></span>
+            <div id="Evenements_ressources">
+                {{ form_row(edit_form.ressources) }}
+            </div>
+            {{ form_row(edit_form.etiquettes) }}
+            {{ form_row(edit_form.etat) }}
+            {{ form_row(edit_form.description, {'attr':{'class':'form-control editor'}}) }}
+        {{ form_end(edit_form) }}
+    {% endblock %}
+{% endblock %}
+{% block body_javascript %}
+    {{ parent() }}
+{% endblock %}

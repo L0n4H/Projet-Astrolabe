@@ -1,0 +1,53 @@
+{% extends 'admin/extend_admin/base.html.twig' %}
+
+{% block title %} Création d'un Evenement - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('workflowcss')}}
+    {{ encore_entry_link_tags('select2css')}}
+    {{ encore_entry_link_tags('progressBarcss')}}
+    {{ encore_entry_link_tags('dropifycss')}}
+    {{ encore_entry_link_tags('formRequired')}}
+
+{% endblock %}
+{# {% form_theme eventForm  'form/custom_event_ressources.html.twig'%} #}
+
+{% block body %}
+    <h1 class="main-title text-center color-dark-green">Création d'un événement</h1>
+    <div id="timeLine">
+        {% include 'components/progressBar.html.twig' only %}
+    </div>
+    <div class="responsive-carousel d-flex align-items-center pswp-gallery" id="mainSlide">
+        {% include 'workflow/slides/slide1.html.twig' %}
+        {% include 'workflow/slides/slide2.html.twig' %}
+        {% include 'workflow/slides/slide3.html.twig' %}
+        {% include 'workflow/slides/slide4.html.twig' %}
+    </div>
+    <div id="afterMainSlide" class="d-flex mx-auto justify-content-center m-3">
+        <button id="progress-prev" type="button" class="slick-btn btn btn-outline-primary m-3">Précédent</button>
+        <button id="progress-next" type="button" class="slick-btn btn btn-outline-success m-3">Continuer</button>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('workflowjs') }}
+    {{ encore_entry_script_tags('progressBarjs') }}
+    {{ encore_entry_script_tags('dropify') }}
+    <script>
+        var routeAddEtiquette = "{{ (absolute_url(path('add_etiquette') ))}}";
+        var routeAddGenreMusic = "{{ (absolute_url(path('add_genreMusical') ))}}";
+        var routeAddTypeEvent = "{{ (absolute_url(path('add_typeEvenement') ))}}";
+        var routeAddLieu = "{{ (absolute_url(path('add_lieu') ))}}";
+        var routeAddLabel = "{{ (absolute_url(path('add_label') ))}}";
+        var routeAddNat = "{{ (absolute_url(path('add_nationalite') ))}}";
+        var routeAddInsrtument = "{{ (absolute_url(path('add_instrument') ))}}";
+        var routeAddMusicien = "{{ (absolute_url(path('add_musicien') ))}}";
+        var routeAddGroup = "{{ (absolute_url(path('add_groupe') ))}}";
+        var routeVerifEvent = "{{ (absolute_url(path('verif_evenement') ))}}";
+        var routeVerifPassage = "{{ (absolute_url(path('verif_passage') ))}}";
+        var routeVerifMedia = "{{ (absolute_url(path('verif_ressource') ))}}";
+        var routeAddEvent = "{{(absolute_url(path('add_event')))}}";
+    </script>
+{% endblock %}

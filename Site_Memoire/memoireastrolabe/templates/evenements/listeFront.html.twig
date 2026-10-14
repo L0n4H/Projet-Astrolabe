@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenements - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('cardscss') }}
+    {{ encore_entry_link_tags('select2css') }}
+    {{ encore_entry_link_tags('evenementscss') }}
+{% endblock %}
+
+{% block body %}
+    <div class="filters">
+        <select name="event_annee" id="event_annee" class="select2 annee">
+            <option value="">ANNÉE</option>
+            {% for index, date in dates %}
+                <option value="{{date}}">{{date}}</option>
+            {% endfor %}
+        </select>
+        <select name="event_trimestre" id="event_trimestre" class="select2 trimestre">
+            <option value="">TRIMESTRE</option>
+            {% for trimestre, values in trimestres %}
+                <option value="{{values|json_encode()}}">{{trimestre}}</option>
+            {% endfor %}
+        </select>
+        <div class="events_genre">
+            <select name="event_genre" id="event_genre" class="select2 genre">
+                <option value="">STYLE MUSICAL</option>
+                {% for index, genre in genres %}
+                    <option value="{{genre.id}}">{{genre.nom}}</option>
+                {% endfor %}
+            </select>
+            <div class="event_genre_strict">
+                <input type="checkbox" name="event_genre_strict" id="event_genre_strict">
+                <label for="event_genre_strict">Rechercher les genres proches</label>
+            </div>
+        </div>
+        <select name="event_type" id="event_type" class="select2 type">
+            <option value="">TYPE</option>
+            {% for index, type in types %}
+                <option value="{{type.id}}">{{type.label}}</option>
+            {% endfor %}
+        </select>
+        <select name="event_lieux" id="event_lieux" class="select2 lieux">
+            <option value="">LIEU</option>
+            {% for index, lieu in lieux %}
+                <option value="{{lieu.id}}">
+                    ({{lieu.CP}}) {{lieu.ville}}
+                    {% if lieu.nomBatiment %}
+                        | {{lieu.nomBatiment}}
+                    {% endif %}
+                </option>
+            {% endfor %}
+        </select>
+        <div class="search ms-auto">
+            <input type="search" name="event_search" id="event_search" placeholder="Rechercher..." class="search-input">
+        </div>
+    </div>
+
+    <div id="container-event">
+        <div class="row" id="container-evenement">
+            {% for evenement in listeEvenements %}
+                {% include 'components/card.html.twig' with {'evenement': evenement} only %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap flex-wrap justify-content-center p-5" id="pagination">
+        {% include 'components/pagination.html.twig'%}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        var search_route = "{{ path('search_evenements') }}";
+        var card_route = "{{ path('event_card') }}";
+        var categorie_musicale_route = "{{ path('liste_categoriesMusicales') }}";
+    </script>
+    {{ encore_entry_script_tags('filtersjs') }}
+{% endblock %}

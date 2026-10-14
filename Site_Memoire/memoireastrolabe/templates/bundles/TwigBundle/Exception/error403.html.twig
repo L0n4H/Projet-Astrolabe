@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="template-error-bloc">
+        <h1>Contenu inaccessible</h1>
+    
+        <p>
+            Il semblerait que vous ne puissiez pas accéder à ce contenu.
+        </p>
+        <a href="{{ path('home') }}" class="d-block">Retour à la page d'accueil</a>
+    </section>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% apply spaceless %}
+{% set typesRessources =  { } %}
+{% for typeRessource in listeTypeRessources %}
+	{% set ressources =  { } %}
+	{% for ressource in typeRessource.getVisibleRessources %}
+		{% set ressourceArr = {(ressource.getId) : {'id':ressource.getId, 'lien':ressource.getLien , 'titre': (ressource.getTitre),'nomFile': (ressource.getNom),'url':  (absolute_url(path('detail_ressource', {'id' : ressource.getId}))) } }%}
+		{% set ressources = ressources|merge(ressourceArr) %}
+	{% endfor %}
+	{% set typeRessourceArr = {(typeRessource.getId) :{  'id' : typeRessource.getId,'label':typeRessource.getLabel,"ressources": ressources}}%}
+	{% set typesRessources = typesRessources|merge(typeRessourceArr) %}
+{% endfor %}
+{{ typesRessources|unescape|raw }}
+{% endapply %}

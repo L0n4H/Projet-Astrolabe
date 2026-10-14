@@ -1,0 +1,57 @@
+<?php //3b2fd09c31b8ba92d35c09d996a73b63
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\ParserResult' => [
+            '_sqlExecutor' => [
+                $o[1],
+            ],
+            '_resultSetMapping' => [
+                $o[2],
+            ],
+            '_parameterMappings' => [
+                [
+                    'query_for_text' => [
+                        0,
+                        2,
+                        4,
+                        6,
+                    ],
+                    'query_as_words' => [
+                        1,
+                        3,
+                        5,
+                        7,
+                    ],
+                ],
+            ],
+        ],
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT DISTINCT e0_.id AS id_0, e0_.date_debut AS date_debut_1 FROM evenement e0_ WHERE LOWER(e0_.description) LIKE ? OR LOWER(e0_.description) IN (?) OR LOWER(e0_.titre) LIKE ? OR LOWER(e0_.titre) IN (?) OR LOWER(e0_.image) LIKE ? OR LOWER(e0_.image) IN (?) OR LOWER(e0_.lien_image) LIKE ? OR LOWER(e0_.lien_image) IN (?) ORDER BY e0_.date_debut DESC LIMIT 25',
+            ],
+        ],
+        'stdClass' => [
+            'scalarMappings' => [
+                2 => [
+                    'id_0' => '_dctrn_id',
+                    'date_debut_1' => '_dctrn_ord0',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'id_0' => 'integer',
+                    'date_debut_1' => 'datetime',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

@@ -1,0 +1,111 @@
+<?php //2e2cda98325fab6dea66ff094c10d786
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\ParserResult' => [
+            '_sqlExecutor' => [
+                $o[1],
+            ],
+            '_resultSetMapping' => [
+                $o[2],
+            ],
+            '_parameterMappings' => [
+                [
+                    'query_for_text' => [
+                        0,
+                        2,
+                        4,
+                        6,
+                    ],
+                    'query_as_words' => [
+                        1,
+                        3,
+                        5,
+                        7,
+                    ],
+                    'dpid' => [
+                        8,
+                    ],
+                ],
+            ],
+        ],
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT e0_.id AS id_0, e0_.date_debut AS date_debut_1, e0_.date_fin AS date_fin_2, e0_.description AS description_3, e0_.titre AS titre_4, e0_.image AS image_5, e0_.updated_at AS updated_at_6, e0_.lien_image AS lien_image_7, e0_.type_evenement_id AS type_evenement_id_8, e0_.lieu_id AS lieu_id_9, e0_.etat_id AS etat_id_10 FROM evenement e0_ WHERE (LOWER(e0_.description) LIKE ? OR LOWER(e0_.description) IN (?) OR LOWER(e0_.titre) LIKE ? OR LOWER(e0_.titre) IN (?) OR LOWER(e0_.image) LIKE ? OR LOWER(e0_.image) IN (?) OR LOWER(e0_.lien_image) LIKE ? OR LOWER(e0_.lien_image) IN (?)) AND e0_.id IN (?)',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'entity' => 'App\\Entity\\Evenement',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'date_debut_1' => 'dateDebut',
+                    'date_fin_2' => 'dateFin',
+                    'description_3' => 'description',
+                    'titre_4' => 'titre',
+                    'image_5' => 'image',
+                    'updated_at_6' => 'updatedAt',
+                    'lien_image_7' => 'lienImage',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'type_evenement_id_8' => 'integer',
+                    'lieu_id_9' => 'integer',
+                    'etat_id_10' => 'integer',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'entity' => null,
+                ],
+            ],
+            'metaMappings' => [
+                2 => [
+                    'type_evenement_id_8' => 'type_evenement_id',
+                    'lieu_id_9' => 'lieu_id',
+                    'etat_id_10' => 'etat_id',
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'entity',
+                    'date_debut_1' => 'entity',
+                    'date_fin_2' => 'entity',
+                    'description_3' => 'entity',
+                    'titre_4' => 'entity',
+                    'image_5' => 'entity',
+                    'updated_at_6' => 'entity',
+                    'lien_image_7' => 'entity',
+                    'type_evenement_id_8' => 'entity',
+                    'lieu_id_9' => 'entity',
+                    'etat_id_10' => 'entity',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\Evenement',
+                    'date_debut_1' => 'App\\Entity\\Evenement',
+                    'date_fin_2' => 'App\\Entity\\Evenement',
+                    'description_3' => 'App\\Entity\\Evenement',
+                    'titre_4' => 'App\\Entity\\Evenement',
+                    'image_5' => 'App\\Entity\\Evenement',
+                    'updated_at_6' => 'App\\Entity\\Evenement',
+                    'lien_image_7' => 'App\\Entity\\Evenement',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

@@ -1,0 +1,27 @@
+{% extends '@EasyAdmin/crud/new.html.twig' %}
+{% block configured_stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block main %}
+    {% block page_content %}
+        {{ form_start(new_form) }}
+            {{ form_row(new_form.nom) }}
+            {{ form_row(new_form.dateCreation) }}
+            {{ form_row(new_form.nationalite) }}
+            {{ form_row(new_form.imageFile) }}
+            {{ form_row(new_form.lienImage) }}
+            {{ form_row(new_form.genresMusicaux) }}
+            {{ form_row(new_form.labels) }}
+            <span class="invalid-feedback" id="error_file"></span>
+            <div id="Groupes_ressources">
+                {{ form_row(new_form.ressources) }}
+            </div>
+            <div id="groupeMembres">
+                {{ form_row(new_form.membres) }}
+            </div>
+            {{ form_row(new_form.etiquettes) }}
+            {{ form_row(new_form.etat) }}
+            {{ form_row(new_form.biographie) }}
+        {{ form_end(new_form) }}
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% apply spaceless %}
+{% set categoriesMusicales = {} %}
+{% for categorieMusical in listeCategoriesMusicales %}
+	{% set genresMusicales = { } %}
+	{% for genreMusical in categorieMusical.getVisibleGenresMusicaux %}
+		{%  set genreMusicalArray ={(genreMusical.getId): {'id': genreMusical.getId, 'nom': genreMusical.getNom,'url':  (absolute_url(path('detail_genreMusical', {'id' : genreMusical.getId}))) }}%}
+		{% set genresMusicales = genresMusicales|merge(genreMusicalArray) %}
+	{% endfor %}
+	{% set categoriePrincipale = {'id': categorieMusical.categoriePrincipale.getId, 'nom': categorieMusical.categoriePrincipale.getNom,'url':  (absolute_url(path('detail_genreMusical', {'id' : categorieMusical.categoriePrincipale.getId}))) } %}
+	{% set categorieMusicaleArr =  {(categorieMusical.getId) :{'id' : (categorieMusical.getId),"categoriePrincipale": categoriePrincipale,"genresMusicaux": genresMusicales,"nom": (categorieMusical.getNom),} } %}
+	{% set categoriesMusicales = categoriesMusicales|merge(categorieMusicaleArr) %}
+{% endfor %}
+{{ categoriesMusicales|unescape|raw }}
+{% endapply %}

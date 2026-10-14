@@ -1,0 +1,93 @@
+<?php //4d54818289a364218f2f2bb30f5309a5
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\ParserResult' => [
+            '_sqlExecutor' => [
+                $o[1],
+            ],
+            '_resultSetMapping' => [
+                $o[2],
+            ],
+            '_parameterMappings' => [
+                [
+                    'etat_id' => [
+                        0,
+                    ],
+                    'id' => [
+                        1,
+                    ],
+                ],
+            ],
+        ],
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT l0_.id AS id_0, l0_.nom AS nom_1, l0_.date_creation AS date_creation_2, l0_.description AS description_3, l0_.logo AS logo_4, l0_.updated_at AS updated_at_5, l0_.lien_logo AS lien_logo_6, l0_.etat_id AS etat_id_7 FROM label l0_ WHERE l0_.etat_id = ? AND l0_.id = ?',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'l' => 'App\\Entity\\Label',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'nom_1' => 'nom',
+                    'date_creation_2' => 'dateCreation',
+                    'description_3' => 'description',
+                    'logo_4' => 'logo',
+                    'updated_at_5' => 'updatedAt',
+                    'lien_logo_6' => 'lienLogo',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'etat_id_7' => 'integer',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'l' => null,
+                ],
+            ],
+            'metaMappings' => [
+                2 => [
+                    'etat_id_7' => 'etat_id',
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'l',
+                    'nom_1' => 'l',
+                    'date_creation_2' => 'l',
+                    'description_3' => 'l',
+                    'logo_4' => 'l',
+                    'updated_at_5' => 'l',
+                    'lien_logo_6' => 'l',
+                    'etat_id_7' => 'l',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\Label',
+                    'nom_1' => 'App\\Entity\\Label',
+                    'date_creation_2' => 'App\\Entity\\Label',
+                    'description_3' => 'App\\Entity\\Label',
+                    'logo_4' => 'App\\Entity\\Label',
+                    'updated_at_5' => 'App\\Entity\\Label',
+                    'lien_logo_6' => 'App\\Entity\\Label',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

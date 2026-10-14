@@ -1,0 +1,25 @@
+{% apply spaceless %}
+{% set musiciensArr =  { } %}
+{% for musicien in listeMusiciens %}
+	{% set etiquettes = { } %}
+	{% for etiquette in musicien.getVisibleEtiquettes %}
+		{%  set etiquetteArray ={(etiquette.getId): {'id':etiquette.getId, 'motsCles':etiquette.getMotsCles,'url':  (absolute_url(path('detail_etiquette', {'id' : etiquette.getId}))) } }   %}
+		{% set etiquettes = etiquettes|merge(etiquetteArray) %}
+	{% endfor %}
+	{% set membres = { } %}
+	{% for membre in musicien.getVisibleMembres %}
+		{% set instruments = { } %}
+		{% for instrument in membre.getVisibleInstruments %}
+			{%  set instrumentArray ={(instrument.getId): {'id':instrument.getId, 'nom':instrument.getNom,'url':  (absolute_url(path('detail_instrument', {'id' : instrument.getId}))) } }   %}
+			{% set instruments = instruments|merge(instrumentArray) %}
+		{% endfor %}
+		{%  set membreArray ={(membre.getId): {'id':membre.getId, 'groupe':membre.getVisibleGroupe is not null ? membre.getVisibleGroupe.getNom,'actif':membre.getActif,'instruments':instruments,'url':  (absolute_url(path('detail_membre', {'id' : membre.getId}))) } }   %}
+		{% set membres = membres|merge(membreArray) %}
+	{% endfor %}
+	{% set musicienArr ={(musicien.getID):{"id":musicien.getID,"nom de Scene":musicien.getNomScene,"nom":musicien.getNom,"prenom":musicien.getPrenom,'date de naissance':(musicien.getDateNaissance),'lienImage':musicien.getLienImage,
+	'image':musicien.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(musicien, 'imageFile')) ): '',
+	'etiquettes':etiquettes,'nationalite': musicien.getVisibleNationalite is not null ? musicien.getVisibleNationalite.getNom : null ,'url':  (absolute_url(path('detail_musicien', {'id' : musicien.getId}))),'membre':membres}}    %}
+	{% set musiciensArr = musiciensArr|merge(musicienArr) %}
+{% endfor %}
+{{ musiciensArr|unescape|raw }}
+{% endapply %}

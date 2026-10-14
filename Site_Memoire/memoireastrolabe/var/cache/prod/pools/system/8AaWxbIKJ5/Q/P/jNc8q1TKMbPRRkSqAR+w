@@ -1,0 +1,99 @@
+<?php //2a002dcf8c2628679cf82c4697cfaeb8
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\ParserResult' => [
+            '_sqlExecutor' => [
+                $o[1],
+            ],
+            '_resultSetMapping' => [
+                $o[2],
+            ],
+            '_parameterMappings' => [
+                [
+                    'etat' => [
+                        0,
+                    ],
+                ],
+            ],
+        ],
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT e0_.id AS id_0, e0_.date_debut AS date_debut_1, e0_.date_fin AS date_fin_2, e0_.description AS description_3, e0_.titre AS titre_4, e0_.image AS image_5, e0_.updated_at AS updated_at_6, e0_.lien_image AS lien_image_7, e0_.type_evenement_id AS type_evenement_id_8, e0_.lieu_id AS lieu_id_9, e0_.etat_id AS etat_id_10 FROM evenement e0_ WHERE e0_.etat_id = ? LIMIT 10 OFFSET 20',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'e' => 'App\\Entity\\Evenement',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'date_debut_1' => 'dateDebut',
+                    'date_fin_2' => 'dateFin',
+                    'description_3' => 'description',
+                    'titre_4' => 'titre',
+                    'image_5' => 'image',
+                    'updated_at_6' => 'updatedAt',
+                    'lien_image_7' => 'lienImage',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'type_evenement_id_8' => 'integer',
+                    'lieu_id_9' => 'integer',
+                    'etat_id_10' => 'integer',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'e' => null,
+                ],
+            ],
+            'metaMappings' => [
+                2 => [
+                    'type_evenement_id_8' => 'type_evenement_id',
+                    'lieu_id_9' => 'lieu_id',
+                    'etat_id_10' => 'etat_id',
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'e',
+                    'date_debut_1' => 'e',
+                    'date_fin_2' => 'e',
+                    'description_3' => 'e',
+                    'titre_4' => 'e',
+                    'image_5' => 'e',
+                    'updated_at_6' => 'e',
+                    'lien_image_7' => 'e',
+                    'type_evenement_id_8' => 'e',
+                    'lieu_id_9' => 'e',
+                    'etat_id_10' => 'e',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\Evenement',
+                    'date_debut_1' => 'App\\Entity\\Evenement',
+                    'date_fin_2' => 'App\\Entity\\Evenement',
+                    'description_3' => 'App\\Entity\\Evenement',
+                    'titre_4' => 'App\\Entity\\Evenement',
+                    'image_5' => 'App\\Entity\\Evenement',
+                    'updated_at_6' => 'App\\Entity\\Evenement',
+                    'lien_image_7' => 'App\\Entity\\Evenement',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

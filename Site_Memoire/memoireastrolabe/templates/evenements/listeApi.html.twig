@@ -1,0 +1,106 @@
+{% apply spaceless %}
+{% set evenementsArr = { } %}
+{% for evenement in listeEvenements %}
+	{% set etiquettes = { } %}
+	{% for etiquette in evenement.getVisibleEtiquettes %}
+		{% set etiquetteArray ={ (etiquette.getId): { 'id':etiquette.getId, 'motsCles':etiquette.getMotsCles, 'url': (absolute_url(path('detail_etiquette', {'id' : etiquette.getId}))) } } %}
+		{% set etiquettes = etiquettes|merge(etiquetteArray) %}
+	{% endfor %}
+	{% set ressources = { } %}
+	{% for ressource in evenement.getVisibleRessources %}
+		{% set ressourceArray = { (ressource.getId) : { 'id':ressource.getId, 'lien':ressource.getLien , 'titre':ressource.getTitre, 'typeRessource':ressource.getType.getLabel, 'url': (absolute_url(path('detail_ressource', {'id' : ressource.getId}))) } } %}
+		{% set ressources = ressources|merge(ressourceArray) %}
+	{% endfor %}
+	{% if evenement.getVisibleLieu != null %} 
+		{% set lieu = { 'ville':(evenement.getVisibleLieu.getVille), 'CP':(evenement.getVisibleLieu.getCP), 'adresse':(evenement.getVisibleLieu.getAdresse), 'nomBatiment':(evenement.getVisibleLieu.getNomBatiment), 'url': (absolute_url(path('detail_lieu', {'id' : evenement.getVisibleLieu.getId}))) } %} 
+	{% else %}
+		{% set lieu = {} %}
+	{% endif %}
+
+	{% set genresMusicaux = { } %}
+	{% for genreMusical in evenement.getVisibleGenresMusicaux %}
+		{% set genreMusicalArray ={(genreMusical.getId): {'id': genreMusical.getId, 'nom': genreMusical.getNom }}%}
+		{% set genresMusicaux = genresMusicaux|merge(genreMusicalArray) %}
+	{% endfor %}
+
+	{% set passages = { } %}
+	{% for passage in evenement.getVisiblePassages %}
+		{% set etiquettes = { } %}
+		{% set genres = { } %}
+		{% set labels = { } %}
+		{% set membres = { } %}
+		{% if passage.getVisibleGroupe is not null %}
+			{% for etiquette in passage.getVisibleGroupe.getVisibleEtiquettes %}
+
+				{% set etiquetteArray ={ (etiquette.getId): { 'id':etiquette.getId, 'motsCles':etiquette.getMotsCles, 'url': (absolute_url(path('detail_etiquette', {'id' : etiquette.getId}))) } } %}
+				{% set etiquettes = etiquettes|merge(etiquetteArray) %}
+			{% endfor %}
+			{% for genre in passage.getVisibleGroupe.getVisibleGenresMusicaux %}
+				{% set categoriesMusical = { } %}
+				{% for categorieMusical in genre.getCategorieMusicales %}
+					{% set categorieMusicalArray = { (categorieMusical.getId): { 'id' : categorieMusical.getId, 'nom':categorieMusical.getNom, 'url': (absolute_url(path('detail_categorieMusicale', {'id' : categorieMusical.getId}))) } } %}
+					{% set categoriesMusical = categoriesMusical|merge(categorieMusicalArray) %}
+				{% endfor %}
+				{% set genreArray ={ (genre.getId) : { 'id':genre.getId, 'nom':genre.getNom,  'categorie':categoriesMusical, 'url': (absolute_url(path('detail_genreMusical', {'id' : genre.getId}))) } } %}
+				{% set genres = genres|merge(genreArray) %}
+			{% endfor %}
+			{% for label in passage.getVisibleGroupe.getVisibleLabels %}
+				{% set labelArray = { (label.getId) : { 'id':label.getId, 'nom':label.getNom, 'url': (absolute_url(path('detail_label', {'id' : label.getId}))) } } %}
+				{% set labels = labels|merge(labelArray) %}
+			{% endfor %}
+			{% for membre in passage.getVisibleGroupe.getVisibleMembres %}
+				{% set etiquettes = { } %}
+				{% if membre.getVisibleMusicien is not null %}
+					{% for etiquette in membre.getVisibleMusicien.getVisibleEtiquettes %}
+						{% set etiquetteArray ={ (etiquette.getId): { 'id':etiquette.getId, 'motsCles':etiquette.getMotsCles, 'url': (absolute_url(path('detail_etiquette', {'id' : etiquette.getId}))) } } %}
+						{% set etiquettes = etiquettes|merge(etiquetteArray) %}
+					{% endfor %}
+					{% set musicien ={ 'id':membre.getVisibleMusicien.getId, 'nom':membre.getVisibleMusicien.getNom, 'prenom':membre.getVisibleMusicien.getPrenom,'lienImage':membre.getVisibleMusicien.getLienImage,'image':(absolute_url(url('home')))~(vich_uploader_asset(membre.getVisibleMusicien, 'imageFile')),'nomScene':membre.getVisibleMusicien.getNomScene, 'dateNaissance':membre.getVisibleMusicien.getDateNaissance, 'etiquettes':etiquettes, 'url': (absolute_url(path('detail_musicien', {'id' : membre.getVisibleMusicien.getId}))) } %}
+					{% set instruments ={} %}
+					{% for instrument in membre.getVisibleInstruments %}
+						{% set instrumentArray ={ (instrument.getId) : { 'id':instrument.getId, 'nom':instrument.getNom, 'url': (absolute_url(path('detail_instrument', {'id' : instrument.getId}))) } } %}
+						{% set instruments = instruments|merge(instrumentArray) %}
+					{% endfor %}
+					{% set membreArray ={ (membre.getId) : { 'id':membre.getId, 'actif':membre.getActif, 'musicien':musicien, 'instruments' : instruments, 'url': (absolute_url(path('detail_membre', {'id' : membre.getId}))) } } %}
+					{% set membres = membres|merge(membreArray) %}
+				{% endif %}
+			{% endfor %}
+			
+			{% set groupe = { 
+				'id' : passage.getVisibleGroupe.getId,  
+				'lienImage':passage.getVisibleGroupe.getLienImage,
+				'image':passage.getVisibleGroupe.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(passage.getVisibleGroupe, 'imageFile')) ): '', 
+				'dateCreation':passage.getVisibleGroupe.getDateCreation, 
+				'biographie':passage.getVisibleGroupe.getBiographie, 
+				'etiquettes':etiquettes, 'genreMusicaux':genres, 
+				'labels':labels, 'membres':membres, 
+				'nationalite': passage.getVisibleGroupe.getVisibleNationalite is not null ? passage.getVisibleGroupe.getVisibleNationalite.getNom : null,
+			 	'url': (absolute_url(path('detail_groupe', {'id' : passage.getVisibleGroupe.getId}))) } %}
+		
+		{% else %}
+			{% set groupe =  null %}
+		{% endif %}
+
+		{% if  passage.getDateDebut is defined and  passage.getDateDebut is not null %}
+			{% set dateDebPass =  passage.getDateDebut.format("d-m-Y H:i") %}
+		{% else %}
+			{% set dateDebPass =  null %}
+		{% endif %}
+
+		{% if  passage.getDateFin is defined and  passage.getDateFin is not null %}
+			{% set dateFinPass =  passage.getDateFin.format("d-m-Y H:i") %}
+		{% else %}
+			{% set dateFinPass =  null %}
+		{% endif %}
+		{% set passageArray = { (passage.getId) : { 'id':passage.getId, 'dateDebut':dateDebPass , 'dateFin':dateFinPass, 'groupe':groupe, 'url': (absolute_url(path('detail_passage', {'id' : passage.getId}))) } } %}
+		{% set passages = passages|merge(passageArray) %}
+	{% endfor %}
+	{% set evenementArr = { (evenement.getId) :{ 'id' : (evenement.getId), 'type': (evenement.getVisibleTypeEvenements != null) ? evenement.getVisibleTypeEvenements.getLabel : "", 'lienImage':evenement.getLienImage,
+	'image':evenement.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(evenement, 'imageFile')) ): '', 
+	'genreMusical': genresMusicaux,
+	 "dateDebut": (evenement.getDateDebut.format("d-m-Y H:i")), "dateFin": (evenement.getDateFin.format("d-m-Y H:i")), "description": (evenement.getDescription), "titre": (evenement.getTitre), 'etiquettes' : etiquettes, 'ressources' : ressources, 'lieu':lieu, 'passages':passages, 'url': (absolute_url(path('detail_api_evenement', {'id' : evenement.getId}))) } } %}
+	{% set evenementsArr = evenementsArr|merge(evenementArr) %}
+{% endfor %}
+{{ evenementsArr|unescape|raw }}
+
+{% endapply %}

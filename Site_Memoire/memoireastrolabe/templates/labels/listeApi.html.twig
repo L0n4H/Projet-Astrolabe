@@ -1,0 +1,26 @@
+{% apply spaceless %}
+{% set labels = {} %}
+{% for label in listeLabels %}
+	{% set groupes = { } %}
+	{% for groupe in label.getVisibleGroupes %}
+		{% set genresMusicaux = {} %}
+		{% for genreMusical in groupe.getVisibleGenresMusicaux %}
+			{% set categoriesMusicales = {} %}
+			{% for categorieMusical in genreMusical.getCategorieMusicales %}
+				{% set categorieMusicales = {(categorieMusical.getId) : {'id': categorieMusical.getId,'nom': categorieMusical.getNom,'url': absolute_url(path('detail_categorieMusicale', {'id': categorieMusical.getId}))}}%}
+				{% set categoriesMusicales = categoriesMusicales|merge(categorieMusicales) %}
+			{% endfor %}
+			{% set genresMusicales = {(genreMusical.getId) : {'id': genreMusical.getId,'nom': genreMusical.getNom,'categorieMusicales': categoriesMusicales,'url': absolute_url(path('detail_genreMusical', {'id' : genreMusical.getId}))}}%}
+			{% set genresMusicaux = genresMusicaux|merge(genresMusicales) %}
+		{% endfor %}
+	
+		{%  set groupeArray = {(groupe.getId): {'id': (groupe.getId), 'nom' : (groupe.getNom),'dateCreation': (groupe.getDateCreation),'biographie': (groupe.getBiographie),'lienImage':groupe.getLienImage,
+		'image':groupe.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(groupe, 'imageFile')) ): '', 
+		'genresMusicaux': genresMusicaux,'url':  (absolute_url(path('detail_membre', {'id' : groupe.getId}))) } }   %}
+		{% set groupes = groupes|merge(groupeArray) %}
+	{% endfor %}
+	{% set labelArr =  {(label.getId) :{'id' : (label.getId),"nom": (label.getNom),"dateCreation": (label.getDateCreation),"description": (label.getDescription),"logo" : (label.getLogo), 'lienLogo':label.getLienLogo, "groupes" : groupes,'url':  (absolute_url(path('detail_label', {'id' : label.getId})))} } %}
+	{% set labels = labels|merge(labelArr) %}
+{% endfor %}
+{{ labels|unescape|raw }}
+{% endapply %}

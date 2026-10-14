@@ -1,0 +1,104 @@
+@import "/node_modules/photoswipe/dist/photoswipe.css";
+@import "~slick-carousel/slick/slick";
+@import "~slick-carousel/slick/slick-theme";
+@import "_variables";
+
+.responsive-carousel {
+    .slick-list {
+        width: 100%;
+    }
+    .slick-slide {
+        width: fit-content!important;
+        .gallery-item {
+            width: 200px;
+            height: auto;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.pswp__zoom-wrap {
+    transition: all .2s ease-in-out!important;
+}
+
+.pswp__img {
+    display: block;
+    object-fit: contain;
+    transition: all .2s ease-in-out;
+}
+
+.btn-details {
+    color: $white !important;
+    background-color: $dark !important;
+    &:hover {
+        background-color: $white !important;
+        color: $dark !important;
+        border: 1px solid $dark;
+    }
+}
+
+.select2-container {
+    width: 100%!important;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border-radius: 7px;
+    margin: 3px auto;
+}
+
+.select2-search--dropdown {
+    background-color: #f1f5f9;
+}
+
+.select2-container--open {
+    z-index: 9999999;
+}
+
+label.required {
+    position: relative;
+
+    &::after {
+        content: " * ";
+        color: red;
+    }
+}
+
+.slick-track{
+    display: flex;
+    margin-left: 0px;
+    .slick-slide{
+        display: flex;
+        height: auto;
+        align-items: center; //optional
+        justify-content: center; //optional
+    }
+}
+
+.tags {
+    margin: 10px 0;
+    span {
+        color: white;
+        background-color: #333;
+        padding: 3px 6px;
+        border-radius: 5px;
+        font-size: .8em;
+        margin: auto 5px;
+    }
+}
+
+.credits {
+    text-decoration: none;
+    font-size: .8rem;
+    color: lighten(#333, 10%);
+}
+
+hr {
+    background-color: darken($vert, 10%);
+    border: 3px solid darken($vert, 10%);
+    width: 75px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    opacity: 1;
+}

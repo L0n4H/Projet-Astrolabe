@@ -1,0 +1,1 @@
+label.required{position:relative}label.required:after{color:red;content:" * "}div.field-association>label.required+div div.clear-button{display:none}

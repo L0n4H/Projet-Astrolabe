@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('resetcss') }}
+{% endblock %}
+{% block title %}Mail de Réinitialisation - {{ parent() }}{% endblock %}
+
+{% block body %}
+        <div class ="row m-5">
+            <div class="col d-none d-lg-block">
+                <img src="{{asset('/build/images/evenement.png')}}" class="img-fluid rounded" alt="Responsive image">
+            </div>
+            <div class="col-12 col-lg-6 d-flex justify-content-center flex-column">
+                {% for flash_error in app.flashes('reset_password_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                {% endfor %}
+                <div id="formReset" class="d-flex flex-column justify-content-center mx-auto">
+                    <h1>Réinitialiser votre mot de passe</h1>
+                    {{ form_start(requestForm) }}
+                        {{ form_row(requestForm.email) }}
+                        <div>
+                            <small>
+                                Entrez votre adresse Email afin de recevoir le lien pour réinitialiser votre mot de passe.
+                            </small>
+                        </div>
+                        <button class="btn btn-primary">Envoi du Mail</button>
+                </div>
+                {{ form_end(requestForm) }}
+            </div>
+        </div>
+    
+{% endblock %}

@@ -1,0 +1,15 @@
+{% apply spaceless %}
+{% set lieuxArr =  { } %}
+{% for lieu in listeLieux %}
+	{% set evenements =  { } %}
+	{% for evenement in lieu.getVisibleEvenements %}
+		{% set evenementArray = {(evenement.getId):{'id' : evenement.getId,'titre':evenement.getTitre,'dateDebut':evenement.getDateDebut,'dateFin':evenement.getDateFin,
+		'image':evenement.getImage is not null ? (absolute_url(url('home')))~(vich_uploader_asset(evenement, 'imageFile')): '', 
+		'lienImage':evenement.getLienImage,'description': evenement.getDescription,'type': (evenement.getVisibleTypeEvenements != null) ? evenement.getVisibleTypeEvenements.getLabel : null, 'url':  (absolute_url(path('detail_api_evenement', {'id' : evenement.getId}))) }}%}
+		{% set evenements = evenements|merge(evenementArray) %}
+	{% endfor %}
+	{% set lieuArr ={(lieu.getID):{"id":lieu.getID,"ville":lieu.getVille,"CP":lieu.getCP,"adresse":lieu.getAdresse,'nomBatiment':(lieu.getNomBatiment),'url':  (absolute_url(path('detail_lieu', {'id' : lieu.getId}))),'evenements':evenements                    }}    %}
+	{% set lieuxArr = lieuxArr|merge(lieuArr) %}
+{% endfor %}
+{{ lieuxArr|unescape|raw }}
+{% endapply %}

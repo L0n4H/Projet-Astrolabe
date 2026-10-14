@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="template-error-bloc">
+        <h1>Contenu introuvable</h1>
+        <p>Il semblerait que cette ressource est inexistante. Elle a peut-être été supprimée ou déplacée.</p>
+        <a href="{{ path('home') }}" class="d-block">Retour à la page d'accueil</a>
+    </section>
+{% endblock %}

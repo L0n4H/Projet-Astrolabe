@@ -1,0 +1,84 @@
+<?php //d4bad3819796153dd7938332766c310e
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\ParserResult' => [
+            '_sqlExecutor' => [
+                $o[1],
+            ],
+            '_resultSetMapping' => [
+                $o[2],
+            ],
+            '_parameterMappings' => [
+                [
+                    'dpid' => [
+                        0,
+                    ],
+                ],
+            ],
+        ],
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT l0_.id AS id_0, l0_.ville AS ville_1, l0_.cp AS cp_2, l0_.adresse AS adresse_3, l0_.nom_batiment AS nom_batiment_4, l0_.etat_id AS etat_id_5 FROM lieu l0_ WHERE l0_.id IN (?)',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'entity' => 'App\\Entity\\Lieu',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'ville_1' => 'ville',
+                    'cp_2' => 'CP',
+                    'adresse_3' => 'adresse',
+                    'nom_batiment_4' => 'nomBatiment',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'etat_id_5' => 'integer',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'entity' => null,
+                ],
+            ],
+            'metaMappings' => [
+                2 => [
+                    'etat_id_5' => 'etat_id',
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'entity',
+                    'ville_1' => 'entity',
+                    'cp_2' => 'entity',
+                    'adresse_3' => 'entity',
+                    'nom_batiment_4' => 'entity',
+                    'etat_id_5' => 'entity',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\Lieu',
+                    'ville_1' => 'App\\Entity\\Lieu',
+                    'cp_2' => 'App\\Entity\\Lieu',
+                    'adresse_3' => 'App\\Entity\\Lieu',
+                    'nom_batiment_4' => 'App\\Entity\\Lieu',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

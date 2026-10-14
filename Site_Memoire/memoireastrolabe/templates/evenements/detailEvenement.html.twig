@@ -1,0 +1,232 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{evenement.getTitre}} - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('detailevementcss')}}
+    {{ encore_entry_link_tags('select2css')}}
+    {{ encore_entry_link_tags('dropifycss')}}
+{% endblock %}
+
+{% block body %}
+
+<div class="container mx-auto">
+    <div class="row">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {% if evenement.imageFile != null %}
+            <div class="col-12 col-lg-5">
+                <img class="d-block img-responsive mx-auto mx-sm-0" src="{{ vich_uploader_asset(evenement, 'imageFile') }}" />
+            </div>
+        {% endif %}
+
+        <div class="col-12 mt-3 text-center text-sm-start mt-lg-0 col-lg-7">
+            <h1 class="title mb-0">{{evenement.getTitre}}</h1>
+            <hr>
+            <div class="tags">
+                {% for genre in evenement.genresMusicaux %}
+                    {% if genre.etat.id == 1 %}                                               
+                        <span>{{genre.nom}}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div>
+                <p class="text-decoration-underline mb-0">Description :</p>
+                <span class="d-block text-decoration-none">{{evenement.getDescription|raw}}</span>
+           
+            </div>
+            <div class="col-12 text-center text-sm-start mt-3">
+                <p><i class="fa-solid fa-calendar-days"></i> Début : {{ evenement.getDateDebut is defined and  evenement.getDateDebut is not null ? evenement.getDateDebut.format("d.m.Y - H:i") : ""}}</p>
+                <p><i class="fa-solid fa-calendar-days"></i> Fin : {{ evenement.getDateFin is defined and  evenement.getDateFin is not null ? evenement.getDateFin.format("d.m.Y - H:i") : ""}}</p>
+                {% if evenement.lieu.etat.id == 1 %}
+                    <p><i class="fa-solid fa-location-dot"></i> {{evenement.getVisibleLieu}}</p>
+                {% endif %}
+            </div>
+            {% for lienExterne in evenement.ressources %}
+                {% if lienExterne.etat.id == 1 %}
+                    {% if lienExterne.type.label == "Lien" and lienExterne.lien %}
+                        {% set valid = checkUrl(lienExterne.lien) %}
+                        {% if valid[0] == false and valid[1] != "" %}
+                            <div class="col-12 text-ce text-sm-start my-3 ">
+                                <i class="fa-solid fa-earth-europe"></i> <a href="{{valid[1]}}" target='_blank' alt="{{lienExterne.titre}}">{{lienExterne.titre}}</a>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <div class="col-12 text-center text-sm-start logos">
+                {% for lienExterne in evenement.ressources %}
+                    {% if lienExterne.etat.id == 1 %}
+                        {% if lienExterne.type.label == "Facebook" %}
+                            <a class="text-decoration-none" href="{{lienExterne.lien}}" target="_blank">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                        {% elseif (lienExterne.type.label == "Twitter") %}
+                            <a class="text-decoration-none" href="{{lienExterne.lien}}" target="_blank">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                        {% elseif (lienExterne.type.label == "Instagram") %}
+                            <a class="text-decoration-none" href="{{lienExterne.lien}}" target="_blank">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+           
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12 mt-3">
+            <h2>Groupes participants</h2>
+            <hr>
+            {% if evenement.getVisiblePassages|length == 0 %}
+                <p>Aucun passage de prévu pour cet événement</p>
+            {% else %}  
+                <table class="table d-none d-sm-block mx-auto">
+                    <thead>
+                        <tr>
+                            <th scope="col">Groupe</th>
+                            <th scope="col">Début</th>
+                            <th scope="col">Fin</th>
+                        </tr>
+                    </thead>   
+                    <tbody>
+                    {% for passage in evenement.getVisiblePassages %}            
+                        <tr>
+                            <td>
+                            {% if passage.getVisibleGroupe.nationalite %}
+                                <img style="height:16px" src="https://countryflagsapi.com/svg/{{passage.getVisibleGroupe.nationalite.codeISO}}" alt="">
+                            {% endif %}
+                                {{passage.getVisibleGroupe}}
+                            </td>
+                            <td>{{ passage.getDateDebut is defined and  passage.getDateDebut is not null ? passage.getDateDebut.format("d.m.Y - H:i") : ""}} </td>
+                            <td>{{ passage.getDateFin is defined and  passage.getDateFin is not null ? passage.getDateFin.format("d.m.Y - H:i") : ""}} </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="accordion d-sm-none mb-4" id="accordionPassage"> 
+                    {% for passage in evenement.getVisiblePassages %}
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading{{loop.index}}">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{loop.index}}" aria-expanded="true" aria-controls="collapse{{loop.index}}">
+                                    {{passage.getVisibleGroupe}}
+                                </button>
+                                </h2>
+                                <div id="collapse{{loop.index}}" class="accordion-collapse collapse show" aria-labelledby="heading{{loop.index}}" data-bs-parent="#accordionPassage">
+                                    <div class="accordion-body">
+                                        <p><i class="fa-solid fa-calendar-days"></i> Début {{ passage.getDateDebut is defined and  passage.getDateDebut is not null ? passage.getDateDebut.format("d.m.Y - H:i") : ""}}</p>
+                                        <p><i class="fa-solid fa-calendar-days"></i> Fin {{ passage.getDateFin is defined and  passage.getDateFin is not null ? passage.getDateFin.format("d.m.Y - H:i") : ""}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-12 mb-4 mt-3">
+            <h2>Galerie</h2>
+            <hr>
+            <button type="button" class="btn btn-details mt-2 mb-3" data-bs-toggle="modal" data-bs-target="#addRessource">Proposer une ressource</button>
+            {% if evenement.ressources|length == 0 %}
+                <p>Aucune ressource n'a été renseignée pour cet événement</p>
+            {% else %} 
+            <div class="responsive-carousel d-flex align-items-center pswp-gallery mt-4" id="gallery">
+                {% for ressource in evenement.getVisibleRessources %}}
+                    {% if (ressource.lien == null and ressource.nom != null) and (ressource.type.id == 1) %}
+                        {% set image = vich_uploader_asset(ressource, 'file') %}
+                        {% set isValid = checkUrl(image) %}
+                        {% if isValid[0] %} {# If image #}
+                            <a href="{{image}}" class="text-center"
+                                data-pswp-height="800"
+                                data-pswp-width="800"
+                                target="_blank">
+                                <img class="img-fluid img-responsive mx-auto gallery-item px-2" loading="lazy" src="{{image}}" alt="{{ressource.nom}}" />
+                                {% if ressource.credits %}
+                                <span class="credits">{{ressource.credits}}</span>
+                                {% endif %}
+                            </a>
+                            {% else %} {# If video #}
+                            <a href="{{image}}" class="text-center"
+                                data-pswp-height="800"
+                                data-pswp-width="800"
+                                target="_blank">
+                                <iframe src="{{image}}" sandbox loading="lazy" allowfullscreen="true"></iframe>
+                                {% if ressource.credits %}
+                                <span class="credits">{{ressource.credits}}</span>
+                                {% endif %}
+                            </a>
+                        {% endif %}
+                    {% elseif (ressource.type.label not in ['Facebook', 'Instagram', 'Twitter']) and ressource.lien %}
+                        {% set isValid = checkUrl(ressource.lien) %}
+                        {% if isValid[0] %} {# If link and http #}
+                            <a href="{{ressource.lien}}" class="text-center"
+                                data-pswp-height="800"
+                                data-pswp-width="800"
+                                target="_blank">
+                                <img class="img-fluid img-responsive mx-auto gallery-item px-2" loading="lazy" src="{{ ressource.lien }}" alt="{{ressource.nom}}" />
+                                {% if ressource.credits %}
+                                <span class="credits">{{ressource.credits}}</span>
+                                {% endif %}
+                            </a>
+                        {% elseif (ressource.type.id == 3) %} {# If file and youtube link #}
+                            <a href="{{ isValid[1]}}"
+                                data-pswp-height="800"
+                                data-pswp-width="800"
+                                target="_blank">
+                                <iframe src="{{isValid[1]}}" loading="lazy" allowfullscreen="true"></iframe>
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addRessource" role="dialog" aria-labelledby="addRessourceLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addRessourceLabel">Proposer une ressource</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            {{ form_start(formRessource, { 'attr' : { 'id': 'ressourceForm' }} ) }}
+                {{ form_row(formRessource.titre, { 'attr' : { 'class' : 'form-control mb-3'}}) }}
+                {{ form_row(formRessource.lien, { 'attr' : { 'class' : 'form-control mb-3'}}) }}
+                {{ form_row(formRessource.file, { 'attr' : { 'class' : 'form-control dropify'}}) }}
+                <span class="invalid-feedback mb-3" id="error_file"></span>
+                {{ form_row(formRessource.type, { 'attr' : { 'class' : 'form-control select2  mb-3'}}) }}
+                {{ form_row(formRessource.credits) }}
+                {{ form_row(formRessource._token) }}
+            {{ form_end(formRessource, {'render_rest': false}) }}
+        </div>
+        <div class="modal-footer">
+            <span class="invalid-feedback"></span> 
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-main" form="ressourceForm" >Envoyer</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('detailevenementjs') }}
+    {{ encore_entry_script_tags('dropify')}}
+{% endblock %}

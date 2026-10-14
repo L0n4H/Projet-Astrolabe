@@ -1,0 +1,57 @@
+<?php //33b9db237045ee823b55ce0fed45eef5
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\ParserResult' => [
+            '_sqlExecutor' => [
+                $o[1],
+            ],
+            '_resultSetMapping' => [
+                $o[2],
+            ],
+            '_parameterMappings' => [
+                [
+                    'query_for_text' => [
+                        0,
+                        2,
+                        4,
+                        6,
+                        8,
+                    ],
+                    'query_as_words' => [
+                        1,
+                        3,
+                        5,
+                        7,
+                        9,
+                    ],
+                ],
+            ],
+        ],
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT count(g0_.id) AS sclr_0 FROM groupe g0_ WHERE LOWER(g0_.nom) LIKE ? OR LOWER(g0_.nom) IN (?) OR LOWER(g0_.date_creation) LIKE ? OR LOWER(g0_.date_creation) IN (?) OR LOWER(g0_.biographie) LIKE ? OR LOWER(g0_.biographie) IN (?) OR LOWER(g0_.image) LIKE ? OR LOWER(g0_.image) IN (?) OR LOWER(g0_.lien_image) LIKE ? OR LOWER(g0_.lien_image) IN (?)',
+            ],
+        ],
+        'stdClass' => [
+            'scalarMappings' => [
+                2 => [
+                    'sclr_0' => 1,
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'sclr_0' => 'string',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

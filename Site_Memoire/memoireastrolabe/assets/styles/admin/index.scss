@@ -1,0 +1,27 @@
+.custom-card {
+    height: 300px;
+    .thumbnail-img {
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        &:hover {
+            .black-bg {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.0));
+            }
+        }
+        .black-bg {
+            height: 100%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.0));
+        }
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: white;
+            font-weight: bold;
+            font-family: "cassannet";
+        }
+    }
+}

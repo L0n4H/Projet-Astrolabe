@@ -1,0 +1,40 @@
+#config/packages/vich_uploader.yaml
+vich_uploader:
+  db_driver: orm
+  
+  mappings:
+    groupe_images:
+      uri_prefix: '%env(resolve:VICH_MAP_GROUPE_IMG)%'
+      upload_destination: "%kernel.project_dir%/public%env(resolve:VICH_MAP_GROUPE_IMG)%"
+      inject_on_load: false
+      delete_on_update: true
+      delete_on_remove: true
+      namer: vich_uploader.namer_origname
+    label_images:
+      uri_prefix: '%env(resolve:VICH_MAP_LABEL_IMG)%'
+      upload_destination: "%kernel.project_dir%/public%env(resolve:VICH_MAP_LABEL_IMG)%"
+      inject_on_load: false
+      delete_on_update: true
+      delete_on_remove: true
+      namer: vich_uploader.namer_origname
+    musicien_images:
+      uri_prefix: '%env(resolve:VICH_MAP_MUSICIEN_IMG)%'
+      upload_destination: "%kernel.project_dir%/public%env(resolve:VICH_MAP_MUSICIEN_IMG)%"
+      inject_on_load: false
+      delete_on_update: true
+      delete_on_remove: true
+      namer: vich_uploader.namer_origname
+    evenement_images:
+      uri_prefix: '%env(resolve:VICH_MAP_EVENEMENT_IMG)%'
+      upload_destination: "%kernel.project_dir%/public%env(resolve:VICH_MAP_EVENEMENT_IMG)%"
+      inject_on_load: false
+      delete_on_update: true
+      delete_on_remove: true
+      namer: vich_uploader.namer_origname
+    ressources:
+      uri_prefix: '%env(resolve:VICH_MAP_RESSOURCES_IMG)%'
+      upload_destination: "%kernel.project_dir%/public%env(resolve:VICH_MAP_RESSOURCES_IMG)%"
+      inject_on_load: false
+      delete_on_update: true
+      delete_on_remove: true
+      namer: vich_uploader.namer_origname

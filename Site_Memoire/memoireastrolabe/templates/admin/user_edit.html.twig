@@ -1,0 +1,76 @@
+{% extends '@EasyAdmin/crud/edit.html.twig' %}
+{% block configured_stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% set nbIndependantRoles = 4 %} {# without entity link like 'ROLE_USER' not like 'ROLE_EVENEMENT_READ' #}
+{% block main %}
+    {% block page_content %}
+        {{ form_start(edit_form) }}
+            {{ form_row(edit_form.username) }}
+            {{ form_row(edit_form.email) }}
+            {{ form_row(edit_form.plainPassword) }}
+            {% for role in edit_form.roles %}
+                {% if loop.index <= nbIndependantRoles %}
+                    {% if loop.index0 == 0 %}
+                        <div class="row custom-ea-bloc my-3 roles-generiques">
+                            <h5 class="custom-ea-title mt-4">Rôles Génériques</h5>
+                    {% endif %}
+                        <div class="col-sm-6 col-lg-5 col-xl-3">
+                            {{ form_row(role) }}
+                        </div>
+                    {% if loop.index == nbIndependantRoles %}
+                        <div>
+                    {% endif %}
+                {% else %}
+                    {% if loop.index0 % 4 == 0 %}
+                        <section class="row custom-ea-bloc my-3 roles-specs">
+                            <h5 class="custom-ea-title">
+                                Rôles
+                                {% if 'EVENEMENT' in role.vars.value %}
+                                    Événements
+                                {% elseif 'LIEU' in role.vars.value %}
+                                    Lieux
+                                {% elseif 'GROUPE' in role.vars.value %}
+                                    Groupes
+                                {% elseif 'LABEL' in role.vars.value %}
+                                    Labels
+                                {% elseif 'MUSICIEN' in role.vars.value %}
+                                    Musiciens
+                                {% elseif 'INSTRUMENT' in role.vars.value %}
+                                    Instruments
+                                {% elseif 'NATIONALITE' in role.vars.value %}
+                                    Nationalités
+                                {% elseif 'GENRE' in role.vars.value %}
+                                    Genres
+                                {% elseif 'CATEGORIE' in role.vars.value %}
+                                    Catégories
+                                {% elseif 'RESSOURCES' in role.vars.value %}
+                                    Ressources
+                                {% elseif 'ETIQUETTE' in role.vars.value %}
+                                    Étiquettes
+                                {% elseif 'TYPEEVENT' in role.vars.value %}
+                                    Types d'événement
+                                {% else %}
+                                    Autres
+                                {% endif %}
+                            </h5>
+                    {% endif %}
+                    
+                        <div class="col-sm-6 col-lg-5 col-xl-3">
+                            {{ form_row(role) }}
+                        </div>
+                
+                    {% if loop.index0 % 4 == 3 %}
+                        </section>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {{ form_end(edit_form) }}
+    {% endblock %}
+{% endblock %}
+{% block body_javascript %}
+    <script type="text/javascript">
+        var nbIndependantRoles = "{{ nbIndependantRoles }}";
+    </script>
+    {{ parent() }}
+{% endblock %}

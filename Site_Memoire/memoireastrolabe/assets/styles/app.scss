@@ -1,0 +1,153 @@
+@import "_variables";
+@import "_fonts";
+@import "~bootstrap/scss/bootstrap";
+@import "~slick-carousel/slick/slick";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+
+body {
+    background-color: $white;
+    font-family: "cassannet", "Helvetica", Arial, sans-serif;
+    font-size: 1em;
+}
+
+.custom-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    @media (min-width: $break_md) {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+.color-green {
+    color: $vert;
+}
+
+.color-dark-green {
+    color: darken($vert, 15%);
+}
+
+.btn-main {
+    background-color: darken($vert, 15%);
+    color: white;
+    &:hover {
+        background-color: darken($vert, 10%);
+        color: white;
+    }
+}
+
+.dropify-wrapper .dropify-message {
+    font-size: 30px!important;
+    span.file-icon {
+        font-size: 30px!important;
+    }
+} 
+
+.black-btn {
+    color: $white !important;
+    background-color: $dark !important;
+    &:hover {
+        background-color: $white !important;
+        color: $dark !important;
+        border: 1px solid $dark;
+    }
+}
+
+.white-btn {
+    color: $dark !important;
+    background-color: $white !important;
+    border: 1px solid $dark;
+    &:hover {
+        background-color: $dark !important;
+        color: $white !important;
+    }
+}
+
+.template-error-bloc {
+    text-align: center;
+    margin: 60px auto 80px;
+}
+.logos a{
+    i {
+        color: $dark !important;
+        &.fa-youtube:hover {
+            color: #c4302b !important;
+        }
+        &.fa-instagram:hover {
+            color: #8a3ab9 !important;
+        }
+        &.fa-twitter:hover {
+            color: #00aced !important;
+        }
+        &.fa-facebook-f:hover {
+            color: #3b5998 !important;
+        }
+    }
+}
+
+.main-header {
+    margin-bottom: 30px;
+    font-family: "cassannet", "Helvetica", Arial, sans-serif;
+
+    .bg-color {
+        height: $height_bandeau;
+        background-color: $vert;
+        width: 100%;
+    }
+    .navbar-toggler {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    a {
+        &.nav-link {
+            color : $dark !important;
+            font-weight: bold;
+            font-size: 13px;
+            &::after {
+                content: " ";
+                display: block;
+                border: 2px solid transparent;
+            }
+            &:hover {
+                &::after {
+                    border: 2px solid $dark;
+                    position: relative;
+                    font-size: 33px;
+                    width: 25px;
+                    left: 0;
+                    transform: translateY(-50%);
+                    @media (min-width: $break_xl) {
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+        }
+
+        &.dropdown-item {
+            color: red !important;
+        }
+    }
+}
+
+footer {
+    font-family: "cassannet", "Helvetica", Arial, sans-serif;
+    background-color: $dark;
+    color: $white;
+    font-size: 1em;
+    line-height: normal;
+
+    .nav-link {
+        color : $white !important;
+        font-size: 0.8em;
+
+        &:hover {
+            text-decoration: underline;
+            text-decoration-color: $white !important;
+        }
+    }
+}

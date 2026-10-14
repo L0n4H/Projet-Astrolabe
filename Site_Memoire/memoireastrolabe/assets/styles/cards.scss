@@ -1,0 +1,159 @@
+@import "_variables";
+
+@mixin random-bgr(){
+    $bg: rgb(random(255), random(255), random(255),0.5);
+    background: $bg;
+    &:hover {
+        background: darken($bg, 15%);
+    }
+}
+
+#container-evenement 
+{
+    > .program
+    {
+        @for $i from 0 to 7 {
+            &:nth-child(8n+#{$i}) .random-background > .bg-default  {
+              @include random-bgr();
+            }
+        }
+    }
+
+    font-family: "cassannet", "Helvetica", Arial, sans-serif;
+   
+    img {
+        vertical-align: middle;
+        border: 0;
+    }
+    a {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+
+    .custom-card {
+        @keyframes fade {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;	
+            }
+        }
+        animation: fade .3s linear;
+        .title {
+            font-size: 30px;
+        }
+        .date {
+            font-size: 20px;
+        }
+        .tags {
+            font-size: 15px;
+            padding: 5px 10px;
+            word-break: keep-all;
+        }
+        .bg-default {
+            z-index: 10;
+            display: block;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            opacity: 1;
+        }
+        .program-text-position {
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            @media (min-width: $break_xl) {
+                bottom: 25px;
+            }
+        }
+    }
+}
+.etiquette
+{
+    text-decoration: none;
+    color: $dark;
+}
+.full-width {
+    width: 100%;
+}
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.color-black {
+    color: #000;
+}
+.bg-color-white {
+    background-color: $white;
+}
+.xs-font-x150 {
+    font-size: 1.5em;
+}
+
+.xs-padding-v-xs {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.color-white {
+    color: $white;
+}
+.xs-font-x200 {
+    font-size: 2em;
+}
+.xs-font-x300 {
+    font-size: 3em;
+}
+.bold {
+    font-weight: bold;
+}
+
+.xs-margin-bottom-xs {
+    margin-bottom: 5px;
+}
+.inline-block {
+    display: inline-block;
+}
+
+.thumbnail-img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-size: cover;
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: $break_sm) {
+    .xs-padding-h-sm {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: $break_md) {
+    .xs-margin-right-md {
+        margin-right: 15px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: $break_lg) {
+    .md-font-x160 {
+        font-size: 1.6em;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1300px and up) */
+@media only screen and (min-width: $break_xl) {*
+    .lg-font-x220 {
+        font-size: 2.2em;
+    }
+}

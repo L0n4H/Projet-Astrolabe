@@ -1,0 +1,62 @@
+<?php //App.Entity.Nationalite
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        (($f = &\Symfony\Component\VarExporter\Internal\Registry::$factories)['Symfony\\Component\\Validator\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::f('Symfony\\Component\\Validator\\Mapping\\ClassMetadata'))(),
+        ($f['Symfony\\Component\\Validator\\Mapping\\PropertyMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::f('Symfony\\Component\\Validator\\Mapping\\PropertyMetadata'))(),
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['App\\Validator\\ContainsLessThanString'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('App\\Validator\\ContainsLessThanString')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\Nationalite',
+                'nom',
+            ],
+            'defaultGroup' => [
+                'Nationalite',
+            ],
+            'members' => [
+                [
+                    'nom' => [
+                        $o[1],
+                    ],
+                ],
+            ],
+            'properties' => [
+                [
+                    'nom' => $o[1],
+                ],
+            ],
+            'class' => [
+                1 => 'App\\Entity\\Nationalite',
+            ],
+            'property' => [
+                1 => 'nom',
+            ],
+            'constraints' => [
+                1 => [
+                    $o[2],
+                ],
+            ],
+            'constraintsByGroup' => [
+                1 => [
+                    'Default' => [
+                        $o[2],
+                    ],
+                    'Nationalite' => [
+                        $o[2],
+                    ],
+                ],
+            ],
+            'groups' => [
+                2 => [
+                    'Default',
+                    'Nationalite',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

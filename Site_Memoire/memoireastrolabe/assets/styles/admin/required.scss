@@ -1,0 +1,12 @@
+label.required {
+    position: relative;
+
+    &::after {
+        content: " * ";
+        color: red;
+    }
+}
+div.field-association>label.required + div div.clear-button
+{
+    display: none;
+}

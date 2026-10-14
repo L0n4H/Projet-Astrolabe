@@ -1,0 +1,110 @@
+#1649403718
+ls
+#1649403721
+nano .env
+#1649403816
+php/bin console doctrine:migrations:migrate
+#1649403828
+./php/bin console doctrine:migrations:migrate
+#1649403837
+php/bin
+#1649403849
+php bin/console
+#1649403884
+php bin/console doctrine:migrations:migrate
+#1649403901
+php -v
+#1649404119
+nano .ovhconfig 
+#1649404129
+php -v
+#1649404134
+nano .ovhconfig 
+#1649404145
+php -v
+#1649404155
+php bin/console
+#1649404163
+nano .ovhconfig 
+#1649404252
+php bin/console
+#1649404269
+mv .ovhconfig ._ovhconfig
+#1649404272
+php -v
+#1649404408
+rm ._ovhconfig 
+#1649404411
+php -v
+#1649404466
+nano .ovhconfig
+#1649404487
+php -v
+#1649404502
+php bin/console
+#1649404574
+nano .bashrc
+#1649404604
+ls /usr
+#1649404609
+ls /usr/local
+#1649404614
+rm .bash_history 
+#1649404617
+rm .bashrc
+#1649404620
+ls
+#1649404664
+php -v
+#1649404760
+exit
+#1649404772
+ls
+#1649404775
+cd ..
+#1649404777
+ls
+#1649404783
+cd
+#1649404785
+ls
+#1649404791
+exit
+#1649404814
+ls
+#1649404816
+cd ..
+#1649404836
+exit
+#1649404888
+ls
+#1649404891
+cd
+#1649404903
+cd /
+#1649404905
+ls
+#1649404911
+cd
+#1649404912
+ls -la
+#1649404921
+cd /
+#1649404923
+ls -la
+#1649404925
+cd
+#1649404941
+cd /www
+#1649405062
+ls
+#1649405063
+cd 
+#1649405065
+cd /
+#1649405068
+ls
+#1649405127
+ls
+#1649405128
+cd

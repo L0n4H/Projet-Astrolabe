@@ -1,0 +1,52 @@
+<?php //e70f8a3e3c8cb65d290d47cecab6b187
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\ParserResult' => [
+            '_sqlExecutor' => [
+                $o[1],
+            ],
+            '_resultSetMapping' => [
+                $o[2],
+            ],
+            '_parameterMappings' => [
+                [
+                    'etat' => [
+                        0,
+                    ],
+                ],
+            ],
+        ],
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT DISTINCT l0_.id AS id_0, l0_.cp AS cp_1, l0_.ville AS ville_2, l0_.nom_batiment AS nom_batiment_3 FROM evenement e1_ INNER JOIN lieu l0_ ON e1_.lieu_id = l0_.id WHERE l0_.etat_id = ?',
+            ],
+        ],
+        'stdClass' => [
+            'scalarMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'cp_1' => 'CP',
+                    'ville_2' => 'ville',
+                    'nom_batiment_3' => 'nomBatiment',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'id_0' => 'integer',
+                    'cp_1' => 'string',
+                    'ville_2' => 'string',
+                    'nom_batiment_3' => 'string',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

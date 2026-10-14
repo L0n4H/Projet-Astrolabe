@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('resetcss') }}
+{% endblock %}
+
+{% block title %}Email Envoyé - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class ="row m-5">
+        <div class="col d-none d-lg-block">
+            <img src="{{asset('/build/images/evenement.png')}}" class="img-fluid rounded" alt="Responsive image">
+        </div>
+        <div class="col-12 col-lg-6 d-flex justify-content-center">
+            <div id="formReset"class="w-50 d-flex flex-column justify-content-center mx-auto" >
+                <p>Si un compte correspond à cet Email, alors un courrier électronique contenant un lien pour réinitialiser votre mot de passe vous a été envoyé.</p>
+                <p>Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+                <p>Si vous n'avez reçu aucun mail, vérifiez vos spams ou  <a href="{{ path('app_forgot_password_request') }}">essayez de nouveau</a>.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

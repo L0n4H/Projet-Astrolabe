@@ -1,0 +1,48 @@
+{% apply spaceless %}
+{% set nationalites = {} %}
+{% for nationalite in listeNationalite %}
+	{% set groupes = {} %}
+	{% for groupe in nationalite.getVisibleGroupes %}
+		{% set labels = {} %}
+		{% for label in groupe.getVisibleLabels %}
+			{% set labelArr =  {(label.getId) :{'id' : (label.getId),"nom": (label.getNom),"dateCreation": (label.getDateCreation),"description": (label.getDescription),"logo" : (label.getLogo),'url':  (absolute_url(path('detail_label', {'id' : label.getId})))} } %}
+			{% set labels = labels|merge(labelArr) %}
+		{% endfor %}
+		{% set genresMusicales = { } %}
+		{% for genreMusical in groupe.getVisibleGenresMusicaux %}
+			{% set categoriesMusicales = {} %}
+			{% for categorieMusical in genreMusical.getCategorieMusicales %}
+				{% set categorieMusicaleArr =  {(categorieMusical.getId) :{'id' : (categorieMusical.getId),"nom": (categorieMusical.getNom),'url':  (absolute_url(path('detail_categorieMusicale', {'id' : categorieMusical.getId})))} } %}
+				{% set categoriesMusicales = categoriesMusicales|merge(categorieMusicaleArr) %}
+			{% endfor %}
+			{%  set genreMusicalArray ={(genreMusical.getId): {'id': genreMusical.getId, 'nom': genreMusical.getNom,'categoriesMusicales': categoriesMusicales,'url':  (absolute_url(path('detail_genreMusical', {'id' : genreMusical.getId}))) } }   %}
+			{% set genresMusicales = genresMusicales|merge(genreMusicalArray) %}
+		{% endfor %}
+		{% set etiquettesGroupe = { } %}
+		{% for etiquette in groupe.getVisibleEtiquettes %}
+			{%  set etiquetteArray ={(etiquette.getId): {'id':etiquette.getId, 'motsCles':etiquette.getMotsCles,'url':  (absolute_url(path('detail_etiquette', {'id' : etiquette.getId}))) } }   %}
+			{% set etiquettesGroupe = etiquettesGroupe|merge(etiquetteArray) %}
+		{% endfor %}
+		{% set groupeArray = {(groupe.getId) : {'id': (groupe.getId),'nom' : (groupe.getNom),'dateCreation': (groupe.getDateCreation),'biographie': (groupe.getBiographie),'lienImage':groupe.getLienImage,
+		'image':groupe.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(groupe, 'imageFile')) ): '', 
+		'etiquettes' : etiquettesGroupe,'genresMusicaux': genresMusicales,'labels': labels, 'url' : absolute_url(path('detail_groupe' , {'id': groupe.getId }))}}%}
+		{% set groupes = groupes|merge(groupeArray) %}
+	{% endfor %}
+	{% set musiciens = {} %}
+	{% for musicien in nationalite.getVisibleMusiciens %}
+		{% set etiquettesMus = { } %}
+		{% for etiquette in musicien.getVisibleEtiquettes %}
+			{%  set etiquetteArray ={(etiquette.getId): {'id':etiquette.getId, 'motsCles':etiquette.getMotsCles,'url':  (absolute_url(path('detail_etiquette', {'id' : etiquette.getId}))) } }   %}
+			{% set etiquettesMus = etiquettesMus|merge(etiquetteArray) %}
+		{% endfor %}
+		{% set musicienArray = {(musicien.getId) : {'id': (musicien.getId),'nom' : (musicien.getNom),'prenom' : (musicien.getPrenom),'nomScene': (musicien.getNomScene),'dateNaisance': (musicien.getDateNaissance),'lienImage':musicien.getLienImage,
+		'image':musicien.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(musicien, 'imageFile')) ): '',
+		'etiquettes': etiquettesMus,'url' : absolute_url(path('detail_musicien' , {'id': musicien.getId }))}}%}
+		{% set musiciens = musiciens|merge(musicienArray) %}
+	{% endfor %}
+	{# "lienDrapeau": (nationalite.getLienDrapeau), #}
+	{% set nationaliteArr =  {(nationalite.getId) :{'id' : (nationalite.getId),"nom": (nationalite.getNom),"groupes": groupes,"musiciens" : musiciens,'url':  (absolute_url(path('detail_nationalite', {'id' : nationalite.getId})))} } %}
+	{% set nationalites = nationalites|merge(nationaliteArr) %}
+{% endfor %}
+{{ nationalites|unescape|raw }}
+{% endapply %}

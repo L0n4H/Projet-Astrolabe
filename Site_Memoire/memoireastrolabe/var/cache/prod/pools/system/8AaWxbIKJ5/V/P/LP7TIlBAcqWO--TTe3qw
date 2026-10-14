@@ -1,0 +1,90 @@
+<?php //1b745eb4ed7c59459a7bcd6d270272a0
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\ParserResult' => [
+            '_sqlExecutor' => [
+                $o[1],
+            ],
+            '_resultSetMapping' => [
+                $o[2],
+            ],
+            '_parameterMappings' => [
+                [
+                    'etat_id' => [
+                        0,
+                    ],
+                ],
+            ],
+        ],
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT r0_.id AS id_0, r0_.lien AS lien_1, r0_.nom AS nom_2, r0_.updated_at AS updated_at_3, r0_.titre AS titre_4, r0_.credits AS credits_5, r0_.type_id AS type_id_6, r0_.etat_id AS etat_id_7 FROM ressource r0_ WHERE r0_.etat_id = ?',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'r' => 'App\\Entity\\Ressource',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'lien_1' => 'lien',
+                    'nom_2' => 'nom',
+                    'updated_at_3' => 'updatedAt',
+                    'titre_4' => 'titre',
+                    'credits_5' => 'credits',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'type_id_6' => 'integer',
+                    'etat_id_7' => 'integer',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'r' => null,
+                ],
+            ],
+            'metaMappings' => [
+                2 => [
+                    'type_id_6' => 'type_id',
+                    'etat_id_7' => 'etat_id',
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'r',
+                    'lien_1' => 'r',
+                    'nom_2' => 'r',
+                    'updated_at_3' => 'r',
+                    'titre_4' => 'r',
+                    'credits_5' => 'r',
+                    'type_id_6' => 'r',
+                    'etat_id_7' => 'r',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\Ressource',
+                    'lien_1' => 'App\\Entity\\Ressource',
+                    'nom_2' => 'App\\Entity\\Ressource',
+                    'updated_at_3' => 'App\\Entity\\Ressource',
+                    'titre_4' => 'App\\Entity\\Ressource',
+                    'credits_5' => 'App\\Entity\\Ressource',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

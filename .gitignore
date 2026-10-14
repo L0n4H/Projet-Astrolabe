@@ -1,1 +1,33 @@
-.env
+# -----------------------------
+# Dépendances Node.js
+# -----------------------------
+node_modules/
+
+# -----------------------------
+# Dépendances PHP (Composer)
+# -----------------------------
+vendor/
+
+# -----------------------------
+# Fichiers de base de données
+# -----------------------------
+*.sql
+*.sqlite
+
+# -----------------------------
+# Caches, logs et environnement (Symfony)
+# -----------------------------
+var/cache/
+var/log/
+var/sessions/
+.env.local
+.env.*.local
+phpunit.result.cache
+
+# -----------------------------
+# Fichiers générés par le système et les IDE
+# -----------------------------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

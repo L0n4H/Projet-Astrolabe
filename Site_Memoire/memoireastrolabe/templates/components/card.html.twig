@@ -1,0 +1,43 @@
+<div class="program col-12 col-sm-6 col-lg-3 custom-card">
+    <a class="program-link" href="{{ (absolute_url(path('detail_evenement', {'id' : evenement.id}))) }}">
+        <div style="background-image: url(
+            {% if evenement.image %}
+                {{ vich_uploader_asset(evenement, 'imageFile') }}
+            {% elseif evenement.lienImage %}
+                {{ lienImage }}
+            {% else %}
+                {{ asset('build/images/img-thumbnail.png') }}
+            {% endif %}
+            )" class="thumbnail-img card-img">
+            <img src="{{ asset('build/images/img-thumbnail.png') }}" class="img-responsive full-width">
+            <div class="random-background">
+                <div class="bg-default ">
+                    <div class="program-text-position">
+                    {% set genres = {} %}
+                    
+                    {% if evenement.getVisibleGenresMusicaux is not null %}
+                        {% for genre in evenement.getVisibleGenresMusicaux %}
+                            {% if not loop.last %}
+                                {% set genres = genres|merge([genre.nom,' - '])  %}
+                            {% else %}
+                                {% set genres = genres|merge([genre.nom])  %}
+                            {% endif %}
+                        {% endfor %}                                                     
+                    {% endif %}
+                        <div class="tags color-black inline-block xs-font-x150 xs-padding-v-xs xs-padding-h-sm xs-margin-bottom-xs xs-margin-right-md
+                            {% if genres|length > 0 %}bg-color-white{% endif %} 
+                        ">
+                            {% for genre in genres %}
+                                {{genre}}
+                            {% endfor %}
+                        </div>
+                        <div class="date color-white xs-font-x200 bold">{{evenement.dateDebut.format("d.m.Y - H:i")}}</div>
+                        <div class="title color-white xs-font-x300 md-font-x160 lg-font-x220 bold">
+                            {{ evenement.titre }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

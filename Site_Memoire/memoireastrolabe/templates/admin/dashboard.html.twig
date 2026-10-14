@@ -1,0 +1,89 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% set url_evenement = ea_url().setController('App\\Controller\\Admin\\EvenementCrudController').setAction('index') %}
+{% set url_groupe    = ea_url().setController('App\\Controller\\Admin\\GroupeCrudController').setAction('index') %}
+{% set url_musique   = ea_url().setController('App\\Controller\\Admin\\GenreMusicalCrudController').setAction('index') %}
+{% set url_ressource = ea_url().setController('App\\Controller\\Admin\\RessourceCrudController').setAction('index') %}
+{% set url_admin     = ea_url().setController('App\\Controller\\Admin\\UserCrudController').setAction('index') %}
+
+{% block page_title -%}
+    <title>Administration - MemoireAstrolabe</title>
+{%- endblock %}
+
+{% block page_content %}
+<h1 class="text-center mb-5">Administration</h1>
+<div class="custom-container row w-100 m-0">
+    <div class="card col-12 col-sm-6 col-lg-4 g-0 custom-card">
+        <a href="{{ url_evenement }}" class="h-100 w-100">
+            <div style="background-image: url({{ asset('/build/images/evenement.png') }})" class="thumbnail-img h-100 w-100">
+                <div class="black-bg">
+                    <div class="text">
+                        Événement
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="card col-12 col-sm-6 col-lg-4 g-0 custom-card">
+        <a href="{{ url_groupe }}" class="h-100 w-100">
+            <div style="background-image: url({{ asset('/build/images/groupe.png') }})" class="thumbnail-img h-100 w-100">
+                <div class="black-bg">
+                    <div class="text">
+                        Groupe
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="card col-12 col-sm-6 col-lg-4 g-0 custom-card">
+        <a href="{{ url_musique }}" class="h-100 w-100">
+            <div style="background-image: url({{ asset('/build/images/musique.png') }})" class="thumbnail-img h-100 w-100">
+                <div class="black-bg">
+                    <div class="text">
+                        Musique
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="card col-12 col-sm-6 col-lg-4 g-0 custom-card">
+        <a href="{{ url_ressource }}" class="h-100 w-100">
+            <div style="background-image: url({{ asset('/build/images/ressources.png') }})" class="thumbnail-img h-100 w-100">
+                <div class="black-bg">
+                    <div class="text">
+                        Médias
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="card col-12 col-sm-6 col-lg-4 g-0 custom-card">
+        <a href="{{ url_admin }}" class="h-100 w-100">
+            <div style="background-image: url({{ asset('/build/images/administration.png') }})" class="thumbnail-img h-100 w-100">
+                <div class="black-bg">
+                    <div class="text">
+                        Administration
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<hr class="mt-3">
+<p class="mb-0 text-center text-muted">Projet réalisé dans le cadre d'un projet tutoré à l'IUT d'Orléans en Licence Professionnelle.</p>
+<ul class="d-flex navbar-nav flex-wrap flex-row justify-content-center">
+    <li class="nav-item mx-2">
+        <a class="nav-link text-muted" href="https://gitlab.com/nicotoine">@Nicolas Devos</a>
+    </li>
+    <li class="nav-item mx-2">
+        <a class="nav-link text-muted" href="https://gitlab.com/526f6d6172696e">@Romain Durand</a>
+    </li>
+    <li class="nav-item mx-2">
+        <a class="nav-link text-muted" href="https://gitlab.com/elieplr">@Elie Plouy-Rossard</a>
+    </li>
+    <li class="nav-item mx-2">
+        <a class="nav-link text-muted" href="https://gitlab.com/kevintld">@Kevin Talland</a>
+    </li>
+</ul>
+{% endblock %}

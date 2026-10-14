@@ -1,0 +1,79 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block head_stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('apiHeedscss') }}
+    {{ encore_entry_link_tags('dropifycss')}}
+{% endblock %}
+
+{% block head_javascript  %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('admin-apiHeeds') }}
+    {{ encore_entry_script_tags('dropify') }}
+      <script>
+        var routeAddCsv = "{{ (absolute_url(path('heeds_csv_import') ))}}";
+    </script>
+{% endblock %}
+
+{% block page_title -%}
+    <title>Import Heeds - MemoireAstrolabe</title>
+{%- endblock %}
+
+{% block page_content %}
+<div class="custom-container">
+    <h2 class="text-center mb-3">Ajout de données</h2>
+    <div id="heeds_form" class="d-flex flex-column justify-content-center align-items-center">
+        <img src="{{ asset('build/images/base_donnees.png') }}" class="img-bd mx-2" alt="Icône base de données">
+        <p>L'ajout de données requiert un fichier d'export CSV au format "programmation"</p>
+      {#   <div class="col-md-4 my-2">
+            <label for="validationCustom01" class="form-label">Date début</label>
+                <input type="date" id="start_date" class="form-control" required>
+           
+        </div>
+
+         <div class="col-md-4 my-2">
+            <label for="validationCustom01" class="form-label">Date fin</label>
+                <input type="date" id="end_date" class="form-control" required>
+
+            
+        </div>
+
+
+        <div id="dateValide" class="invalid-feedback text-center">
+                La date de début doit être antérieure à celle de fin.
+            </div> #}
+        <div class="col-6">
+            <input type="file" class="dropify" data-allowed-file-extensions="csv"  accept=".csv"/>
+        </div>
+        <div class="m-2">
+            <button type="button" disabled class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Récupérer les données</button>
+        </div>
+    </div>
+    
+    <div class="d-flex justify-content-center d-none" id="spinner">
+        <div class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+   
+</div>
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Ajout de nouvelles données</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-danger">L'ajout de nouvelles données fait appel à l'application Heeds. En continuant, vous vous engagez à ne pas utiliser à tort et à travers cette fonctionnalité.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" id="getData" data-bs-dismiss="modal">Continuer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock page_content %}

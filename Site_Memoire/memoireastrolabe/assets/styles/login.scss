@@ -1,0 +1,27 @@
+@import "variables";
+
+#formConnexion{
+    width: 70%;
+    label{
+        margin : 5px;
+    }
+    input{
+        margin : 5px;
+    }
+    a{
+        margin : 5px;
+    }
+    .btn-primary{
+        margin : 5px;
+        background-color: darken($color: $vert, $amount: 10%);
+        border-color: darken($color: $vert, $amount: 10%);
+    }
+    .btn-primary:hover{
+        background-color:  $vert;
+        border-color: $vert;
+    }
+}
+
+.btn {
+    width: fit-content;
+}
