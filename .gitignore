@@ -8,6 +8,11 @@ node_modules/
 # -----------------------------
 vendor/
 
+# -----------------------------
+# Fichiers de base de données
+# -----------------------------
+*.sql
+*.sqlite
 
 # -----------------------------
 # Caches, logs et environnement (Symfony)
