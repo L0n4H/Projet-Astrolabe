@@ -1,3 +1,0 @@
-<?php //App%255CEntity%255CTypeRessource%2523getVisibleRessources
-
-return [PHP_INT_MAX, []];
