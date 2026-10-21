@@ -17,13 +17,13 @@ vendor/
 # -----------------------------
 # Caches, logs et environnement (Symfony)
 # -----------------------------
-var/cache/
-var/log/
-var/sessions/
+var/
 .env.local
 .env.*.local
 phpunit.result.cache
-
+public/bundles
+public/build
+public/uploads
 # -----------------------------
 # Fichiers générés par le système et les IDE
 # -----------------------------
