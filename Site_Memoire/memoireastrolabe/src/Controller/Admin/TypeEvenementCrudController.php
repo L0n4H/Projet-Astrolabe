@@ -47,12 +47,6 @@ class TypeEvenementCrudController extends AbstractCrudController
             ->add('etat')
         ;
     }
-
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets->addWebpackEncoreEntry('admin-typeEvenementjs');
-    }
-
     public function configureFields(string $pageName): iterable
     {
         return [

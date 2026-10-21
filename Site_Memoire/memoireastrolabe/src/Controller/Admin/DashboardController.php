@@ -49,10 +49,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureAssets(): Assets
     {
-        return parent::configureAssets()->addWebpackEncoreEntry('admin-indexcss')
-                                        ->addWebpackEncoreEntry('admincss')
-                                        ->addWebpackEncoreEntry('adminjs')
-                                        ->addWebpackEncoreEntry('formRequired');
+        return Assets::new();
     }
 
     public function configureMenuItems(): iterable

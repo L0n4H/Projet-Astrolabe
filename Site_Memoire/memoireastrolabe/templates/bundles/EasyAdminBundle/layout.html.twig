@@ -2,6 +2,39 @@
 
 {% set nbEnAttente = nbEtatEnAttente() %}
 
+{% block head_stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('admin-indexcss') }}
+    {{ encore_entry_link_tags('admincss') }}
+    {{ encore_entry_link_tags('formRequired') }}
+{% endblock %}
+
+{% block head_javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('adminjs') }}
+    {{ encore_entry_script_tags('formRequired') }}
+
+    {# Chargement dynamique des scripts spécifiques en fonction de la page CRUD active #}
+    {% if ea is defined and ea.crud is not null %}
+        {% set controleur_actuel = ea.crud.controllerFqcn|split('\\')|last %}
+        
+        {% if controleur_actuel == 'LieuCrudController' %}
+            {{ encore_entry_script_tags('admin-lieujs') }}
+            
+        {% elseif controleur_actuel == 'EvenementCrudController' %}
+            {{ encore_entry_script_tags('admin-evenement') }}
+            
+        {% elseif controleur_actuel == 'GroupeCrudController' %}
+            {{ encore_entry_script_tags('admin-groupe') }}
+            
+        {% elseif controleur_actuel == 'MusicienCrudController' %}
+            {{ encore_entry_script_tags('admin-musicien') }}
+            
+        {# Vous pouvez ajouter les autres CRUD ici sur le même modèle #}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
 {% block header_custom_menu %}
     <div class="d-flex align-items-center">
         <div class="px-2 position-relative">

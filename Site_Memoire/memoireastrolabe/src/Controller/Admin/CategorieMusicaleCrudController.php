@@ -49,11 +49,6 @@ class CategorieMusicaleCrudController extends AbstractCrudController
         ;
     }
 
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets->addWebpackEncoreEntry('admin-categorieMusicaljs');
-    }
-
     public function configureFields(string $pageName): iterable
     {
         return [

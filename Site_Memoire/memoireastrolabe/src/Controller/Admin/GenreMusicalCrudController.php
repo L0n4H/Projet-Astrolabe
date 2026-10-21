@@ -47,12 +47,6 @@ class GenreMusicalCrudController extends AbstractCrudController
             ->add('etat')
         ;
     }
-
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets->addWebpackEncoreEntry('admin-genreMusicaljs');
-    }
-
     public function configureFields(string $pageName): iterable
     {
         return [
