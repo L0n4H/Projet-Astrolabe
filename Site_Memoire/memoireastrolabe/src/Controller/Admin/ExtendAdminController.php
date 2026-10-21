@@ -105,13 +105,17 @@ class ExtendAdminController extends AbstractController
                         $titre ? $evenement->setTitre($titre) : $errorMes.= "Titre manquant;";
                         
                         $dateDeb = $this->getDate($data);
-                        $dateDeb ? $evenement->setDateDebut($dateDeb) :$errorMes.= "date de debut manquante;";
+                        $dateDeb
+                            ? $evenement->setDateDebut($dateDeb)->setHeureDebut($dateDeb)
+                            : $errorMes.= "date de debut manquante;";
     
                        /*  if($dateDeb) 
                          echo($data[1].' '.$this->getOuverture($data).'  :  '.$dateDeb->format('d/m/Y H: i: s'). ' | '); */
     
                         $dateFin = $this->getDate_fin($data);
-                        $dateFin ? $evenement->setDateFin($dateFin) :$errorMes.= "date de fin manquante;";
+                        $dateFin
+                            ? $evenement->setDateFin($dateFin)->setHeureFin($dateFin)
+                            : $errorMes.= "date de fin manquante;";
                     
                         $type = $this->getType($data);
                         $type ? $evenement->setTypeEvenement($type) : $errorMes.= "Type d'évenement manquant;";

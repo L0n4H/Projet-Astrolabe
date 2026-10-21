@@ -98,7 +98,7 @@
 	{% set evenementArr = { (evenement.getId) :{ 'id' : (evenement.getId), 'type': (evenement.getVisibleTypeEvenements != null) ? evenement.getVisibleTypeEvenements.getLabel : "", 'lienImage':evenement.getLienImage,
 	'image':evenement.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(evenement, 'imageFile')) ): '', 
 	'genreMusical': genresMusicaux,
-	 "dateDebut": (evenement.getDateDebut.format("d-m-Y H:i")), "dateFin": (evenement.getDateFin.format("d-m-Y H:i")), "description": (evenement.getDescription), "titre": (evenement.getTitre), 'etiquettes' : etiquettes, 'ressources' : ressources, 'lieu':lieu, 'passages':passages, 'url': (absolute_url(path('detail_api_evenement', {'id' : evenement.getId}))) } } %}
+	 "dateDebut": evenement.getDateDebut.format("d-m-Y"), "heureDebut": evenement.getHeureDebut.format("H:i"), "dateFin": evenement.getDateFin.format("d-m-Y"), "heureFin": evenement.getHeureFin.format("H:i"), "description": (evenement.getDescription), "titre": (evenement.getTitre), 'etiquettes' : etiquettes, 'ressources' : ressources, 'lieu':lieu, 'passages':passages, 'url': (absolute_url(path('detail_api_evenement', {'id' : evenement.getId}))) } } %}
 	{% set evenementsArr = evenementsArr|merge(evenementArr) %}
 {% endfor %}
 {{ evenementsArr|unescape|raw }}

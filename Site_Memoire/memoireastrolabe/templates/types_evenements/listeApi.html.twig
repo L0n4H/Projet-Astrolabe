@@ -98,7 +98,7 @@
 		{% endfor %}
 		{% set evenementArr = { (evenement.getId) :{ 'id' : (evenement.getId),'lienImage':evenement.getLienImage,
 		'image':evenement.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(evenement, 'imageFile')) ): '', 
-		"dateDebut": (evenement.getDateDebut.format("d-m-Y H:i")), "dateFin": (evenement.getDateFin.format("d-m-Y H:i")), "description": (evenement.getDescription), "titre": (evenement.getTitre), 'etiquettes' : etiquettes, 'ressources' : ressources, 'lieu':lieu, 'passages':passages, 'url': (absolute_url(path('detail_api_evenement', {'id' : evenement.getId}))) } } %}
+		"dateDebut": evenement.getDateDebut.format("d-m-Y"), "heureDebut": evenement.getHeureDebut.format("H:i"), "dateFin": evenement.getDateFin.format("d-m-Y"), "heureFin": evenement.getHeureFin.format("H:i"), "description": (evenement.getDescription), "titre": (evenement.getTitre), 'etiquettes' : etiquettes, 'ressources' : ressources, 'lieu':lieu, 'passages':passages, 'url': (absolute_url(path('detail_api_evenement', {'id' : evenement.getId}))) } } %}
 		{% set evenements = evenements|merge(evenementArr) %}
 	{% endfor %}
 	{% set typeEvenementArr = { (typeEvenement.getID):{ "id":typeEvenement.getID, "label":typeEvenement.getLabel, 'url': (absolute_url(path('detail_typeEvenement', {'id' : typeEvenement.getId}))), 'evenements':evenements, } } %}

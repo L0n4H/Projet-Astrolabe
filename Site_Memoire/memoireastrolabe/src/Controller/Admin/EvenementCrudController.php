@@ -15,11 +15,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
@@ -80,8 +81,10 @@ class EvenementCrudController extends AbstractCrudController
         return [
             TextField::new('titre')->setLabel("Titre"),
             AssociationField::new('lieu')->setLabel("Lieu")->setRequired(true),
-            DateTimeField::new('dateDebut')->setLabel("Date début"),
-            DateTimeField::new('dateFin')->setLabel("Date fin"),
+            DateField::new('dateDebut')->setLabel("Date début"),
+            TimeField::new('heureDebut')->setLabel("Heure début")->setRequired(true),
+            DateField::new('dateFin')->setLabel("Date fin"),
+            TimeField::new('heureFin')->setLabel("Heure fin")->setRequired(true),
             AssociationField::new('typeEvenement')->setLabel("Type"),
             Field::new('imageFile')->setLabel("Image")->onlyOnForms()->setFormType(VichImageType::class),
             UrlField::new('lienImage')->setLabel('Lien')->onlyOnForms(),

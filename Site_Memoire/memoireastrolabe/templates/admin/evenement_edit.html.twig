@@ -7,8 +7,14 @@
         {{ form_start(edit_form) }}
             {{ form_row(edit_form.titre) }}
             {{ form_row(edit_form.lieu) }}
-            {{ form_row(edit_form.dateDebut) }}
-            {{ form_row(edit_form.dateFin) }}
+            <div class="row">
+                <div class="col-md-6">{{ form_row(edit_form.dateDebut) }}</div>
+                <div class="col-md-6">{{ form_row(edit_form.dateFin) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">{{ form_row(edit_form.heureDebut) }}</div>
+                <div class="col-md-6">{{ form_row(edit_form.heureFin) }}</div>
+            </div>
             {{ form_row(edit_form.typeEvenement) }}
             {{ form_row(edit_form.imageFile) }}
             {{ form_row(edit_form.lienImage) }}

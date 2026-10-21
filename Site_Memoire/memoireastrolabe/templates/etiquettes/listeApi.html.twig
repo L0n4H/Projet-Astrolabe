@@ -64,8 +64,10 @@
                 {
                     'id' : evenement.getId,
                     'titre':evenement.getTitre,
-                    'dateDebut':evenement.getDateDebut,
-                    'dateFin':evenement.getDateFin,
+                    'dateDebut':evenement.getDateDebut.format("d-m-Y"),
+                    'heureDebut':evenement.getHeureDebut.format("H:i"),
+                    'dateFin':evenement.getDateFin.format("d-m-Y"),
+                    'heureFin':evenement.getHeureFin.format("H:i"),
 		            'image':evenement.getImage is not null ? (absolute_url(url('home')))~(vich_uploader_asset(evenement, 'imageFile')): '', 
 		            'lienImage':evenement.getLienImage,
                     'description': evenement.getDescription,

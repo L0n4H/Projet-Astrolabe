@@ -3,7 +3,7 @@
 {% for lieu in listeLieux %}
 	{% set evenements =  { } %}
 	{% for evenement in lieu.getVisibleEvenements %}
-		{% set evenementArray = {(evenement.getId):{'id' : evenement.getId,'titre':evenement.getTitre,'dateDebut':evenement.getDateDebut,'dateFin':evenement.getDateFin,
+		{% set evenementArray = {(evenement.getId):{'id' : evenement.getId,'titre':evenement.getTitre,'dateDebut':evenement.getDateDebut.format("d-m-Y"),'heureDebut':evenement.getHeureDebut.format("H:i"),'dateFin':evenement.getDateFin.format("d-m-Y"),'heureFin':evenement.getHeureFin.format("H:i"),
 		'image':evenement.getImage is not null ? (absolute_url(url('home')))~(vich_uploader_asset(evenement, 'imageFile')): '', 
 		'lienImage':evenement.getLienImage,'description': evenement.getDescription,'type': (evenement.getVisibleTypeEvenements != null) ? evenement.getVisibleTypeEvenements.getLabel : null, 'url':  (absolute_url(path('detail_api_evenement', {'id' : evenement.getId}))) }}%}
 		{% set evenements = evenements|merge(evenementArray) %}

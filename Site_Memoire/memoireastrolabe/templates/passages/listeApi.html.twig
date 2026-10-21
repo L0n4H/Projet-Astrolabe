@@ -8,14 +8,14 @@
 			{% set lieu =  null %}
 		{% endif %}
 	
-		{% set evenement = {  'id' : passage.getVisibleEvenement.getId,'type':passage.getVisibleEvenement.getTypeEvenement is not null ? passage.getVisibleEvenement.getTypeEvenement.getLabel : null,"dateDebut": (passage.getVisibleEvenement.getDateDebut.format("d-m-Y H:i")),"dateFin": (passage.getVisibleEvenement.getDateFin.format("d-m-Y H:i")),"description": (passage.getVisibleEvenement.getDescription),
+		{% set evenement = {  'id' : passage.getVisibleEvenement.getId,'type':passage.getVisibleEvenement.getTypeEvenement is not null ? passage.getVisibleEvenement.getTypeEvenement.getLabel : null,"dateDebut": passage.getVisibleEvenement.getDateDebut.format("d-m-Y"),"heureDebut": passage.getVisibleEvenement.getHeureDebut.format("H:i"),"dateFin": passage.getVisibleEvenement.getDateFin.format("d-m-Y"),"heureFin": passage.getVisibleEvenement.getHeureFin.format("H:i"),"description": (passage.getVisibleEvenement.getDescription),
 		'image':passage.getVisibleEvenement.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(passage.getVisibleEvenement, 'imageFile')) ): '', 
 		'lienImage':passage.getVisibleEvenement.getLienImage,"titre": (passage.getVisibleEvenement.getTitre),'lieu':lieu,}%}
 	
 		{% set genres = { } %}
 
 		{% for genre in passage.getVisibleGroupe.getVisibleGenresMusicaux %}
-			{% set evenement = {  'id' : passage.getVisibleEvenement.getId,'type': (passage.getVisibleEvenement.getVisibleTypeEvenements != null) ? passage.getVisibleEvenement.getVisibleTypeEvenements.getLabel : "","dateDebut": (passage.getVisibleEvenement.getDateDebut.format("d-m-Y H:i")),"dateFin": (passage.getVisibleEvenement.getDateFin.format("d-m-Y H:i")),"description": (passage.getVisibleEvenement.getDescription),
+			{% set evenement = {  'id' : passage.getVisibleEvenement.getId,'type': (passage.getVisibleEvenement.getVisibleTypeEvenements != null) ? passage.getVisibleEvenement.getVisibleTypeEvenements.getLabel : "","dateDebut": passage.getVisibleEvenement.getDateDebut.format("d-m-Y"),"heureDebut": passage.getVisibleEvenement.getHeureDebut.format("H:i"),"dateFin": passage.getVisibleEvenement.getDateFin.format("d-m-Y"),"heureFin": passage.getVisibleEvenement.getHeureFin.format("H:i"),"description": (passage.getVisibleEvenement.getDescription),
 			'image':passage.getVisibleEvenement.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(passage.getVisibleEvenement, 'imageFile')) ): '', 
 			'lienImage':passage.getVisibleEvenement.getLienImage,"titre": (passage.getVisibleEvenement.getTitre),'lieu':lieu,}%}
 			{% set genres = { } %}

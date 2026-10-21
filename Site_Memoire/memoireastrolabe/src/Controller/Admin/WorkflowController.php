@@ -210,7 +210,9 @@ class WorkflowController extends AbstractController
         $newEvent = array(
             'titre'             => $param["titre"],
             'dateDeb'           => $param['dateDeb'],
+            'heureDeb'          => $param['heureDeb'],
             'dateFin'           => $param['dateFin'],
+            'heureFin'          => $param['heureFin'],
             'typeEvenement'     => $typeEvenement,
             'lieu'              => $lieu,
             'genresMusicaux'     => $genres,
@@ -403,7 +405,9 @@ class WorkflowController extends AbstractController
             $newEvent->setTitre($param["titre"]);
             $newEvent->setTypeEvenement($typeEvenementRepository->find($param["typeEvenement"]));
             $newEvent->setDateDebut(new DateTime($param["dateDeb"]));
+            $newEvent->setHeureDebut(new DateTime($param["heureDeb"]));
             $newEvent->setDateFin(new DateTime($param["dateFin"]));
+            $newEvent->setHeureFin(new DateTime($param["heureFin"]));
             $newEvent->setDescription($param["desc"]);
             $newEvent->setImage($hashImgName);
             $hashImgName ="";
