@@ -66,14 +66,6 @@ class RessourceCrudController extends AbstractCrudController
             ->add('type')
         ;
     }
-
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets->addWebpackEncoreEntry('admin-ressource')
-            ->addWebpackEncoreEntry('dropify')
-            ->addWebpackEncoreEntry('dropifycss');
-    }
-
     public function configureFields(string $pageName): iterable
     {
         return [

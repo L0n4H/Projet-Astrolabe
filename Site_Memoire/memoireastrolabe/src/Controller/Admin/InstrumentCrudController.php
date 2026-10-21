@@ -46,13 +46,7 @@ class InstrumentCrudController extends AbstractCrudController
             ->add('nom')
             ->add('etat')
         ;
-    }
-
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets->addWebpackEncoreEntry('admin-instrumentjs');
-    }
-    
+    } 
     public function configureFields(string $pageName): iterable
     {
         return [

@@ -4,7 +4,7 @@
             {% if evenement.image %}
                 {{ vich_uploader_asset(evenement, 'imageFile') }}
             {% elseif evenement.lienImage %}
-                {{ lienImage }}
+                {{ evenement.lienImage }}
             {% else %}
                 {{ asset('build/images/img-thumbnail.png') }}
             {% endif %}

@@ -80,13 +80,6 @@ class UserCrudController extends AbstractCrudController
     {
         return User::class;
     }
-
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets->addWebpackEncoreEntry('admin-userjs')
-        ;
-    }
-
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

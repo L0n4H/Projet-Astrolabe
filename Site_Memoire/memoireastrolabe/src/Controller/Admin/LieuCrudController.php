@@ -31,12 +31,6 @@ class LieuCrudController extends AbstractCrudController
         ;
     }
 
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets->addWebpackEncoreEntry('admin-lieujs');
-    }
-    
-
     public function configureActions(Actions $actions): Actions
     {
         return $actions->setPermission(Action::NEW, 'ROLE_LIEU_WRITE')

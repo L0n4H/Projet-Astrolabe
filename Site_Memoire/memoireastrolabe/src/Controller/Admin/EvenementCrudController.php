@@ -31,11 +31,6 @@ class EvenementCrudController extends AbstractCrudController
     {
         return Evenement::class;
     }
-    
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets->addWebpackEncoreEntry('select2css')->addWebpackEncoreEntry('admin-evenement');
-    }
 
     public function configureCrud(Crud $crud): Crud
     {

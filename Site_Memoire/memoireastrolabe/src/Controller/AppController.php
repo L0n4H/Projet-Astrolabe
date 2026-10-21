@@ -13,6 +13,6 @@ class AppController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->redirectToRoute("listeFront_evenements");
+        return $this->redirectToRoute("listeFront_evenements",['currentPage' => 1]);
     }
 }
