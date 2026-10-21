@@ -66,13 +66,6 @@ class GroupeCrudController extends AbstractCrudController
                        ->setPermission(Action::BATCH_DELETE, 'ROLE_GROUPE_DELETE')
         ;
     }
-
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets->addWebpackEncoreEntry('admin-groupe')
-                      ->addWebpackEncoreEntry('select2css');
-    }
-
     public function configureFilters(Filters $filters): Filters
     {
         return $filters

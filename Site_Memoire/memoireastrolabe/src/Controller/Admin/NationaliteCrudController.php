@@ -47,12 +47,6 @@ class NationaliteCrudController extends AbstractCrudController
             ->add('etat')
         ;
     }
-
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets->addWebpackEncoreEntry('admin-nationalitejs');
-    }
-
     public function configureFields(string $pageName): iterable
     {
         return [

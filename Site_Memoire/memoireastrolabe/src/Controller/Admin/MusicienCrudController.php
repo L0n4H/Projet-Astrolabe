@@ -70,9 +70,4 @@ class MusicienCrudController extends AbstractCrudController
             AssociationField::new('etat')->setLabel("État"),
         ];
     }
-
-    public function configureAssets(Assets $assets): Assets
-    {
-        return $assets->addWebpackEncoreEntry('admin-musicien');
-    }
 }
