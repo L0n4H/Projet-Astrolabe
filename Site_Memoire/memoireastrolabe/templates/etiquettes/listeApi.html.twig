@@ -49,6 +49,7 @@
                 'biographie':groupe.getBiographie,
                 'image':groupe.getImage,
                 'nationalite': groupe.getVisibleNationalite is not null ? groupe.getVisibleNationalite.getNom : null,
+                'nationalites': groupe.getVisibleNationaliteNames,
                 'url':  (absolute_url(path('detail_groupe', {'id' : groupe.getId}))) 
                 } 
             }

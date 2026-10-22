@@ -771,7 +771,7 @@ function manageSelect2(div,btn)
     var date  = '#groupForm #groupe_dateCreation';
     var bio = '#cke_groupe_biographie iframe'; 
     var etiquettes= '#groupForm #groupe_etiquettes';
-    var nationalite= '#groupForm #groupe_nationalite';
+    var nationalite= '#groupForm #groupe_nationalites';
     var photo = '#groupForm #groupe_imageFile_file';
     var genreMusicaux= '#groupForm #groupe_genresMusicaux';
     var label= '#groupForm #groupe_labels';
@@ -872,8 +872,12 @@ function manageSelect2(div,btn)
       spans.push(span);
       if ( $(span).parents('.slick-slide').first().find('.feedbacks').length > 0 )
         $(span).parents('.slick-slide').first().find('.feedbacks').text('');
+      const inputValue = $(input).val();
+      const isEmpty = Array.isArray(inputValue)
+        ? inputValue.length === 0
+        : (inputValue || '').replaceAll(' ', '') === '';
       if ( 
-        $(input).val().replaceAll(' ','') == '' &&
+        isEmpty &&
         $(input).attr("type") != "file" && 
         !$(input).hasClass("cke_wysiwyg_frame")
       ) {

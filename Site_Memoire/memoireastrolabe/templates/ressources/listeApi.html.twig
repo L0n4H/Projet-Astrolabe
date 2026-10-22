@@ -65,6 +65,7 @@
 						'labels':labels,
 						'membres':membres,
 						'nationalite': passage.getVisibleGroupe.getVisibleNationalite is not null ? passage.getVisibleGroupe.getVisibleNationalite.getNom : null,
+						'nationalites': passage.getVisibleGroupe.getVisibleNationaliteNames,
 						'url':  (absolute_url(path('detail_groupe', {'id' : passage.getVisibleGroupe.getId}))) }%}
 			{% else %}
 				{% set groupe = {} %}
@@ -90,7 +91,7 @@
 	{% endfor %}
 	{% set groupes = { } %}
 	{% for groupe in ressource.getVisibleGroupes %}
-		{% set groupeArray = {(groupe.getId):{'id':groupe.getId,'dateCreation':groupe.getDateCreation,'biographie':groupe.getBiographie,'image':groupe.getImage,'nationalite':groupe.getVisibleNationalite is not null ? groupe.getVisibleNationalite.getNom : null ,'url':(absolute_url(path('detail_groupe',{'id':groupe.getId})))}} %}
+		{% set groupeArray = {(groupe.getId):{'id':groupe.getId,'dateCreation':groupe.getDateCreation,'biographie':groupe.getBiographie,'image':groupe.getImage,'nationalite':groupe.getVisibleNationalite is not null ? groupe.getVisibleNationalite.getNom : null,'nationalites':groupe.getVisibleNationaliteNames,'url':(absolute_url(path('detail_groupe',{'id':groupe.getId})))}} %}
 		{% set groupes = groupes|merge(groupeArray) %}
 	{% endfor %}
 	{% set ressourceArr =  {(ressource.getId) :{'id' : (ressource.getId),"lien": (ressource.getLien),'titre': (ressource.getTitre),'image':ressource.getNom is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(ressource, 'file')) ): '',"etiquettes": etiquettesRess,"evenements" : evenementsArr,"groupes": groupes,"credits" : ressource.getCredits,'type': (ressource.getType.getLabel),'url':  (absolute_url(path('detail_ressource', {'id' : ressource.getId})))} } %}

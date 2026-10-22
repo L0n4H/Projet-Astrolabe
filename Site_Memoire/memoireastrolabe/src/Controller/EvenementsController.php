@@ -67,7 +67,7 @@ class EvenementsController extends AbstractController
     /**
      * @Route("/evenements/liste/{currentPage}", name="listeFront_evenements")
      */
-    public function accueil(int $currentPage=1, EntityManagerInterface $em): Response
+    public function accueil(EntityManagerInterface $em, $currentPage = 1): Response
     {
         $evenementRepository = $em->getRepository(Evenement::class);
         $count = count($evenementRepository->findByEtat(1));

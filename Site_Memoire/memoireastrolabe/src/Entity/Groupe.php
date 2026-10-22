@@ -87,10 +87,13 @@ class Groupe
 
     /**
      * @OA\Property(ref=@Model(type=Nationalite::class))
-     * @ORM\ManyToOne(targetEntity=Nationalite::class, inversedBy="groupes")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToMany(targetEntity=Nationalite::class, inversedBy="groupes")
+     * @ORM\JoinTable(name="groupe_nationalite",
+     *     joinColumns={@ORM\JoinColumn(name="groupe_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="nationalite_id", referencedColumnName="id")}
+     * )
      */
-    private $nationalite;
+    private $nationalites;
 
     /**
      * @OA\Property(ref=@Model(type=Passage::class))
@@ -125,6 +128,7 @@ class Groupe
         $this->etiquettes = new ArrayCollection();
         $this->genresMusicaux = new ArrayCollection();
         $this->labels = new ArrayCollection();
+        $this->nationalites = new ArrayCollection();
         $this->passages = new ArrayCollection();
         $this->membres = new ArrayCollection();
         $this->ressources = new ArrayCollection();
@@ -298,19 +302,81 @@ class Groupe
         return $this;
     }
     
+    /**
+     * @return Collection<int, Nationalite>
+     */
+    public function getNationalites(): Collection
+    {
+        return $this->nationalites;
+    }
+
+    /**
+     * @return Nationalite[]
+     */
+    public function getVisibleNationalites(): array
+    {
+        $nationalites = [];
+
+        foreach ($this->nationalites as $nationalite) {
+            if ($nationalite->getEtat() && $nationalite->getEtat()->getId() === 1) {
+                $nationalites[] = $nationalite;
+            }
+        }
+
+        return $nationalites;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getVisibleNationaliteNames(): array
+    {
+        return array_map(
+            static function (Nationalite $nationalite): ?string {
+                return $nationalite->getNom();
+            },
+            $this->getVisibleNationalites()
+        );
+    }
+
     public function getNationalite(): ?Nationalite
     {
-        return $this->nationalite;
+        return $this->nationalites->first() ?: null;
     }
-    
-    public function getVisibleNationalite() 
+
+    public function getVisibleNationalite(): ?Nationalite
     {
-        return !is_null($this->nationalite) && $this->nationalite->getEtat()->getId() == 1 ?$this->nationalite : null;
+        return $this->getVisibleNationalites()[0] ?? null;
     }
-    
+
+    public function addNationalite(Nationalite $nationalite): self
+    {
+        if (!$this->nationalites->contains($nationalite)) {
+            $this->nationalites[] = $nationalite;
+            $nationalite->addGroupe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNationalite(Nationalite $nationalite): self
+    {
+        if ($this->nationalites->removeElement($nationalite)) {
+            $nationalite->removeGroupe($this);
+        }
+
+        return $this;
+    }
+
     public function setNationalite(?Nationalite $nationalite): self
     {
-        $this->nationalite = $nationalite;
+        if ($nationalite === null) {
+            foreach ($this->nationalites->toArray() as $currentNationalite) {
+                $this->removeNationalite($currentNationalite);
+            }
+        } else {
+            $this->addNationalite($nationalite);
+        }
 
         return $this;
     }

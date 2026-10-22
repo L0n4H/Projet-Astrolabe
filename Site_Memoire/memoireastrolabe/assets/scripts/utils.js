@@ -141,12 +141,12 @@ class GenreMusical
 }
 
 class Groupe{
-    constructor(nom,date,bio,nationalite,photo,etiquettes,genreMusicaux,label,membres,Img)
+    constructor(nom,date,bio,nationalites,photo,etiquettes,genreMusicaux,label,membres,Img)
     {
         this.nom = nom;
         this.date = date;
         this.bio = bio;
-        this.nationalite = nationalite; //'idNat'
+        this.nationalites = nationalites; //'idNat'
         this.photo = photo; // "nom.extension"
         this.etiquettes = etiquettes; //array id etiquette
         this.genreMusicaux = genreMusicaux; //array id genreMusical

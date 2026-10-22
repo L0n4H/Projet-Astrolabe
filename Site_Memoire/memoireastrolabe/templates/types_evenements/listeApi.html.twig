@@ -88,6 +88,7 @@
 					'labels':labels, 
 					'membres':membres, 
 					'nationalite': passage.getVisibleGroupe.getVisibleNationalite is not null ? passage.getVisibleGroupe.getVisibleNationalite.getNom : null, 
+					'nationalites': passage.getVisibleGroupe.getVisibleNationaliteNames,
 					'url': (absolute_url(path('detail_groupe', {'id' : passage.getVisibleGroupe.getId}))) 
 				} %}
 				{% set passageArray = { (passage.getId) : { 'id':passage.getId, 'dateDebut':dateDebPass , 'dateFin':dateFinPass, 'groupe':groupe, 'url': (absolute_url(path('detail_passage', {'id' : passage.getId}))) } } %}

@@ -116,8 +116,10 @@ class GroupeType extends AbstractType
                 ] , 
                 "required" => false 
             ])
-            ->add('nationalite', null, [
-                "label" => "Nationalité",
+            ->add('nationalites', null, [
+                "label" => "Nationalités",
+                "multiple" => true,
+                "by_reference" => false,
                 "label_attr" => [
                     "class" => "form-label mt-3",
                 ] ,

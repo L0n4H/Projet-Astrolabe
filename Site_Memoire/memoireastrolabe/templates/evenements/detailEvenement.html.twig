@@ -103,9 +103,9 @@
                     {% for passage in evenement.getVisiblePassages %}            
                         <tr>
                             <td>
-                            {% if passage.getVisibleGroupe.nationalite %}
-                                <img style="height:16px" src="https://countryflagsapi.com/svg/{{passage.getVisibleGroupe.nationalite.codeISO}}" alt="">
-                            {% endif %}
+                            {% for nationalite in passage.getVisibleGroupe.getVisibleNationalites %}
+                                <img style="height:16px" src="https://countryflagsapi.com/svg/{{nationalite.codeISO}}" alt="{{ nationalite.nom }}">
+                            {% endfor %}
                                 {{passage.getVisibleGroupe}}
                             </td>
                             <td>{{ passage.getDateDebut is defined and  passage.getDateDebut is not null ? passage.getDateDebut.format("d.m.Y - H:i") : ""}} </td>

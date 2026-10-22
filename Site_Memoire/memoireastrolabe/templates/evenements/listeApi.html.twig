@@ -75,6 +75,7 @@
 				'etiquettes':etiquettes, 'genreMusicaux':genres, 
 				'labels':labels, 'membres':membres, 
 				'nationalite': passage.getVisibleGroupe.getVisibleNationalite is not null ? passage.getVisibleGroupe.getVisibleNationalite.getNom : null,
+				'nationalites': passage.getVisibleGroupe.getVisibleNationaliteNames,
 			 	'url': (absolute_url(path('detail_groupe', {'id' : passage.getVisibleGroupe.getId}))) } %}
 		
 		{% else %}

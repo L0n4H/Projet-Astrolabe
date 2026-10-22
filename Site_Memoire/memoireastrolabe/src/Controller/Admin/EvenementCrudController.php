@@ -33,6 +33,19 @@ class EvenementCrudController extends AbstractCrudController
         return Evenement::class;
     }
 
+    public function createEntity(string $entityFqcn)
+    {
+        $evenement = parent::createEntity($entityFqcn);
+
+        if ($evenement instanceof Evenement) {
+            $evenement
+                ->setHeureDebut(new \DateTime('20:30'))
+                ->setHeureFin(new \DateTime('01:00'));
+        }
+
+        return $evenement;
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -77,9 +90,9 @@ class EvenementCrudController extends AbstractCrudController
             TextField::new('titre')->setLabel("Titre"),
             AssociationField::new('lieu')->setLabel("Lieu")->setRequired(true),
             DateField::new('dateDebut')->setLabel("Date début"),
-            TimeField::new('heureDebut')->setLabel("Heure début")->setRequired(true),
+            TimeField::new('heureDebut')->setLabel("Heure début")->setRequired(true)->renderAsChoice()->setFormTypeOption('minutes', [0, 15, 30, 45]),
             DateField::new('dateFin')->setLabel("Date fin"),
-            TimeField::new('heureFin')->setLabel("Heure fin")->setRequired(true),
+            TimeField::new('heureFin')->setLabel("Heure fin")->setRequired(true)->renderAsChoice()->setFormTypeOption('minutes', [0, 15, 30, 45]),
             AssociationField::new('typeEvenement')->setLabel("Type"),
             Field::new('imageFile')->setLabel("Image")->onlyOnForms()->setFormType(VichImageType::class),
             UrlField::new('lienImage')->setLabel('Lien')->onlyOnForms(),

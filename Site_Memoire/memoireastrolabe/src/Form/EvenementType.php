@@ -45,7 +45,9 @@ class EvenementType extends AbstractType
             ])
             ->add('heureDebut', TimeType::class, [
                 "label" => "Heure de début",
-                "widget" => "single_text",
+                'widget' => 'choice',
+                'hours' => range(0, 23),
+                'minutes' => [0, 15, 30, 45],
                 "label_attr" => [
                     "class" => "form-label required mt-3",
                 ] ,
@@ -56,7 +58,9 @@ class EvenementType extends AbstractType
             ])
             ->add('heureFin', TimeType::class, [
                 "label" => "Heure de fin",
-                "widget" => "single_text",
+                'widget' => 'choice',
+                'hours' => range(0, 23),
+                'minutes' => [0, 15, 30, 45],
                 "label_attr" => [
                     "class" => "form-label required mt-3",
                 ] ,

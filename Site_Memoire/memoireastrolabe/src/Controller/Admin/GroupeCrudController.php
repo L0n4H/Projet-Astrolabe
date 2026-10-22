@@ -74,7 +74,7 @@ class GroupeCrudController extends AbstractCrudController
             ->add('etiquettes')
             ->add('genresMusicaux')
             ->add('labels')
-            ->add('nationalite')
+            ->add('nationalites')
             ->add('membres')
             ->add('etat')
         ;
@@ -85,7 +85,7 @@ class GroupeCrudController extends AbstractCrudController
         return [
             TextField::new('nom')->setLabel("Nom"),
             TextField::new('dateCreation')->setLabel("Date de création"),
-            AssociationField::new('nationalite')->setLabel("Nationalité"),
+            AssociationField::new('nationalites')->setLabel("Nationalités")->setFormTypeOption('by_reference', false),
             Field::new('imageFile')->setLabel("Image")->onlyOnForms()->setFormType(VichImageType::class),
             UrlField::new('lienImage')->setLabel('Lien')->onlyOnForms(),
             AssociationField::new('genresMusicaux')->setLabel("Genres Musicaux")->onlyOnForms(),

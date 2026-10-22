@@ -134,6 +134,8 @@ class Evenement
     
     public function __construct()
     {
+        $this->heureDebut = new \DateTime('20:30');
+        $this->heureFin = new \DateTime('01:00');
         $this->etiquettes = new ArrayCollection();
         $this->ressources = new ArrayCollection();
         $this->passages = new ArrayCollection();
