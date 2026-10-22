@@ -44,6 +44,16 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-sm-6 inputCol">
+                            {{ form_row(eventForm.heureDebut) }}
+                            <span class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-sm-6 inputCol">
+                            {{ form_row(eventForm.heureFin) }}
+                            <span class="invalid-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-6 inputCol">
                             {{ form_row(eventForm.genresMusicaux) }}
                             <button type="button" class="lienParamSupp vertical-next btn"><i class="fas fa-plus color-green"></i>Ajouter un genre musical</button>

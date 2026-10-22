@@ -44,8 +44,8 @@
            
             </div>
             <div class="col-12 text-center text-sm-start mt-3">
-                <p><i class="fa-solid fa-calendar-days"></i> Début : {{ evenement.getDateDebut is defined and  evenement.getDateDebut is not null ? evenement.getDateDebut.format("d.m.Y - H:i") : ""}}</p>
-                <p><i class="fa-solid fa-calendar-days"></i> Fin : {{ evenement.getDateFin is defined and  evenement.getDateFin is not null ? evenement.getDateFin.format("d.m.Y - H:i") : ""}}</p>
+                <p><i class="fa-solid fa-calendar-days"></i> Début : {{ evenement.getDateDebut is not null ? evenement.getDateDebut.format("d.m.Y") ~ " - " ~ evenement.getHeureDebut.format("H:i") : ""}}</p>
+                <p><i class="fa-solid fa-calendar-days"></i> Fin : {{ evenement.getDateFin is not null ? evenement.getDateFin.format("d.m.Y") ~ " - " ~ evenement.getHeureFin.format("H:i") : ""}}</p>
                 {% if evenement.lieu.etat.id == 1 %}
                     <p><i class="fa-solid fa-location-dot"></i> {{evenement.getVisibleLieu}}</p>
                 {% endif %}
@@ -103,9 +103,9 @@
                     {% for passage in evenement.getVisiblePassages %}            
                         <tr>
                             <td>
-                            {% if passage.getVisibleGroupe.nationalite %}
-                                <img style="height:16px" src="https://countryflagsapi.com/svg/{{passage.getVisibleGroupe.nationalite.codeISO}}" alt="">
-                            {% endif %}
+                            {% for nationalite in passage.getVisibleGroupe.getVisibleNationalites %}
+                                <img style="height:16px" src="https://countryflagsapi.com/svg/{{nationalite.codeISO}}" alt="{{ nationalite.nom }}">
+                            {% endfor %}
                                 {{passage.getVisibleGroupe}}
                             </td>
                             <td>{{ passage.getDateDebut is defined and  passage.getDateDebut is not null ? passage.getDateDebut.format("d.m.Y - H:i") : ""}} </td>

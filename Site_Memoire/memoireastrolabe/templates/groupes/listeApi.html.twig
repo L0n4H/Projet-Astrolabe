@@ -35,8 +35,10 @@
             'type': passage.getVisibleEvenement.getTypeEvenement is not null ? passage.getVisibleEvenement.getTypeEvenement.getLabel : null,
             'image':passage.getVisibleEvenement.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(passage.getVisibleEvenement, 'imageFile')) ): '', 
             'lienImage':passage.getVisibleEvenement.getLienImage,
-            "dateDebut": (passage.getVisibleEvenement.getDateDebut.format("d-m-Y H:i")),
-            "dateFin": (passage.getVisibleEvenement.getDateFin.format("d-m-Y H:i")),
+            "dateDebut": passage.getVisibleEvenement.getDateDebut.format("d-m-Y"),
+            "heureDebut": passage.getVisibleEvenement.getHeureDebut.format("H:i"),
+            "dateFin": passage.getVisibleEvenement.getDateFin.format("d-m-Y"),
+            "heureFin": passage.getVisibleEvenement.getHeureFin.format("H:i"),
             "description": (passage.getVisibleEvenement.getDescription),
             "titre": (passage.getVisibleEvenement.getTitre),
             
@@ -198,6 +200,7 @@
                 'membres':membres,
                 'ressources' : ressources,
                 'nationalite': groupe.getVisibleNationalite is not null ? groupe.getVisibleNationalite.getNom : null,
+                'nationalites': groupe.getVisibleNationaliteNames,
                 'url':  (absolute_url(path('detail_groupe', {'id' : groupe.getId}))) 
             }
         } 

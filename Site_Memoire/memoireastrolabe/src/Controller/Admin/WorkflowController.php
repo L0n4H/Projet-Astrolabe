@@ -210,7 +210,9 @@ class WorkflowController extends AbstractController
         $newEvent = array(
             'titre'             => $param["titre"],
             'dateDeb'           => $param['dateDeb'],
+            'heureDeb'          => $param['heureDeb'],
             'dateFin'           => $param['dateFin'],
+            'heureFin'          => $param['heureFin'],
             'typeEvenement'     => $typeEvenement,
             'lieu'              => $lieu,
             'genresMusicaux'     => $genres,
@@ -279,12 +281,17 @@ class WorkflowController extends AbstractController
                 );
                 array_push($membres, $temp);
             }
-            $idNat = $groupe->getNationalite() ? $groupe->getNationalite() : null;
-            $nationalite = $idNat ? $this->nationaliteRepository->find($idNat)->getNom() : '';
+            $nationalites = array_map(
+                static function ($nationalite): ?string {
+                    return $nationalite->getNom();
+                },
+                $groupe->getNationalites()->toArray()
+            );
             $newgrp = array(
                 'nom'                => $groupe->getNom(),
                 'lien'               => $groupe->getLienImage(),
-                'nationalite'        => $nationalite,
+                'nationalite'        => $nationalites[0] ?? '',
+                'nationalites'       => $nationalites,
                 'genre_musicaux'     => $genres,
                 'labels'             => $labels,
                 'dateCreation'       => $groupe->getDateCreation(),
@@ -403,7 +410,9 @@ class WorkflowController extends AbstractController
             $newEvent->setTitre($param["titre"]);
             $newEvent->setTypeEvenement($typeEvenementRepository->find($param["typeEvenement"]));
             $newEvent->setDateDebut(new DateTime($param["dateDeb"]));
+            $newEvent->setHeureDebut(new DateTime($param["heureDeb"]));
             $newEvent->setDateFin(new DateTime($param["dateFin"]));
+            $newEvent->setHeureFin(new DateTime($param["heureFin"]));
             $newEvent->setDescription($param["desc"]);
             $newEvent->setImage($hashImgName);
             $hashImgName ="";
@@ -497,7 +506,10 @@ class WorkflowController extends AbstractController
             $newGroupe->setNom($param["nom"]);
             $newGroupe->setDateCreation($param["date"]);
             $newGroupe->setBiographie($param["bio"]);
-            $newGroupe->setNationalite($nationaliteRepository->find($param["nationalite"]));
+            $nationalites = $param['nationalites'] ?? ($param['nationalite'] ?? []);
+            foreach ((array) $nationalites as $nationaliteId) {
+                $newGroupe->addNationalite($nationaliteRepository->find($nationaliteId));
+            }
             $newGroupe->setImage($hashImgName);
             $hashImgName ="";
             foreach ($param["etiquettes"] as $id) {

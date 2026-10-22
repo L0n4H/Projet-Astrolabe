@@ -38,15 +38,25 @@ class Evenement
 
     /**
      * @OA\Property(type="string")
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $dateDebut;
 
     /**
      * @OA\Property(type="string")
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $dateFin;
+
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    private $heureDebut;
+
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    private $heureFin;
 
     /**
      * @OA\Property(type="string")
@@ -124,6 +134,8 @@ class Evenement
     
     public function __construct()
     {
+        $this->heureDebut = new \DateTime('20:30');
+        $this->heureFin = new \DateTime('01:00');
         $this->etiquettes = new ArrayCollection();
         $this->ressources = new ArrayCollection();
         $this->passages = new ArrayCollection();
@@ -184,6 +196,30 @@ class Evenement
     public function setDateFin(\DateTimeInterface $dateFin): self
     {
         $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    public function getHeureDebut(): ?\DateTimeInterface
+    {
+        return $this->heureDebut;
+    }
+    
+    public function setHeureDebut(\DateTimeInterface $heureDebut): self
+    {
+        $this->heureDebut = $heureDebut;
+
+        return $this;
+    }
+    
+    public function getHeureFin(): ?\DateTimeInterface
+    {
+        return $this->heureFin;
+    }
+    
+    public function setHeureFin(\DateTimeInterface $heureFin): self
+    {
+        $this->heureFin = $heureFin;
 
         return $this;
     }

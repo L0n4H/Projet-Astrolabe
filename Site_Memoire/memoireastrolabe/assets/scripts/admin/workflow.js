@@ -548,7 +548,9 @@ function manageSelect2(div,btn)
     //typeEvenement,dateDeb,dateFin,desc,titre,genreMusicaux
     var typeEvenement = '#evenement_typeEvenement';
     var dateDeb = "#evenement_dateDebut";
+    var heureDeb = "#evenement_heureDebut";
     var dateFin = "#evenement_dateFin";
+    var heureFin = "#evenement_heureFin";
     var desc = "#cke_evenement_description iframe";
     var titre = "#evenement_titre";
     var genreMusicaux = "#evenement_genresMusicaux";
@@ -557,7 +559,7 @@ function manageSelect2(div,btn)
     var etiquettes = "#evenement_etiquettes";
 
     //les variables
-    var listParam = [typeEvenement,dateDeb,dateFin,desc,titre,genreMusicaux,lieu,img,etiquettes];
+    var listParam = [typeEvenement,dateDeb,heureDeb,dateFin,heureFin,desc,titre,genreMusicaux,lieu,img,etiquettes];
     var currentType = "Evenement";
     var routeVerif = routeVerifEvent;
     HandleForm(null,2,"#mainSlide",listParam,currentType,routeVerif);
@@ -769,7 +771,7 @@ function manageSelect2(div,btn)
     var date  = '#groupForm #groupe_dateCreation';
     var bio = '#cke_groupe_biographie iframe'; 
     var etiquettes= '#groupForm #groupe_etiquettes';
-    var nationalite= '#groupForm #groupe_nationalite';
+    var nationalite= '#groupForm #groupe_nationalites';
     var photo = '#groupForm #groupe_imageFile_file';
     var genreMusicaux= '#groupForm #groupe_genresMusicaux';
     var label= '#groupForm #groupe_labels';
@@ -841,17 +843,8 @@ function manageSelect2(div,btn)
     var dateFin = Array();
     if(currentType == "Evenement")
     {
-      
-      for (var param of listParam) {
-          if ( param.toUpperCase().includes('DEB') && param.toUpperCase().includes('DATE'))
-          {
-            dateDeb.push( param)
-          }
-          else if ( param.toUpperCase().includes('FIN') && param.toUpperCase().includes('DATE'))
-          {
-            dateFin.push( param)
-          }
-      } 
+      dateDeb.push({ date: '#evenement_dateDebut', time: '#evenement_heureDebut' });
+      dateFin.push({ date: '#evenement_dateFin', time: '#evenement_heureFin' });
 
     }
     else if(currentType == "Passage")
@@ -861,11 +854,11 @@ function manageSelect2(div,btn)
               let id = $(param).attr('id');
               if ( id.toUpperCase().includes('DEB') && id.toUpperCase().includes('DATE'))
               {
-                  dateDeb.push( '#'+ id)
+                  dateDeb.push({ date: '#'+id, time: null })
               }
               else if ( id.toUpperCase().includes('FIN') && id.toUpperCase().includes('DATE'))
               {
-                  dateFin.push( '#'+id)
+                  dateFin.push({ date: '#'+id, time: null })
               }
           } 
         
@@ -879,8 +872,12 @@ function manageSelect2(div,btn)
       spans.push(span);
       if ( $(span).parents('.slick-slide').first().find('.feedbacks').length > 0 )
         $(span).parents('.slick-slide').first().find('.feedbacks').text('');
+      const inputValue = $(input).val();
+      const isEmpty = Array.isArray(inputValue)
+        ? inputValue.length === 0
+        : (inputValue || '').replaceAll(' ', '') === '';
       if ( 
-        $(input).val().replaceAll(' ','') == '' &&
+        isEmpty &&
         $(input).attr("type") != "file" && 
         !$(input).hasClass("cke_wysiwyg_frame")
       ) {
@@ -897,39 +894,45 @@ function manageSelect2(div,btn)
     {
         if(dateDeb[i] != "" && dateFin[i] != "")
         {
-            var timestampDeb = new Date($(dateDeb[i]).val()).getTime()
-            var timestampFin = new Date($(dateFin[i]).val()).getTime()
+            var dateDebut = dateDeb[i].date;
+            var dateFinValue = dateFin[i].date;
+            var debut = $(dateDebut).val();
+            var fin = $(dateFinValue).val();
+            if (dateDeb[i].time) debut += `T${$(dateDeb[i].time).val()}`;
+            if (dateFin[i].time) fin += `T${$(dateFin[i].time).val()}`;
+            var timestampDeb = new Date(debut).getTime()
+            var timestampFin = new Date(fin).getTime()
             if(timestampDeb > timestampFin)
             {
               validForm = false;
               
-              if($(dateDeb[i]).parents('.inputCol').find('span.invalid-feedback').length==0)
+              if($(dateDebut).parents('.inputCol').find('span.invalid-feedback').length==0)
               {
-                $(dateDeb[i]).parent().addClass('inputCol');
-                $(dateDeb[i]).after( '<span class="invalid-feedback invalid-feedback-up">La date de debut doit être antérieure à celle de fin !</span>' );
+                $(dateDebut).parent().addClass('inputCol');
+                $(dateDebut).after( '<span class="invalid-feedback invalid-feedback-up">La date de début doit être antérieure à celle de fin !</span>' );
               }
               else
               {
-                $(dateDeb[i]).parents('.inputCol').find('span.invalid-feedback').text('La date de debut doit être antérieure à celle de fin !').addClass('invalid-feedback-up')
+                $(dateDebut).parents('.inputCol').find('span.invalid-feedback').text('La date de début doit être antérieure à celle de fin !').addClass('invalid-feedback-up')
               }
 
-              if($(dateFin[i]).parents('.inputCol').find('span.invalid-feedback').length==0)
+              if($(dateFinValue).parents('.inputCol').find('span.invalid-feedback').length==0)
               {
-                $(dateFin[i]).parent().addClass('inputCol');
-                $(dateFin[i]).after( '<span class="invalid-feedback invalid-feedback-up">La date de debut doit être antérieure à celle de fin !</span>' );
+                $(dateFinValue).parent().addClass('inputCol');
+                $(dateFinValue).after( '<span class="invalid-feedback invalid-feedback-up">La date de début doit être antérieure à celle de fin !</span>' );
               }
               else
               {
-                $(dateFin[i]).parents('.inputCol').find('span.invalid-feedback').text('La date de debut doit être antérieure à celle de fin !').addClass('invalid-feedback-up')
+                $(dateFinValue).parents('.inputCol').find('span.invalid-feedback').text('La date de début doit être antérieure à celle de fin !').addClass('invalid-feedback-up')
               }
             }
             else 
             {
-              if($(dateDeb[i]).val().replaceAll(' ','') != '' && $(dateDeb[i]).parents('.inputCol').find('span.invalid-feedback').length!=0)
-              $(dateDeb[i]).parents('.inputCol').find('span.invalid-feedback').text('').addClass('invalid-feedback-up')
+              if($(dateDebut).val().replaceAll(' ','') != '' && $(dateDebut).parents('.inputCol').find('span.invalid-feedback').length!=0)
+              $(dateDebut).parents('.inputCol').find('span.invalid-feedback').text('').addClass('invalid-feedback-up')
              
-              if($(dateFin[i]).val().replaceAll(' ','') != '' && $(dateFin[i]).parents('.inputCol').find('span.invalid-feedback').length!=0)
-                $(dateFin[i]).parents('.inputCol').find('span.invalid-feedback').text('').addClass('invalid-feedback-up')
+              if($(dateFinValue).val().replaceAll(' ','') != '' && $(dateFinValue).parents('.inputCol').find('span.invalid-feedback').length!=0)
+                $(dateFinValue).parents('.inputCol').find('span.invalid-feedback').text('').addClass('invalid-feedback-up')
             
             }
         }
@@ -1126,16 +1129,18 @@ function manageSelect2(div,btn)
         $(listParam[0]).val(),
         $(listParam[1]).val(),
         $(listParam[2]).val(),
-        $(listParam[3]).contents().find('body').html(),
+        $(listParam[3]).val(),
         $(listParam[4]).val(),
-        $(listParam[5]).val(),
+        $(listParam[5]).contents().find('body').html(),
         $(listParam[6]).val(),
+        $(listParam[7]).val(),
+        $(listParam[8]).val(),
         { 
           'lien':$('#evenement_lien').val(),
-          'nom':$(listParam[7]).parents('.vich-image').first().find(' .dropify-filename-inner').html(),
-          'file':$(listParam[7]).parents('.vich-image').first().find('.dropify-render img').attr('src'),
+          'nom':$(listParam[9]).parents('.vich-image').first().find(' .dropify-filename-inner').html(),
+          'file':$(listParam[9]).parents('.vich-image').first().find('.dropify-render img').attr('src'),
         },
-        $(listParam[8]).val(),
+        $(listParam[10]).val(),
 
       );
       return newtemp
@@ -1212,8 +1217,8 @@ function manageSelect2(div,btn)
     if ( listeObjetCreer['Evenement']['lieu']['adresse'] ) lieu += ` - ${listeObjetCreer['Evenement']['lieu']['adresse']}`;
     $('.event-lieu').text(lieu)
     /** Dates */
-    $('.event-date-debut').text(new Date(listeObjetCreer["Evenement"]['dateDeb']).formatFR());
-    $('.event-date-fin').text(new Date(listeObjetCreer["Evenement"]['dateFin']).formatFR());
+    $('.event-date-debut').text(new Date(`${listeObjetCreer["Evenement"]['dateDeb']}T${listeObjetCreer["Evenement"]['heureDeb']}`).formatFR());
+    $('.event-date-fin').text(new Date(`${listeObjetCreer["Evenement"]['dateFin']}T${listeObjetCreer["Evenement"]['heureFin']}`).formatFR());
     /** Genres Musicaux */
     $('.event-genres').text('Aucun genre musical renseigné');
     if ( listeObjetCreer['Evenement']["genresMusicaux"].length > 0 )
@@ -1338,7 +1343,9 @@ function manageSelect2(div,btn)
     //récup les val
     var event_typeEvenement = $('#evenement_typeEvenement').val();
     var event_dateDeb       = $("#evenement_dateDebut").val();
+    var event_heureDeb      = $("#evenement_heureDebut").val();
     var event_dateFin       = $("#evenement_dateFin").val();
+    var event_heureFin      = $("#evenement_heureFin").val();
     var event_desc          = $("#cke_evenement_description iframe").contents().find('body').html();
     var event_titre         = $("#evenement_titre").val();
     var event_genreMusicaux = $("#evenement_genresMusicaux").val();
@@ -1350,7 +1357,7 @@ function manageSelect2(div,btn)
     var event_ressources    = listeRessources;
     var event_passages      = listePassages;
 
-    var temp = new EvenementCmpl(event_typeEvenement,event_dateDeb,event_dateFin,event_desc,event_titre,event_genreMusicaux,event_lieu,event_img,event_etiquettes,event_ressources,event_passages)
+    var temp = new EvenementCmpl(event_typeEvenement,event_dateDeb,event_heureDeb,event_dateFin,event_heureFin,event_desc,event_titre,event_genreMusicaux,event_lieu,event_img,event_etiquettes,event_ressources,event_passages)
     fetch(routeAddEvent,{
       headers: {
         'Content-Type': 'application/json',

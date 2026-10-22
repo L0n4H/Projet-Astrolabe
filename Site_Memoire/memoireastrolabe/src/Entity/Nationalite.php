@@ -36,7 +36,7 @@ class Nationalite
 
     /**
      * @OA\Property(ref=@Model(type=Groupe::class))
-     * @ORM\OneToMany(targetEntity=Groupe::class, mappedBy="nationalite")
+     * @ORM\ManyToMany(targetEntity=Groupe::class, mappedBy="nationalites")
      */
     private $groupes;
 
@@ -110,7 +110,7 @@ class Nationalite
     {
         if (!$this->groupes->contains($groupe)) {
             $this->groupes[] = $groupe;
-            $groupe->setNationalite($this);
+            $groupe->addNationalite($this);
         }
 
         return $this;
@@ -119,10 +119,7 @@ class Nationalite
     public function removeGroupe(Groupe $groupe): self
     {
         if ($this->groupes->removeElement($groupe)) {
-            // set the owning side to null (unless already changed)
-            if ($groupe->getNationalite() === $this) {
-                $groupe->setNationalite(null);
-            }
+            $groupe->removeNationalite($this);
         }
 
         return $this;
@@ -187,9 +184,8 @@ class Nationalite
      */
     public function resetGroupes()
     {
-        foreach( $this->groupes as $groupe )
-        {
-            $groupe->setNationalite(null);
+        foreach ($this->groupes->toArray() as $groupe) {
+            $groupe->removeNationalite($this);
         }
     }
 

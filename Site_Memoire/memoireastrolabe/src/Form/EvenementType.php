@@ -6,8 +6,8 @@ use App\Entity\Evenement;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +19,7 @@ class EvenementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('dateDebut', DateTimeType::class, [
+            ->add('dateDebut', DateType::class, [
                 "label" => "Date de début",
                 "widget" => "single_text",
                 "label_attr" => [
@@ -27,11 +27,11 @@ class EvenementType extends AbstractType
                 ] ,
                 "attr" => [
                     "class" =>  "form-control",
-                    "max"   =>  "9999-01-01T00:00",
+                    "max"   =>  "9999-01-01",
                 ],
                 "required" => true
             ])
-            ->add('dateFin', DateTimeType::class, [
+            ->add('dateFin', DateType::class, [
                 "label" => "Date de fin",
                 "widget" => "single_text",
                 "label_attr" => [
@@ -39,7 +39,33 @@ class EvenementType extends AbstractType
                 ] ,
                 "attr" => [
                     "class" => "form-control",
-                    "max"   =>  "9999-01-01T00:00"
+                    "max"   =>  "9999-01-01"
+                ],
+                "required" => true
+            ])
+            ->add('heureDebut', TimeType::class, [
+                "label" => "Heure de début",
+                'widget' => 'choice',
+                'hours' => range(0, 23),
+                'minutes' => [0, 15, 30, 45],
+                "label_attr" => [
+                    "class" => "form-label required mt-3",
+                ] ,
+                "attr" => [
+                    "class" =>  "form-control",
+                ],
+                "required" => true
+            ])
+            ->add('heureFin', TimeType::class, [
+                "label" => "Heure de fin",
+                'widget' => 'choice',
+                'hours' => range(0, 23),
+                'minutes' => [0, 15, 30, 45],
+                "label_attr" => [
+                    "class" => "form-label required mt-3",
+                ] ,
+                "attr" => [
+                    "class" => "form-control"
                 ],
                 "required" => true
             ])

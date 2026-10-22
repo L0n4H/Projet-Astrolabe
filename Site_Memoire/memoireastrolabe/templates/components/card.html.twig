@@ -31,7 +31,7 @@
                                 {{genre}}
                             {% endfor %}
                         </div>
-                        <div class="date color-white xs-font-x200 bold">{{evenement.dateDebut.format("d.m.Y - H:i")}}</div>
+                        <div class="date color-white xs-font-x200 bold">{{evenement.dateDebut.format("d.m.Y")}} - {{evenement.heureDebut.format("H:i")}}</div>
                         <div class="title color-white xs-font-x300 md-font-x160 lg-font-x220 bold">
                             {{ evenement.titre }}
                         </div>

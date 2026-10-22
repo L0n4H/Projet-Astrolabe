@@ -33,6 +33,7 @@
                     'image':membre.getVisibleGroupe.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(membre.getVisibleGroupe, 'imageFile')) ): '', 
                     'biographie':membre.getVisibleGroupe.getBiographie,
                     'nationalite': membre.getVisibleGroupe.getVisibleNationalite is not null ? membre.getVisibleGroupe.getVisibleNationalite.getNom : null,
+                    'nationalites': membre.getVisibleGroupe.getVisibleNationaliteNames,
                     'url' : absolute_url(path('detail_groupe', {'id': membre.getVisibleGroupe.getId}))
                 }
             }%}

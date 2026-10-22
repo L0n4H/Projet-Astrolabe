@@ -136,7 +136,8 @@ async function applyFilter()
         $(card).find('.title').html(event['titre']);
 
         // Date
-        $(card).find('.date').html(new Date(event["dateDebut"]["date"]).formatFR());
+        const dateDebut = new Date(`${event["dateDebut"]}T${event["heureDebut"]}`);
+        $(card).find('.date').html(dateDebut.formatFR());
 
         // Genres
         if ( event["genresMusicaux"].length > 0 )

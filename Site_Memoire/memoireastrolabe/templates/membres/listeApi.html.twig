@@ -31,7 +31,7 @@
 		{% endfor %}
 		{% set groupe =  {'id' : (membre.getVisibleGroupe.getId),"nom": (membre.getVisibleGroupe.getNom),'dateCreation' : membre.getVisibleGroupe.dateCreation,'biographie':membre.getVisibleGroupe.getBiographie,'lienImage':membre.getVisibleGroupe.getLienImage,
 		'image':membre.getVisibleGroupe.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(membre.getVisibleGroupe, 'imageFile')) ): '', 
-		'genreMusicaux':genres,'nationalite': membre.getVisibleGroupe.getVisibleNationalite is not null ? membre.getVisibleGroupe.getVisibleNationalite.getNom : null,'url':  (absolute_url(path('detail_groupe', {'id' : membre.getVisibleGroupe.getId}))) } %}
+		'genreMusicaux':genres,'nationalite': membre.getVisibleGroupe.getVisibleNationalite is not null ? membre.getVisibleGroupe.getVisibleNationalite.getNom : null,'nationalites': membre.getVisibleGroupe.getVisibleNationaliteNames,'url':  (absolute_url(path('detail_groupe', {'id' : membre.getVisibleGroupe.getId}))) } %}
 	{% else %}
 		{% set groupe =  {} %}
 	{% endif %}

@@ -67,7 +67,7 @@ class EvenementsController extends AbstractController
     /**
      * @Route("/evenements/liste/{currentPage}", name="listeFront_evenements")
      */
-    public function accueil(int $currentPage=1, EntityManagerInterface $em): Response
+    public function accueil(EntityManagerInterface $em, $currentPage = 1): Response
     {
         $evenementRepository = $em->getRepository(Evenement::class);
         $count = count($evenementRepository->findByEtat(1));
@@ -159,7 +159,8 @@ class EvenementsController extends AbstractController
             $events[] = [
                 "id" => $event->getId(),
                 "titre" => $event->getTitre(),
-                "dateDebut" => $event->getDateDebut(),
+                "dateDebut" => $event->getDateDebut()->format('Y-m-d'),
+                "heureDebut" => $event->getHeureDebut()->format('H:i:s'),
                 "genresMusicaux" => $genres,
                 "image" => $event->getImage(),
                 "lienImage" => $event->getLienImage(),
@@ -181,6 +182,7 @@ class EvenementsController extends AbstractController
             'evenement' => (new Evenement())->setId(0)
                             ->setTitre("replace_titre")
                             ->setDateDebut(new DateTime())
+                            ->setHeureDebut(new DateTime())
                             ->setImage("replace_image")
                             ->setLienImage("replace_image")
         ]);

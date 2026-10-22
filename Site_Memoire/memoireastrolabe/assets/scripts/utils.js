@@ -85,12 +85,14 @@ class TypeEvenement{
     
 }
 class Evenement{
-    constructor(typeEvenement,dateDeb,dateFin,desc,titre,genreMusicaux,lieu,img,etiquettes) //ressource
+    constructor(typeEvenement,dateDeb,heureDeb,dateFin,heureFin,desc,titre,genreMusicaux,lieu,img,etiquettes) //ressource
     {
         //this.ressource = ressource; //array ids ressources;
         this.typeEvenement   = typeEvenement; //idType
         this.dateDeb = dateDeb; 
+        this.heureDeb = heureDeb;
         this.dateFin = dateFin;
+        this.heureFin = heureFin;
         this.desc = desc;
         this.titre = titre;
         this.genreMusicaux = genreMusicaux;
@@ -101,11 +103,13 @@ class Evenement{
     }
 }
 class EvenementCmpl{
-    constructor(typeEvenement,dateDeb,dateFin,desc,titre,genreMusicaux,lieu,img,etiquettes,ressources,passages) 
+    constructor(typeEvenement,dateDeb,heureDeb,dateFin,heureFin,desc,titre,genreMusicaux,lieu,img,etiquettes,ressources,passages)
     {
         this.typeEvenement   = typeEvenement; 
         this.dateDeb = dateDeb; 
+        this.heureDeb = heureDeb;
         this.dateFin = dateFin;
+        this.heureFin = heureFin;
         this.desc = desc;
         this.titre = titre;
         this.genreMusicaux = genreMusicaux;
@@ -137,12 +141,12 @@ class GenreMusical
 }
 
 class Groupe{
-    constructor(nom,date,bio,nationalite,photo,etiquettes,genreMusicaux,label,membres,Img)
+    constructor(nom,date,bio,nationalites,photo,etiquettes,genreMusicaux,label,membres,Img)
     {
         this.nom = nom;
         this.date = date;
         this.bio = bio;
-        this.nationalite = nationalite; //'idNat'
+        this.nationalites = nationalites; //'idNat'
         this.photo = photo; // "nom.extension"
         this.etiquettes = etiquettes; //array id etiquette
         this.genreMusicaux = genreMusicaux; //array id genreMusical

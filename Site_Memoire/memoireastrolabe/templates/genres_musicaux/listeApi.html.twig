@@ -7,6 +7,7 @@
 		{% set groupeArray = {(groupe.getId):{'id':groupe.getId,'dateCreation':groupe.getDateCreation, 'biographie':groupe.getBiographie,'lienImage':groupe.getLienImage,
 		'image':groupe.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(groupe, 'imageFile')) ): '', 
 		'nationalite':groupe.getVisibleNationalite is not null ? groupe.getVisibleNationalite.getNom : null ,
+		'nationalites':groupe.getVisibleNationaliteNames,
 		'url':(absolute_url(path('detail_groupe',{'id':groupe.getId})))}} %}
 		{% set groupes = groupes|merge(groupeArray) %}
 	{% endfor %}
@@ -61,7 +62,7 @@
 					{% set membreArray ={ (membre.getId) : { 'id':membre.getId, 'actif':membre.getActif, 'musicien':musicien, 'instruments' : instruments, 'url': (absolute_url(path('detail_membre', {'id' : membre.getId}))) } } %}
 					{% set membres = membres|merge(membreArray) %}
 				{% endfor %}
-				{% set groupe = { 'id' : passage.getVisibleGroupe.getId, 'dateCreation':passage.getVisibleGroupe.getDateCreation, 'biographie':passage.getVisibleGroupe.getBiographie, 'image':passage.getVisibleGroupe.getImage, 'etiquettes':etiquettes, 'labels':labels, 'membres':membres, 'nationalite': passage.getVisibleGroupe.getVisibleNationalite is not null ? passage.getVisibleGroupe.getVisibleNationalite.getNom : null, 'url': (absolute_url(path('detail_groupe', {'id' : passage.getVisibleGroupe.getId}))) } %}
+				{% set groupe = { 'id' : passage.getVisibleGroupe.getId, 'dateCreation':passage.getVisibleGroupe.getDateCreation, 'biographie':passage.getVisibleGroupe.getBiographie, 'image':passage.getVisibleGroupe.getImage, 'etiquettes':etiquettes, 'labels':labels, 'membres':membres, 'nationalite': passage.getVisibleGroupe.getVisibleNationalite is not null ? passage.getVisibleGroupe.getVisibleNationalite.getNom : null, 'nationalites': passage.getVisibleGroupe.getVisibleNationaliteNames, 'url': (absolute_url(path('detail_groupe', {'id' : passage.getVisibleGroupe.getId}))) } %}
 			{% else %}
 				{% set groupe =  null %}
 			{% endif %}
@@ -82,7 +83,7 @@
 		{% endfor %}
 		{% set evenementArr = { (evenement.getId) :{ 'id' : (evenement.getId), 'type': (evenement.getVisibleTypeEvenements is not null) ? evenement.getVisibleTypeEvenements.getLabel : null, 'lienImage':evenement.getLienImage,
 		'image':evenement.getImage is not null ? ((absolute_url(url('home')))~(vich_uploader_asset(evenement, 'imageFile')) ): '', 
-		 "dateDebut": (evenement.getDateDebut.format("d-m-Y H:i")), "dateFin": (evenement.getDateFin.format("d-m-Y H:i")), "description": (evenement.getDescription), "titre": (evenement.getTitre), 'etiquettes' : etiquettes, 'ressources' : ressources, 'lieu':lieu, 'passages':passages, 'url': (absolute_url(path('detail_api_evenement', {'id' : evenement.getId}))) } } %}
+		 "dateDebut": evenement.getDateDebut.format("d-m-Y"), "heureDebut": evenement.getHeureDebut.format("H:i"), "dateFin": evenement.getDateFin.format("d-m-Y"), "heureFin": evenement.getHeureFin.format("H:i"), "description": (evenement.getDescription), "titre": (evenement.getTitre), 'etiquettes' : etiquettes, 'ressources' : ressources, 'lieu':lieu, 'passages':passages, 'url': (absolute_url(path('detail_api_evenement', {'id' : evenement.getId}))) } } %}
 		{% set evenementsArr = evenementsArr|merge(evenementArr) %}
 	{% endfor %}
 	{# end evenement #}
