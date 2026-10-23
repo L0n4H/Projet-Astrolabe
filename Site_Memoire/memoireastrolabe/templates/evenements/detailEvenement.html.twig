@@ -66,16 +66,19 @@
                 {% for lienExterne in evenement.ressources %}
                     {% if lienExterne.etat.id == 1 %}
                         {% if lienExterne.type.label == "Facebook" %}
-                            <a class="text-decoration-none" href="{{lienExterne.lien}}" target="_blank">
+                            <a class="text-decoration-none" href="{{lienExterne.lien}}" target="_blank" rel="noopener noreferrer">
                                 <i class="fa-brands fa-facebook-f"></i>
+                                <span class="social-link-label">Facebook</span>
                             </a>
                         {% elseif (lienExterne.type.label == "Twitter") %}
-                            <a class="text-decoration-none" href="{{lienExterne.lien}}" target="_blank">
+                            <a class="text-decoration-none" href="{{lienExterne.lien}}" target="_blank" rel="noopener noreferrer">
                                 <i class="fa-brands fa-twitter"></i>
+                                <span class="social-link-label">Twitter</span>
                             </a>
                         {% elseif (lienExterne.type.label == "Instagram") %}
-                            <a class="text-decoration-none" href="{{lienExterne.lien}}" target="_blank">
+                            <a class="text-decoration-none" href="{{lienExterne.lien}}" target="_blank" rel="noopener noreferrer">
                                 <i class="fa-brands fa-instagram"></i>
+                                <span class="social-link-label">Instagram</span>
                             </a>
                         {% endif %}
                     {% endif %}
@@ -156,6 +159,7 @@
                                 {% if ressource.credits %}
                                 <span class="credits">{{ressource.credits}}</span>
                                 {% endif %}
+                                <span class="resource-title">{{ ressource.titre ?: "Voir l’image" }}</span>
                             </a>
                             {% else %} {# If video #}
                             <a href="{{image}}" class="text-center"
@@ -179,6 +183,7 @@
                                 {% if ressource.credits %}
                                 <span class="credits">{{ressource.credits}}</span>
                                 {% endif %}
+                                <span class="resource-title">{{ ressource.titre ?: "Voir l’image" }}</span>
                             </a>
                         {% elseif (ressource.type.id == 3) %} {# If file and youtube link #}
                             <a href="{{ isValid[1]}}"

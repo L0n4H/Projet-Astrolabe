@@ -1,7 +1,7 @@
 @import "_variables";
 
 @mixin random-bgr(){
-    $bg: rgb(random(255), random(255), random(255),0.5);
+    $bg: rgba(random(120), random(120), random(120), 0.8);
     background: $bg;
     &:hover {
         background: darken($bg, 15%);
