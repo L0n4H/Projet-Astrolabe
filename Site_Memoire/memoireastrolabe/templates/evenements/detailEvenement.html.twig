@@ -70,11 +70,6 @@
                                 <i class="fa-brands fa-facebook-f"></i>
                                 <span class="social-link-label">Facebook</span>
                             </a>
-                        {% elseif (lienExterne.type.label == "Twitter") %}
-                            <a class="text-decoration-none" href="{{lienExterne.lien}}" target="_blank" rel="noopener noreferrer">
-                                <i class="fa-brands fa-twitter"></i>
-                                <span class="social-link-label">Twitter</span>
-                            </a>
                         {% elseif (lienExterne.type.label == "Instagram") %}
                             <a class="text-decoration-none" href="{{lienExterne.lien}}" target="_blank" rel="noopener noreferrer">
                                 <i class="fa-brands fa-instagram"></i>
@@ -172,7 +167,7 @@
                                 {% endif %}
                             </a>
                         {% endif %}
-                    {% elseif (ressource.type.label not in ['Facebook', 'Instagram', 'Twitter']) and ressource.lien %}
+                    {% elseif (ressource.type.label not in ['Facebook', 'Instagram']) and ressource.lien %}
                         {% set isValid = checkUrl(ressource.lien) %}
                         {% if isValid[0] %} {# If link and http #}
                             <a href="{{ressource.lien}}" class="text-center"
