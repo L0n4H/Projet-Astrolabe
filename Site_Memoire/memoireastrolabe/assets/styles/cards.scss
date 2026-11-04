@@ -1,24 +1,7 @@
 @import "_variables";
 
-@mixin random-bgr(){
-    $bg: rgb(random(255), random(255), random(255),0.5);
-    background: $bg;
-    &:hover {
-        background: darken($bg, 15%);
-    }
-}
-
 #container-evenement 
 {
-    > .program
-    {
-        @for $i from 0 to 7 {
-            &:nth-child(8n+#{$i}) .random-background > .bg-default  {
-              @include random-bgr();
-            }
-        }
-    }
-
     font-family: "cassannet", "Helvetica", Arial, sans-serif;
    
     img {
@@ -64,6 +47,7 @@
             left: 0;
             top: 0;
             opacity: 1;
+            background-color: rgba($dark, 0.40);
         }
         .program-text-position {
             position: absolute;
