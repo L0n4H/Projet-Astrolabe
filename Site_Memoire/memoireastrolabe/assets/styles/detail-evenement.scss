@@ -94,6 +94,19 @@ label.required {
     color: lighten(#333, 10%);
 }
 
+.logos {
+    .social-link-label {
+        font-size: .8rem;
+        margin-left: .25rem;
+    }
+}
+
+.resource-title {
+    display: block;
+    font-size: .8rem;
+    margin-top: .25rem;
+}
+
 hr {
     background-color: darken($vert, 10%);
     border: 3px solid darken($vert, 10%);

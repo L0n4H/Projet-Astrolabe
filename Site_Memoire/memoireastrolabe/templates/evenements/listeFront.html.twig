@@ -77,5 +77,29 @@
         var card_route = "{{ path('event_card') }}";
         var categorie_musicale_route = "{{ path('liste_categoriesMusicales') }}";
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var container = document.getElementById('container-evenement');
+            if (!container) return;
+
+            function assignRandomBackground(element) {
+                var hue = Math.floor(Math.random() * 360);
+                element.style.backgroundColor = 'hsla(' + hue + ', 50%, 55%, 0.40)';
+            }
+
+            function randomizeBackgrounds(root) {
+                if (root.nodeType !== Node.ELEMENT_NODE) return;
+                if (root.classList.contains('bg-default')) assignRandomBackground(root);
+                root.querySelectorAll('.bg-default').forEach(assignRandomBackground);
+            }
+
+            randomizeBackgrounds(container);
+            new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    mutation.addedNodes.forEach(randomizeBackgrounds);
+                });
+            }).observe(container, { childList: true, subtree: true });
+        });
+    </script>
     {{ encore_entry_script_tags('filtersjs') }}
 {% endblock %}

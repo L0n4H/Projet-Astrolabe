@@ -57,11 +57,7 @@ class AppFixtures extends Fixture
         $manager->persist($typeRessource4);
         
         $typeRessource5 = new TypeRessource();
-        $typeRessource5->setLabel("Twitter");
+        $typeRessource5->setLabel("Instagram");
         $manager->persist($typeRessource5);
-        
-        $typeRessource6 = new TypeRessource();
-        $typeRessource6->setLabel("Instagram");
-        $manager->persist($typeRessource6);
     }
 }

@@ -2786,7 +2786,6 @@ INSERT INTO `type_ressource` (`id`, `label`) VALUES
 (1, 'Image/Vidéo'),
 (6, 'Instagram'),
 (2, 'Lien'),
-(5, 'Twitter'),
 (3, 'Youtube');
 
 -- --------------------------------------------------------
