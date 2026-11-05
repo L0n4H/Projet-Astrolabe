@@ -80,7 +80,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var container = document.getElementById('container-evenement');
-            if (!container) return;
+            var containerParent = document.getElementById('container-event');
+            if (!container || !containerParent) return;
 
             function assignRandomBackground(element) {
                 var hue = Math.floor(Math.random() * 360);
@@ -98,7 +99,7 @@
                 mutations.forEach(function (mutation) {
                     mutation.addedNodes.forEach(randomizeBackgrounds);
                 });
-            }).observe(container, { childList: true, subtree: true });
+            }).observe(containerParent, { childList: true, subtree: true });
         });
     </script>
     {{ encore_entry_script_tags('filtersjs') }}
