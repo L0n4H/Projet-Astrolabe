@@ -127,8 +127,8 @@ class EvenementRepository extends ServiceEntityRepository
         $search = $filters["search"] != "" ? $filters["search"] : null;
         if ( $search )
         {
-            $query = $query->join('e.etiquettes', 'et')
-                            ->andWhere("e.titre LIKE :search OR et.motsCles LIKE :search")
+            $query = $query->leftJoin('e.etiquettes', 'et')
+                            ->andWhere("(e.titre LIKE :search OR et.motsCles LIKE :search)")
                             ->setParameter("search", "%$search%")
                             ;
         }
