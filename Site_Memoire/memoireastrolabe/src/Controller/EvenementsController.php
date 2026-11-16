@@ -70,18 +70,29 @@ class EvenementsController extends AbstractController
     public function accueil(EntityManagerInterface $em, $currentPage = 1): Response
     {
         $evenementRepository = $em->getRepository(Evenement::class);
-        $count = count($evenementRepository->findByEtat(1));
+        $evenementsActifs = $evenementRepository->findByEtat(1);
+        $count = count($evenementsActifs);
 
         /** Dates */
-        $date = 2012;
-        $date_diff = date_diff(new DateTime("01-01-$date"), new DateTime())->y;
-        $dates = array();
-        for( $i = 0; $i <= $date_diff; $i++ )
-        {
-            $dates[] = $date;
-            $date += 1;
+        $anneeMin = null;
+        $anneeMax = null;
+        foreach ($evenementsActifs as $evenement) {
+            $dateDebut = $evenement->getDateDebut();
+            if ($dateDebut === null) {
+                continue;
+            }
+
+            $annee = (int) $dateDebut->format('Y');
+            $anneeMin = $anneeMin === null ? $annee : min($anneeMin, $annee);
+            $anneeMax = $anneeMax === null ? $annee : max($anneeMax, $annee);
         }
-        $dates = array_reverse($dates);
+
+        $dates = array();
+        if ($anneeMin !== null && $anneeMax !== null) {
+            for ($annee = $anneeMin; $annee <= $anneeMax; $annee++) {
+                $dates[] = $annee;
+            }
+        }
 
         /** Trimestres */
         $trimestres = array(

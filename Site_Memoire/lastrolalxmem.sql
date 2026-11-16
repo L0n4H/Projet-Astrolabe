@@ -2764,7 +2764,8 @@ CREATE TABLE `type_evenement` (
 
 INSERT INTO `type_evenement` (`id`, `etat_id`, `label`) VALUES
 (1, 4, 'CONCERT A L\'ASTROLABE'),
-(2, 4, 'CONCERT HORS LES MURS');
+(2, 4, 'CONCERT HORS LES MURS'),
+(3, 4, 'Action culturelle');
 
 -- --------------------------------------------------------
 
